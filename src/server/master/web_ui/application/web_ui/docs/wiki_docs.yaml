@@ -1,0 +1,1886 @@
+- fields: {content: "<h2>Djangy's Architecture</h2>\r\n<p>Djangy has several key components:\r\
+      \n<ul>\r\n  <li><a href=\"#proxycache\">ProxyCache</a></li>\r\n  <li><a href=\"\
+      #masters\">Masters</a></li>\r\n  <li><a href=\"#workers\">Workers</a></li>\r\
+      \n  <li><a href=\"#bundles\">Bundles</a></li>\r\n  <li><a href=\"#databases\"\
+      >Databases</a></li>\r\n</ul>\r\n</p>\r\n<br />\r\n<a name=\"proxycache\"></a>\r\
+      \n<h3>ProxyCache</h3>\r\n<br />\r\n<p>The ProxyCache is what sits in front of\
+      \ our server infrastructure.  It knows about your <a href=\"#bundles\">application\
+      \ bundle</a>, your custom domain names, and your caching configuration.  It\
+      \ automatically balances the load across our <a href=\"#workers\">workers</a>\
+      \ to ensure the highest performance possible.</p>\r\n<br />\r\n<a name=\"masters\"\
+      ></a>\r\n<h3>Masters</h3>\r\n<br />\r\n<p>Our masters coordinate everything\
+      \ that happens on Djangy.  When you push your code, you're pushing it to one\
+      \ of our masters.  The master is also responsible for updating your application's\
+      \ resource allocations: domain names, performance, debug status, and the like.\
+      \  During deployment, the master chooses which workers have the lowest load,\
+      \ then instructs the workers to build your application's bundle and to launch\
+      \ your application.</p>\r\n<br />\r\n<a name=\"workers\"></a>\r\n<h3>Workers</h3>\r\
+      \n<br />\r\n<p>Workers are the horsepower behind Djangy.  When you deploy your\
+      \ app, you deploy it to our worker infrastructure.  These are rock-solid, multi-tenant,\
+      \ fully managed machines that do one thing: run applications.  When you scale\
+      \ your application's performance, these workers throw resources directly behind\
+      \ your application -- instant scalability is now possible.</p>\r\n<br />\r\n\
+      <a name=\"bundles\"></a>\r\n<h3>Bundles</h3>\r\n<br />\r\n<p>When you push code\
+      \ to Djangy, we build a self-contained, runnable version of your application\
+      \ for use on our worker infrastructure.  Your application's bundle contains\
+      \ a virtual environment (including any dependencies you specify), customized\
+      \ settings, and miscellaneous configuration files required to run your application\
+      \ on Djangy.  Your application's bundle is READ-ONLY.  For this reason, Djangy\
+      \ does not provide filesystem access to your application.  If you need to store\
+      \ uploaded files, we suggest either putting them into your database as BLOBs\
+      \ or using a third-party storage service like <a href=\"http://aws.amazon.com/s3/\"\
+      \ target=\"_blank\">http://aws.amazon.com/s3/</a>.</p>\r\n<br />\r\n<a name=\"\
+      databases\"></a>\r\n<h3>Databases</h3>\r\n<br />\r\n<p>Djangy provides your\
+      \ application with it's own MySQL database.  This database will <i>just work</i>\
+      \ -- all the settings in your application are overridden to ensure seamless\
+      \ integration.  You can easily see these settings in action -- they're in the\
+      \ same place, the DATABASES variable inside settings.py.</p>\r\n<p>You can interact\
+      \ with your live database using the <tt>djangy manage.py shell</tt> command.\
+      \  You also have the ability to load and dump data directly -- see the <a href=\"\
+      /docs/Databases\">Database docs</a> for more information.</p>", name: Architecture,
+    rendered: "<h2><a href=\"/docs/overview.htmlDjangy/\">Djangy</a>'s <a href=\"\
+      /docs/overview.htmlArchitecture/\">Architecture</a></h2>\r\n<p><a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> has several key components:\r\n<ul>\r\n  <li><a href=\"#proxycache\"\
+      ><a href=\"/docs/overview.htmlProxyCache/\">ProxyCache</a></a></li>\r\n  <li><a\
+      \ href=\"#masters\"><a href=\"/docs/overview.htmlMasters/\">Masters</a></a></li>\r\
+      \n  <li><a href=\"#workers\"><a href=\"/docs/overview.htmlWorkers/\">Workers</a></a></li>\r\
+      \n  <li><a href=\"#bundles\"><a href=\"/docs/overview.htmlBundles/\">Bundles</a></a></li>\r\
+      \n  <li><a href=\"#databases\"><a href=\"/docs/overview.htmlDatabases/\">Databases</a></a></li>\r\
+      \n</ul>\r\n</p>\r\n<br />\r\n<a name=\"proxycache\"></a>\r\n<h3><a href=\"/docs/overview.htmlProxyCache/\"\
+      >ProxyCache</a></h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlThe/\">The</a>\
+      \ <a href=\"/docs/overview.htmlProxyCache/\">ProxyCache</a> is what sits in\
+      \ front of our server infrastructure.  <a href=\"/docs/overview.htmlIt/\">It</a>\
+      \ knows about your <a href=\"#bundles\">application bundle</a>, your custom\
+      \ domain names, and your caching configuration.  <a href=\"/docs/overview.htmlIt/\"\
+      >It</a> automatically balances the load across our <a href=\"#workers\">workers</a>\
+      \ to ensure the highest performance possible.</p>\r\n<br />\r\n<a name=\"masters\"\
+      ></a>\r\n<h3><a href=\"/docs/overview.htmlMasters/\">Masters</a></h3>\r\n<br\
+      \ />\r\n<p><a href=\"/docs/overview.htmlOur/\">Our</a> masters coordinate everything\
+      \ that happens on <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>.  <a href=\"\
+      /docs/overview.htmlWhen/\">When</a> you push your code, you're pushing it to\
+      \ one of our masters.  <a href=\"/docs/overview.htmlThe/\">The</a> master is\
+      \ also responsible for updating your application's resource allocations: domain\
+      \ names, performance, debug status, and the like.  <a href=\"/docs/overview.htmlDuring/\"\
+      >During</a> deployment, the master chooses which workers have the lowest load,\
+      \ then instructs the workers to build your application's bundle and to launch\
+      \ your application.</p>\r\n<br />\r\n<a name=\"workers\"></a>\r\n<h3><a href=\"\
+      /docs/overview.htmlWorkers/\">Workers</a></h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlWorkers/\"\
+      >Workers</a> are the horsepower behind <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a>.  <a href=\"/docs/overview.htmlWhen/\">When</a> you deploy your\
+      \ app, you deploy it to our worker infrastructure.  <a href=\"/docs/overview.htmlThese/\"\
+      >These</a> are rock-solid, multi-tenant, fully managed machines that do one\
+      \ thing: run applications.  <a href=\"/docs/overview.htmlWhen/\">When</a> you\
+      \ scale your application's performance, these workers throw resources directly\
+      \ behind your application -- instant scalability is now possible.</p>\r\n<br\
+      \ />\r\n<a name=\"bundles\"></a>\r\n<h3><a href=\"/docs/overview.htmlBundles/\"\
+      >Bundles</a></h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlWhen/\">When</a>\
+      \ you push code to <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>, we build\
+      \ a self-contained, runnable version of your application for use on our worker\
+      \ infrastructure.  <a href=\"/docs/overview.htmlYour/\">Your</a> application's\
+      \ bundle contains a virtual environment (including any dependencies you specify),\
+      \ customized settings, and miscellaneous configuration files required to run\
+      \ your application on <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>.  <a\
+      \ href=\"/docs/overview.htmlYour/\">Your</a> application's bundle is READ-ONLY.\
+      \  <a href=\"/docs/overview.htmlFor/\">For</a> this reason, <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> does not provide filesystem access to your application.  <a href=\"\
+      /docs/overview.htmlIf/\">If</a> you need to store uploaded files, we suggest\
+      \ either putting them into your database as <a href=\"/docs/overview.htmlBLOBs/\"\
+      >BLOBs</a> or using a third-party storage service like <a href=\"http://aws.amazon.com/s3/\"\
+      \ target=\"_blank\">http://aws.amazon.com/s3/</a>.</p>\r\n<br />\r\n<a name=\"\
+      databases\"></a>\r\n<h3><a href=\"/docs/overview.htmlDatabases/\">Databases</a></h3>\r\
+      \n<br />\r\n<p><a href=\"/docs/overview.htmlDjangy/\">Djangy</a> provides your\
+      \ application with it's own MySQL database.  <a href=\"/docs/overview.htmlThis/\"\
+      >This</a> database will <i>just work</i> -- all the settings in your application\
+      \ are overridden to ensure seamless integration.  <a href=\"/docs/overview.htmlYou/\"\
+      >You</a> can easily see these settings in action -- they're in the same place,\
+      \ the DATABASES variable inside settings.py.</p>\r\n<p><a href=\"/docs/overview.htmlYou/\"\
+      >You</a> can interact with your live database using the <tt>djangy manage.py\
+      \ shell</tt> command.  <a href=\"/docs/overview.htmlYou/\">You</a> also have\
+      \ the ability to load and dump data directly -- see the <a href=\"/docs/<a href=\"\
+      /docs/overview.htmlDatabases/\">Databases</a>\"><a href=\"/docs/overview.htmlDatabase/\"\
+      >Database</a> docs</a> for more information.</p>"}
+  model: docs.page
+  pk: 30
+- fields: {content: "<h2>Django admin panel and auth</h2>\r\n<p>Django's Admin app\
+      \ is a popular way to manage authentication and\r\npermissions.  Djangy fully\
+      \ supports the admin panel.</p>\r\n\r\n<p>Usually when you run <tt>syncdb</tt>\
+      \ and you have the auth app in your\r\n<tt>INSTALLED_APPS</tt>, you'd be prompted\
+      \ to create a superuser account.\r\nFor security purposes, we've separated this\
+      \ functionality into a djangy command;\r\nnamely, the <tt>djangy createsuperuser</tt>\
+      \ command.</p>\r\n\r\n<h3>createsuperuser</h3>\r\n\r\n<p>Assuming you've created\
+      \ a <tt>models.py</tt> inside your Django application\r\nand you've previously\
+      \ run the <tt>djangy syncdb</tt> command, your next step\r\nis to run <tt>djangy\
+      \ createsuperuser</tt>:</p>\r\n\r\n<pre>\r\ndjangy createsuperuser\r\n</pre>\r\
+      \n\r\n<p>Assuming all goes well, a django admin super user will be created and\r\
+      \nyour newfound credentials will be printed for your convenience.  Now you\r\
+      \nare free to log in to the admin panel wherever you've decided to configure\
+      \ it,\r\nby default <tt>yourapp.djangy.com/admin</tt>.</p>\r\n", name: Auth,
+    rendered: "<h2><a href=\"/docs/Django/\">Django</a> admin panel and auth</h2>\r\
+      \n<p><a href=\"/docs/Django/\">Django</a>'s <a href=\"/docs/Admin/\">Admin</a>\
+      \ app is a popular way to manage authentication and\r\npermissions.  <a href=\"\
+      /docs/Djangy/\">Djangy</a> fully supports the admin panel.</p>\r\n\r\n<p><a\
+      \ href=\"/docs/Usually/\">Usually</a> when you run <tt>syncdb</tt> and you have\
+      \ the auth app in your\r\n<tt>INSTALLED_APPS</tt>, you'd be prompted to create\
+      \ a superuser account.\r\n<a href=\"/docs/For/\">For</a> security purposes,\
+      \ we've separated this functionality into a djangy command;\r\nnamely, the <tt>djangy\
+      \ createsuperuser</tt> command.</p>\r\n\r\n<h3>createsuperuser</h3>\r\n\r\n\
+      <p><a href=\"/docs/Assuming/\">Assuming</a> you've created a <tt>models.py</tt>\
+      \ inside your <a href=\"/docs/Django/\">Django</a> application\r\nand you've\
+      \ previously run the <tt>djangy syncdb</tt> command, your next step\r\nis to\
+      \ run <tt>djangy createsuperuser</tt>:</p>\r\n\r\n<pre>\r\ndjangy createsuperuser\r\
+      \n</pre>\r\n\r\n<p><a href=\"/docs/Assuming/\">Assuming</a> all goes well, a\
+      \ django admin super user will be created and\r\nyour newfound credentials will\
+      \ be printed for your convenience.  <a href=\"/docs/Now/\">Now</a> you\r\nare\
+      \ free to log in to the admin panel wherever you've decided to configure it,\r\
+      \nby default <tt>yourapp.djangy.com/admin</tt>.</p>\r\n"}
+  model: docs.page
+  pk: 12
+- fields: {content: "<h2>Backups</h2>\r\n<br />\r\n<p>Djangy performs daily backups\
+      \ of your application bundle, database, and user information.  Interacting with\
+      \ these backups via the dashboard and client is on our roadmap.  If you need\
+      \ to restore your instance from a recent backup, please email <a mailto:support@djangy.com>support@djangy.com</a>\
+      \ and we'll be glad to help you.</p>\r\n<p>Also note that it's possible to run\
+      \ <tt>reset</tt>, <tt>syncdb</tt>, <tt>migrate</tt> (if necessary), and <tt>loaddata</tt>\
+      \ if you need to quickly wipe and repopulate your database.  More information\
+      \ can be found in the <a href=\"/docs/Databases\">Database documentation</a>.</p>",
+    name: Backups, rendered: "<h2><a href=\"/docs/overview.htmlBackups/\">Backups</a></h2>\r\
+      \n<br />\r\n<p><a href=\"/docs/overview.htmlDjangy/\">Djangy</a> performs daily\
+      \ backups of your application bundle, database, and user information.  <a href=\"\
+      /docs/overview.htmlInteracting/\">Interacting</a> with these backups via the\
+      \ dashboard and client is on our roadmap.  <a href=\"/docs/overview.htmlIf/\"\
+      >If</a> you need to restore your instance from a recent backup, please email\
+      \ <a mailto:support@djangy.com>support@djangy.com</a> and we'll be glad to help\
+      \ you.</p>\r\n<p><a href=\"/docs/overview.htmlAlso/\">Also</a> note that it's\
+      \ possible to run <tt>reset</tt>, <tt>syncdb</tt>, <tt>migrate</tt> (if necessary),\
+      \ and <tt>loaddata</tt> if you need to quickly wipe and repopulate your database.\
+      \  <a href=\"/docs/overview.htmlMore/\">More</a> information can be found in\
+      \ the <a href=\"/docs/<a href=\"/docs/overview.htmlDatabases/\">Databases</a>\"\
+      ><a href=\"/docs/overview.htmlDatabase/\">Database</a> documentation</a>.</p>"}
+  model: docs.page
+  pk: 28
+- fields: {content: "<h2>Background jobs with Celery</h2>\r\n<br />\r\n<ul>\r\n  <li><a\
+      \ href=\"#introduction\">Introduction to background jobs</a></li>\r\n  <li><a\
+      \ href=\"#using-celery\">Using celery</li>\r\n</ul>\r\n<br />\r\n<a name=\"\
+      introduction\"></a>\r\n<h3>Introduction to background jobs</h3>\r\n<br />\r\n\
+      <p>Background jobs are an essential component of many modern web apps.  They're\
+      \ used to keep the load off client requests -- uploading data to S3, image manipulation,\
+      \ and RSS scraping are perfect candidates for background jobs.</p>\r\n<p>Djangy\
+      \ gives you this ability by utilizing the popular <a href=\"http://celeryproject.org/docs/index.html\"\
+      \ target=\"_blank\">Celery project</a>.</p>\r\n<br />\r\n<a name=\"using-celery\"\
+      ></a>\r\n<h3>Using celery</h3>\r\n<br />\r\n<p>Using celery is easy.  Here's\
+      \ an example of a task:</p>\r\n<pre>\r\nfrom celery.decorators import task\r\
+      \n\r\n@task\r\ndef do_work(x, y):\r\n    return x * y\r\n</pre>\r\n<p>You'd\
+      \ call this task from your view or interactive shell like so:</p>\r\n<pre>\r\
+      \nfrom tasks import do_work\r\nresult = do_work.delay(5, 6) # pass x=5, y=6\
+      \ to the do_work() function\r\nvalue = result.wait() # block until this task\
+      \ completes\r\nprint value\r\n</pre>\r\n<p>To get celery working, add your tasks\
+      \ to a file called <tt>tasks.py</tt> in the same directory as <tt>manage.py</tt>\
+      \ (for example).  Then, add the following to your <tt>settings.py</tt>:</p>\r\
+      \n<pre>\r\nINSTALLED_APPS = (\r\n  ...,\r\n   djcelery,\r\n   ghettoq,\r\n)\r\
+      \nimport djcelery\r\ndjcelery.setup_loader()\r\nCELERY_IMPORTS = (\r\n   \"\
+      tasks\",\r\n)\r\n</pre>\r\n<p>The <tt>djcelery</tt> stuff integrates celery\
+      \ into your django project.  The <tt>ghettoq</tt> line is the library required\
+      \ to use your database as the message queue for your tasks.</p>\r\n<p>Add the\
+      \ following to your <a href=\"/docs/Dependencies\"><tt>djangy.pip</tt></a>:</p>\r\
+      \n<pre>\r\ndjango-celery\r\nghettoq\r\n</pre>\r\n<p>Don't forget to <tt>git\
+      \ commit</tt> your changes and push!</p>\r\n<p>Before you can use the task queue,\
+      \ you need to <tt>syncdb</tt> and <tt>migrate</tt>:</p>\r\n<pre>\r\n$ djangy\
+      \ manage.py syncdb\r\n$ djnagy managey.py migrate\r\n</pre>\r\n<p>...and you're\
+      \ good to go!</p>\r\n<p>For more information on how to utilize celery for background\
+      \ tasks, check out their <a href=\"http://celeryproject.org/docs/index.html\"\
+      \ target=\"_blank\">Official documentation</a>.</p>", name: Celery, rendered: "<h2><a\
+      \ href=\"/docs/overview.htmlBackground/\">Background</a> jobs with <a href=\"\
+      /docs/overview.htmlCelery/\">Celery</a></h2>\r\n<br />\r\n<ul>\r\n  <li><a href=\"\
+      #introduction\"><a href=\"/docs/overview.htmlIntroduction/\">Introduction</a>\
+      \ to background jobs</a></li>\r\n  <li><a href=\"#using-celery\"><a href=\"\
+      /docs/overview.htmlUsing/\">Using</a> celery</li>\r\n</ul>\r\n<br />\r\n<a name=\"\
+      introduction\"></a>\r\n<h3><a href=\"/docs/overview.htmlIntroduction/\">Introduction</a>\
+      \ to background jobs</h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlBackground/\"\
+      >Background</a> jobs are an essential component of many modern web apps.  <a\
+      \ href=\"/docs/overview.htmlThey/\">They</a>'re used to keep the load off client\
+      \ requests -- uploading data to <a href=\"/docs/overview.htmlS3/\">S3</a>, image\
+      \ manipulation, and RSS scraping are perfect candidates for background jobs.</p>\r\
+      \n<p><a href=\"/docs/overview.htmlDjangy/\">Djangy</a> gives you this ability\
+      \ by utilizing the popular <a href=\"http://celeryproject.org/docs/index.html\"\
+      \ target=\"_blank\"><a href=\"/docs/overview.htmlCelery/\">Celery</a> project</a>.</p>\r\
+      \n<br />\r\n<a name=\"using-celery\"></a>\r\n<h3><a href=\"/docs/overview.htmlUsing/\"\
+      >Using</a> celery</h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlUsing/\"\
+      >Using</a> celery is easy.  <a href=\"/docs/overview.htmlHere/\">Here</a>'s\
+      \ an example of a task:</p>\r\n<pre>\r\nfrom celery.decorators import task\r\
+      \n\r\n@task\r\ndef do_work(x, y):\r\n    return x * y\r\n</pre>\r\n<p><a href=\"\
+      /docs/overview.htmlYou/\">You</a>'d call this task from your view or interactive\
+      \ shell like so:</p>\r\n<pre>\r\nfrom tasks import do_work\r\nresult = do_work.delay(5,\
+      \ 6) # pass x=5, y=6 to the do_work() function\r\nvalue = result.wait() # block\
+      \ until this task completes\r\nprint value\r\n</pre>\r\n<p><a href=\"/docs/overview.htmlTo/\"\
+      >To</a> get celery working, add your tasks to a file called <tt>tasks.py</tt>\
+      \ in the same directory as <tt>manage.py</tt> (for example).  <a href=\"/docs/overview.htmlThen/\"\
+      >Then</a>, add the following to your <tt>settings.py</tt>:</p>\r\n<pre>\r\n\
+      INSTALLED_APPS = (\r\n  ...,\r\n   djcelery,\r\n   ghettoq,\r\n)\r\nimport djcelery\r\
+      \ndjcelery.setup_loader()\r\nCELERY_IMPORTS = (\r\n   \"tasks\",\r\n)\r\n</pre>\r\
+      \n<p><a href=\"/docs/overview.htmlThe/\">The</a> <tt>djcelery</tt> stuff integrates\
+      \ celery into your django project.  <a href=\"/docs/overview.htmlThe/\">The</a>\
+      \ <tt>ghettoq</tt> line is the library required to use your database as the\
+      \ message queue for your tasks.</p>\r\n<p><a href=\"/docs/overview.htmlAdd/\"\
+      >Add</a> the following to your <a href=\"/docs/<a href=\"/docs/overview.htmlDependencies/\"\
+      >Dependencies</a>\"><tt>djangy.pip</tt></a>:</p>\r\n<pre>\r\ndjango-celery\r\
+      \nghettoq\r\n</pre>\r\n<p><a href=\"/docs/overview.htmlDon/\">Don</a>'t forget\
+      \ to <tt>git commit</tt> your changes and push!</p>\r\n<p><a href=\"/docs/overview.htmlBefore/\"\
+      >Before</a> you can use the task queue, you need to <tt>syncdb</tt> and <tt>migrate</tt>:</p>\r\
+      \n<pre>\r\n$ djangy manage.py syncdb\r\n$ djnagy managey.py migrate\r\n</pre>\r\
+      \n<p>...and you're good to go!</p>\r\n<p><a href=\"/docs/overview.htmlFor/\"\
+      >For</a> more information on how to utilize celery for background tasks, check\
+      \ out their <a href=\"http://celeryproject.org/docs/index.html\" target=\"_blank\"\
+      ><a href=\"/docs/overview.htmlOfficial/\">Official</a> documentation</a>.</p>"}
+  model: docs.page
+  pk: 33
+- fields: {content: "<h2>Installing the Djangy command-line client</h2>\r\n<br />\r\
+      \n<p>The Djangy command-line tool is how you'll interact with our API most of\
+      \ the time.  The client will allow you to create djangy applications, view logs,\
+      \ and run manage.py commands like syncdb and migrate.  It will also give you\
+      \ access to the usual interactive shell you're used to for local development.\r\
+      \n<ul>\r\n  <li><a href=\"#installation\">Installation</a></li>\r\n  <li><a\
+      \ href=\"#usage\">Usage</a></li>\r\n</ul>\r\n</p>\r\n<br />\r\n<a name=\"installation\"\
+      ></a>\r\n<h3>Installation</h3>\r\n<br />\r\n<p>Assuming you already have a Djangy\
+      \ account, you have two options to install the djangy command-line client:\r\
+      \n<pre>\r\n$ easy_install djangy\r\n</pre>\r\nor\r\n<pre>\r\n$ pip install djangy\r\
+      \n</pre>\r\n</p>\r\n<a name=\"usage\"></a>\r\n<h3>Usage</h3>\r\n<pre>\r\n$ djangy\
+      \ help\r\n Djangy Commands:\r\n                                # NOTE: all commands\
+      \ accept\r\n                                # the [-a app_name] argument:\r\n\
+      \                                # $ djangy -a myproject create\r\n\r\ndjangy\
+      \ create                   # create a new djangy application\r\n\r\ndjangy manage.py\
+      \ &lt;command&gt;      # remotely execute manage.py command\r\ndjangy manage.py\
+      \ syncdb\r\ndjangy manage.py migrate\r\ndjangy manage.py shell\r\n\r\ndjangy\
+      \ logs                     # display recent log output (last 100 lines)\r\n\
+      djangy help                     # display this message\r\n\r\n# Example:\r\n\
+      \r\n    django-startproject myproject\r\n    cd myproject\r\n    git init\r\n\
+      \    git add .\r\n    git commit -m \"my new project\"\r\n    djangy create\r\
+      \n    git push djangy master\r\n\r\n# http://www.djangy.com/docs/ | support@djangy.com\r\
+      \n\r\n</pre>", name: Client, rendered: "<h2><a href=\"/docs/overview.htmlInstalling/\"\
+      >Installing</a> the <a href=\"/docs/overview.htmlDjangy/\">Djangy</a> command-line\
+      \ client</h2>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlThe/\">The</a> <a\
+      \ href=\"/docs/overview.htmlDjangy/\">Djangy</a> command-line tool is how you'll\
+      \ interact with our API most of the time.  <a href=\"/docs/overview.htmlThe/\"\
+      >The</a> client will allow you to create djangy applications, view logs, and\
+      \ run manage.py commands like syncdb and migrate.  <a href=\"/docs/overview.htmlIt/\"\
+      >It</a> will also give you access to the usual interactive shell you're used\
+      \ to for local development.\r\n<ul>\r\n  <li><a href=\"#installation\"><a href=\"\
+      /docs/overview.htmlInstallation/\">Installation</a></a></li>\r\n  <li><a href=\"\
+      #usage\"><a href=\"/docs/overview.htmlUsage/\">Usage</a></a></li>\r\n</ul>\r\
+      \n</p>\r\n<br />\r\n<a name=\"installation\"></a>\r\n<h3><a href=\"/docs/overview.htmlInstallation/\"\
+      >Installation</a></h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlAssuming/\"\
+      >Assuming</a> you already have a <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>\
+      \ account, you have two options to install the djangy command-line client:\r\
+      \n<pre>\r\n$ easy_install djangy\r\n</pre>\r\nor\r\n<pre>\r\n$ pip install djangy\r\
+      \n</pre>\r\n</p>\r\n<a name=\"usage\"></a>\r\n<h3><a href=\"/docs/overview.htmlUsage/\"\
+      >Usage</a></h3>\r\n<pre>\r\n$ djangy help\r\n <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> <a href=\"/docs/overview.htmlCommands/\">Commands</a>:\r\n     \
+      \                           # NOTE: all commands accept\r\n                \
+      \                # the [-a app_name] argument:\r\n                         \
+      \       # $ djangy -a myproject create\r\n\r\ndjangy create                \
+      \   # create a new djangy application\r\n\r\ndjangy manage.py &lt;command&gt;\
+      \      # remotely execute manage.py command\r\ndjangy manage.py syncdb\r\ndjangy\
+      \ manage.py migrate\r\ndjangy manage.py shell\r\n\r\ndjangy logs           \
+      \          # display recent log output (last 100 lines)\r\ndjangy help     \
+      \                # display this message\r\n\r\n# <a href=\"/docs/overview.htmlExample/\"\
+      >Example</a>:\r\n\r\n    django-startproject myproject\r\n    cd myproject\r\
+      \n    git init\r\n    git add .\r\n    git commit -m \"my new project\"\r\n\
+      \    djangy create\r\n    git push djangy master\r\n\r\n# http://www.djangy.com/docs/\
+      \ | support@djangy.com\r\n\r\n</pre>"}
+  model: docs.page
+  pk: 21
+- fields: {content: "<h2>Collaboration</h2>\r\n<br />\r\n<h3>Adding Collaborators</h3>\r\
+      \n<br />\r\n<p>Collaborating with other developers on your project is easy:\r\
+      \n<ul>\r\n  <li>Navigate to the dashboard for your application</li>\r\n  <li>Find\
+      \ the \"Collaborators\" section</li>\r\n  <li>Enter the user's email address\
+      \ in the provided textbox</li>\r\n  <li>Click \"Add Collaborator\"!</li>\r\n\
+      </ul>\r\nThat user will now have access to that application via the djangy command-line\
+      \ tool, the web dashboard, and via git (provided they've provided us with their\
+      \ SSH public key).\r\n</p>\r\n<h3>Removing Collaborators</h3>\r\n<br />\r\n\
+      <p>Removing collaborators is just as easy as adding them.  Simply find their\
+      \ email address in the \"Collaborators\" section of your application's web dashboard\
+      \ and click \"remove\".</p>", name: Collaboration, rendered: "<h2><a href=\"\
+      /docs/overview.htmlCollaboration/\">Collaboration</a></h2>\r\n<br />\r\n<h3><a\
+      \ href=\"/docs/overview.htmlAdding/\">Adding</a> <a href=\"/docs/overview.htmlCollaborators/\"\
+      >Collaborators</a></h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlCollaborating/\"\
+      >Collaborating</a> with other developers on your project is easy:\r\n<ul>\r\n\
+      \  <li><a href=\"/docs/overview.htmlNavigate/\">Navigate</a> to the dashboard\
+      \ for your application</li>\r\n  <li><a href=\"/docs/overview.htmlFind/\">Find</a>\
+      \ the \"<a href=\"/docs/overview.htmlCollaborators/\">Collaborators</a>\" section</li>\r\
+      \n  <li><a href=\"/docs/overview.htmlEnter/\">Enter</a> the user's email address\
+      \ in the provided textbox</li>\r\n  <li><a href=\"/docs/overview.htmlClick/\"\
+      >Click</a> \"<a href=\"/docs/overview.htmlAdd/\">Add</a> <a href=\"/docs/overview.htmlCollaborator/\"\
+      >Collaborator</a>\"!</li>\r\n</ul>\r\n<a href=\"/docs/overview.htmlThat/\">That</a>\
+      \ user will now have access to that application via the djangy command-line\
+      \ tool, the web dashboard, and via git (provided they've provided us with their\
+      \ SSH public key).\r\n</p>\r\n<h3><a href=\"/docs/overview.htmlRemoving/\">Removing</a>\
+      \ <a href=\"/docs/overview.htmlCollaborators/\">Collaborators</a></h3>\r\n<br\
+      \ />\r\n<p><a href=\"/docs/overview.htmlRemoving/\">Removing</a> collaborators\
+      \ is just as easy as adding them.  <a href=\"/docs/overview.htmlSimply/\">Simply</a>\
+      \ find their email address in the \"<a href=\"/docs/overview.htmlCollaborators/\"\
+      >Collaborators</a>\" section of your application's web dashboard and click \"\
+      remove\".</p>"}
+  model: docs.page
+  pk: 24
+- fields: {content: "<h2>Optional configuration files</h2>\r\n<br />\r\n<p>Djangy\
+      \ automatically creates and uses three configuration files.  You may\r\nneed\
+      \ to customize these configuration files if your application has more\r\ndependencies,\
+      \ or if you make a change to the name of the directory\r\ncontaining your git\
+      \ repository.</p>\r\n<br />\r\n<h3>~/.djangy</h3>\r\n<br />\r\n<p>Contains your\
+      \ Djangy account's email address and hashed password.  Used\r\nby the Djangy\
+      \ client program to authenticate with the Djangy servers.  If\r\nyou change\
+      \ your password on the <a href=\"/dashboard\">Djangy web\r\ndashboard</a>, the\
+      \ next time you run <tt><b>djangy</b></tt> you'll be asked\r\nto update your\
+      \ password, and it will then be saved to\r\n<tt><b>~/.djangy</b></tt></p>\r\n\
+      <br />\r\n<h3>git_repo/djangy.eggs</h3>\r\n<br />\r\n<p>See <a href=\"docs/Dependencies\"\
+      >Managing Dependencies</a>.</p>\r\n<h3>git_repo/djangy.pip</h3>\r\n<br />\r\n\
+      <p>See <a href=\"docs/Dependencies\">Managing Dependencies</a>.</p>\r\n<br />\r\
+      \n<h3>git_repo/djangy.config</h3>\r\n<br />\r\n<p>Configures basic information\
+      \ about your Djangy application, including the\r\napplication's name and what\
+      \ the application's git repository directory is\r\nnamed on your computer. \
+      \ A basic version of <tt><b>djangy.config</b></tt> is\r\nautomatically generated\
+      \ by &ldquo;<tt><b>djangy create</b></tt>&rdquo;,\r\ndepicted below.</p>\r\n\
+      \r\n<pre>[application]\r\nrootdir=<i>...</i>\r\napplication_name=<i>...</i></pre>\r\
+      \n\r\n<p><b>Important:</b> If your application assumes that your git repository\r\
+      \nhas a particular name, you <i>must</i> include a\r\n<tt><b>djangy.config</b></tt>\
+      \ file with <tt><b>rootdir</b></tt> set\r\ncorrectly.</p>", name: ConfigFiles,
+    rendered: "<h2><a href=\"/docs/overview.htmlOptional/\">Optional</a> configuration\
+      \ files</h2>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlDjangy/\">Djangy</a>\
+      \ automatically creates and uses three configuration files.  <a href=\"/docs/overview.htmlYou/\"\
+      >You</a> may\r\nneed to customize these configuration files if your application\
+      \ has more\r\ndependencies, or if you make a change to the name of the directory\r\
+      \ncontaining your git repository.</p>\r\n<br />\r\n<h3>~/.djangy</h3>\r\n<br\
+      \ />\r\n<p><a href=\"/docs/overview.htmlContains/\">Contains</a> your <a href=\"\
+      /docs/overview.htmlDjangy/\">Djangy</a> account's email address and hashed password.\
+      \  <a href=\"/docs/overview.htmlUsed/\">Used</a>\r\nby the <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> client program to authenticate with the <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> servers.  <a href=\"/docs/overview.htmlIf/\">If</a>\r\nyou change\
+      \ your password on the <a href=\"/dashboard\"><a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> web\r\ndashboard</a>, the next time you run <tt><b>djangy</b></tt>\
+      \ you'll be asked\r\nto update your password, and it will then be saved to\r\
+      \n<tt><b>~/.djangy</b></tt></p>\r\n<br />\r\n<h3>git_repo/djangy.eggs</h3>\r\
+      \n<br />\r\n<p><a href=\"/docs/overview.htmlSee/\">See</a> <a href=\"docs/<a\
+      \ href=\"/docs/overview.htmlDependencies/\">Dependencies</a>\"><a href=\"/docs/overview.htmlManaging/\"\
+      >Managing</a> <a href=\"/docs/overview.htmlDependencies/\">Dependencies</a></a>.</p>\r\
+      \n<h3>git_repo/djangy.pip</h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlSee/\"\
+      >See</a> <a href=\"docs/<a href=\"/docs/overview.htmlDependencies/\">Dependencies</a>\"\
+      ><a href=\"/docs/overview.htmlManaging/\">Managing</a> <a href=\"/docs/overview.htmlDependencies/\"\
+      >Dependencies</a></a>.</p>\r\n<br />\r\n<h3>git_repo/djangy.config</h3>\r\n\
+      <br />\r\n<p><a href=\"/docs/overview.htmlConfigures/\">Configures</a> basic\
+      \ information about your <a href=\"/docs/overview.htmlDjangy/\">Djangy</a> application,\
+      \ including the\r\napplication's name and what the application's git repository\
+      \ directory is\r\nnamed on your computer.  A basic version of <tt><b>djangy.config</b></tt>\
+      \ is\r\nautomatically generated by &ldquo;<tt><b>djangy create</b></tt>&rdquo;,\r\
+      \ndepicted below.</p>\r\n\r\n<pre>[application]\r\nrootdir=<i>...</i>\r\napplication_name=<i>...</i></pre>\r\
+      \n\r\n<p><b><a href=\"/docs/overview.htmlImportant/\">Important</a>:</b> <a\
+      \ href=\"/docs/overview.htmlIf/\">If</a> your application assumes that your\
+      \ git repository\r\nhas a particular name, you <i>must</i> include a\r\n<tt><b>djangy.config</b></tt>\
+      \ file with <tt><b>rootdir</b></tt> set\r\ncorrectly.</p>"}
+  model: docs.page
+  pk: 9
+- fields: {content: "<h2>Creating Djangy Applications</h2>\r\n<br />\r\n<p>Djangy\
+      \ is a platform for hosting your django applications.  The first step is always\
+      \ to create an app.  Simply run the following commands from within your git\
+      \ repository:\r\n<pre>\r\n$ cd myapp\r\n$ djangy create\r\nUsing git repository\
+      \ \"/Users/dave/projects/myapp\"\r\n\r\nEnter your email address: dave@djangy.com\r\
+      \nPlease enter your password: \r\n \r\nSaved credentials.\r\nTo change your\
+      \ email address or password, remove \"/Users/dave/.djangy\"\r\n\r\nPlease enter\
+      \ your application name [Enter for myapp]: \r\n \r\nUsing application name \"\
+      myapp\" from user input\r\nUsing public key file \"/Users/dave/.ssh/id_rsa.pub\"\
+      \r\nApplication created.\r\n[master 83b657d] added \"djangy.config\" and \"\
+      djangy.eggs\" to repository\r\n 2 files changed, 5 insertions(+), 0 deletions(-)\r\
+      \n create mode 100644 djangy.config\r\n create mode 100644 djangy.eggs\r\n\r\
+      \nYou can now run \"git push djangy master\"\r\n</pre>\r\nNow you're ready to\
+      \ <a href=\"/docs/DeployingWithGit\">Deploy with Git</a>.</p>", name: CreatingApps,
+    rendered: "<h2><a href=\"/docs/overview.htmlCreating/\">Creating</a> <a href=\"\
+      /docs/overview.htmlDjangy/\">Djangy</a> <a href=\"/docs/overview.htmlApplications/\"\
+      >Applications</a></h2>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> is a platform for hosting your django applications.  <a href=\"\
+      /docs/overview.htmlThe/\">The</a> first step is always to create an app.  <a\
+      \ href=\"/docs/overview.htmlSimply/\">Simply</a> run the following commands\
+      \ from within your git repository:\r\n<pre>\r\n$ cd myapp\r\n$ djangy create\r\
+      \n<a href=\"/docs/overview.htmlUsing/\">Using</a> git repository \"/<a href=\"\
+      /docs/overview.htmlUsers/\">Users</a>/dave/projects/myapp\"\r\n\r\n<a href=\"\
+      /docs/overview.htmlEnter/\">Enter</a> your email address: dave@djangy.com\r\n\
+      <a href=\"/docs/overview.htmlPlease/\">Please</a> enter your password: \r\n\
+      \ \r\n<a href=\"/docs/overview.htmlSaved/\">Saved</a> credentials.\r\n<a href=\"\
+      /docs/overview.htmlTo/\">To</a> change your email address or password, remove\
+      \ \"/<a href=\"/docs/overview.htmlUsers/\">Users</a>/dave/.djangy\"\r\n\r\n\
+      <a href=\"/docs/overview.htmlPlease/\">Please</a> enter your application name\
+      \ [<a href=\"/docs/overview.htmlEnter/\">Enter</a> for myapp]: \r\n \r\n<a href=\"\
+      /docs/overview.htmlUsing/\">Using</a> application name \"myapp\" from user input\r\
+      \n<a href=\"/docs/overview.htmlUsing/\">Using</a> public key file \"/<a href=\"\
+      /docs/overview.htmlUsers/\">Users</a>/dave/.ssh/id_rsa.pub\"\r\n<a href=\"/docs/overview.htmlApplication/\"\
+      >Application</a> created.\r\n[master 83b657d] added \"djangy.config\" and \"\
+      djangy.eggs\" to repository\r\n 2 files changed, 5 insertions(+), 0 deletions(-)\r\
+      \n create mode 100644 djangy.config\r\n create mode 100644 djangy.eggs\r\n\r\
+      \n<a href=\"/docs/overview.htmlYou/\">You</a> can now run \"git push djangy\
+      \ master\"\r\n</pre>\r\n<a href=\"/docs/overview.htmlNow/\">Now</a> you're ready\
+      \ to <a href=\"/docs/<a href=\"/docs/overview.htmlDeployingWithGit/\">DeployingWithGit</a>\"\
+      ><a href=\"/docs/overview.htmlDeploy/\">Deploy</a> with <a href=\"/docs/overview.htmlGit/\"\
+      >Git</a></a>.</p>"}
+  model: docs.page
+  pk: 22
+- fields: {content: "<h2>Using a database on Djangy</h2>\r\n\r\n<p>Sooner or later\
+      \ (probably sooner), you'll want to use Django data models\r\nin your application.\
+      \  Django models require a database to store persistent\r\ndata.</p>\r\n\r\n\
+      <p>Djangy automatically provides your Django application with its own MySQL\r\
+      \ndatabase. You can interact with this database using your normal workflow:\r\
+      \n<ul>\r\n  <li><a href=\"#syncb\">syncdb</a></li>\r\n  <li><a href=\"#migrate\"\
+      >migrate</a></li>\r\n  <li><a href=\"#loaddata\">loaddata</a></li>\r\n  <li><a\
+      \ href=\"#dumpdata\">dumpdata</a></li>\r\n  <li><a href=\"#reset\">reset</a></li>\r\
+      \n</ul>\r\n</p>\r\n<br />\r\n<a name=\"syncdb\"></a>\r\n<h3>syncdb</h3>\r\n\
+      <br />\r\n<p>Assuming you've created a <tt>models.py</tt> inside your Django\
+      \ application\r\nand it works for you locally, all you need to do to run the\
+      \ equivalent of\r\n<tt>python manage.py syncdb</tt> on Djangy:</p>\r\n\r\n<pre>\r\
+      \n$ djangy manage.py syncdb\r\n\r\nUsing git repository \"/Users/dave/myapp\"\
+      \r\nUsing application name \"myapp\" from \"/Users/dave/myapp/djangy.config\"\
+      \r\n\r\nCreating table auth_permission\r\nCreating table auth_group_permissions\r\
+      \nCreating table auth_group\r\nCreating table auth_user_user_permissions\r\n\
+      Creating table auth_user_groups\r\nCreating table auth_user\r\nCreating table\
+      \ auth_message\r\nCreating table django_content_type\r\nCreating table django_session\r\
+      \nCreating table django_site\r\n\r\nYou just installed Django's auth system,\
+      \ which means you don't have any \r\nsuperusers defined.  Would you like to\
+      \ create one now? (yes/no): yes\r\nUsername (Leave blank to use 'djangy'): dave\
+      \           \r\nE-mail address: dave@djangy.com\r\nPassword:\r\nPassword (again):\r\
+      \n\r\nSuperuser created successfully.\r\nInstalling index for auth.Permission\
+      \ model\r\nInstalling index for auth.Group_permissions model\r\nInstalling index\
+      \ for auth.User_user_permissions model\r\nInstalling index for auth.User_groups\
+      \ model\r\nInstalling index for auth.Message model\r\nNo fixtures found.\r\n\
+      </pre>\r\n<br />\r\n<a name=\"migrate\"></a>\r\n<h3>migrate</h3>\r\n<br />\r\
+      \n<p>Django's <tt>syncdb</tt> only creates tables that don't already exist in\r\
+      \nthe database; it doesn't even try to help when you change the structure of\r\
+      \nan existing Django model.  <a href=\"http://south.aeracode.org/\">South</a>\
+      \ is\r\na Django extension which provides <i>migrations</i> that allow you to\
+      \ change\r\nthe schema of an existing database.</p>\r\n\r\n<p>Djangy fully supports\
+      \ South, using the following workflow:</p>\r\n\r\n<ol>\r\n<li>Update your Django\
+      \ models locally on your development workstation.</li>\r\n<li>Run <tt>python\
+      \ manage.py schemamigration</tt>, e.g.\r\n    <pre>python manage.py schemamigration\
+      \ appname --auto</pre>\r\n    This will generate migration files in your local\
+      \ git repository.</li>\r\n<li>Run <tt>git commit</tt> and <tt>git push</tt>\
+      \ to upload the\r\n    migrations to Djangy.\r\n    <pre>git add .\r\ngit commit\
+      \ -m \"Created migrations\"\r\ngit push djangy master</pre></li>\r\n<li>Run\
+      \ <tt>djangy manage.py migrate</tt> to apply the migrations.  The <tt>djangy\r\
+      \n    manage.py migrate</tt> command accepts the same arguments as <tt>python\
+      \ manage.py\r\n    migrate</tt>, but runs on Djangy's servers rather than your\
+      \ local\r\n    development workstation.\r\n    <pre>djangy manage.py migrate\
+      \ [args...]</pre></li>\r\n</ol>\r\n<br />\r\n<a name=\"loaddata\"></a>\r\n<h3>loaddata</h3>\r\
+      \n<br />\r\n<p><tt>loaddata</tt> is the standard django-esque method of prepopulating\
+      \ your database.  Using loaddata on Djangy is no different from using loaddata\
+      \ normally.  Make sure your fixture is in your repository and pushed to Djangy,\
+      \ then run:\r\n<pre>\r\n$ djangy manage.py loaddata &lt;fixture-name&gt;\r\n\
+      </pre>\r\nFor more information on loaddata and fixtures, see the <a href=\"\
+      http://docs.djangoproject.com/en/1.2/ref/django-admin/#loaddata-fixture-fixture\"\
+      \ target=\"_blank\">Django Documentation</a>.\r\n</p>\r\n<br />\r\n<a name=\"\
+      dumpdata\"></a>\r\n<h3>dumpdata</h3>\r\n<br />\r\n<p><tt>dumpdata</tt> is the\
+      \ standard django-esque method of downloading all of the data currently in your\
+      \ database.  Using dumpdata on Djangy is no different from using dumpdata normally.\
+      \  Simply run:\r\n<pre>\r\n$ djangy manage.py dumpdata [app-name] > fixture-name.json\r\
+      \n</pre>\r\nNote that if no app name is provided, an entire database dump will\
+      \ be downloaded.  It's also important to note that all output will be directed\
+      \ to <tt>stdout</tt>.  Hence the need to use <tt>&gt; fixture-name.json</tt>\
+      \ at the end of the command.  For more information on dumpdata and fixtures,\
+      \ see the <a href=\"http://docs.djangoproject.com/en/1.2/ref/django-admin/#dumpdata-appname-appname-appname-model\"\
+      \ target=\"_blank\">Django Documentation</a>.</p>\r\n<br />\r\n<a name=\"reset\"\
+      ></a>\r\n<h3>reset</h3>\r\n<br />\r\n<p><tt>reset</tt> is the standard django-esque\
+      \ method of dropping database tables.  Usage is identical to local usage:\r\n\
+      <pre>\r\n$ djangy manage.py reset &lt;app-name&gt;\r\n</pre>\r\nSince this is\
+      \ such a sensitive operation, you'll be prompted before resetting any of your\
+      \ applications' data.  For more information, see the official <a href=\"http://docs.djangoproject.com/en/1.2/ref/django-admin/#reset-appname-appname\"\
+      \ target=\"_blank\">Django docs</a>.</p>", name: Databases, rendered: "<h2><a\
+      \ href=\"/docs/overview.htmlUsing/\">Using</a> a database on <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a></h2>\r\n\r\n<p><a href=\"/docs/overview.htmlSooner/\">Sooner</a>\
+      \ or later (probably sooner), you'll want to use <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a> data models\r\nin your application.  <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a> models require a database to store persistent\r\ndata.</p>\r\n\r\
+      \n<p><a href=\"/docs/overview.htmlDjangy/\">Djangy</a> automatically provides\
+      \ your <a href=\"/docs/overview.htmlDjango/\">Django</a> application with its\
+      \ own MySQL\r\ndatabase. <a href=\"/docs/overview.htmlYou/\">You</a> can interact\
+      \ with this database using your normal workflow:\r\n<ul>\r\n  <li><a href=\"\
+      #syncb\">syncdb</a></li>\r\n  <li><a href=\"#migrate\">migrate</a></li>\r\n\
+      \  <li><a href=\"#loaddata\">loaddata</a></li>\r\n  <li><a href=\"#dumpdata\"\
+      >dumpdata</a></li>\r\n  <li><a href=\"#reset\">reset</a></li>\r\n</ul>\r\n</p>\r\
+      \n<br />\r\n<a name=\"syncdb\"></a>\r\n<h3>syncdb</h3>\r\n<br />\r\n<p><a href=\"\
+      /docs/overview.htmlAssuming/\">Assuming</a> you've created a <tt>models.py</tt>\
+      \ inside your <a href=\"/docs/overview.htmlDjango/\">Django</a> application\r\
+      \nand it works for you locally, all you need to do to run the equivalent of\r\
+      \n<tt>python manage.py syncdb</tt> on <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a>:</p>\r\n\r\n<pre>\r\n$ djangy manage.py syncdb\r\n\r\n<a href=\"\
+      /docs/overview.htmlUsing/\">Using</a> git repository \"/<a href=\"/docs/overview.htmlUsers/\"\
+      >Users</a>/dave/myapp\"\r\n<a href=\"/docs/overview.htmlUsing/\">Using</a> application\
+      \ name \"myapp\" from \"/<a href=\"/docs/overview.htmlUsers/\">Users</a>/dave/myapp/djangy.config\"\
+      \r\n\r\n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_permission\r\
+      \n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_group_permissions\r\
+      \n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_group\r\n\
+      <a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_user_user_permissions\r\
+      \n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_user_groups\r\
+      \n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_user\r\n\
+      <a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_message\r\n\
+      <a href=\"/docs/overview.htmlCreating/\">Creating</a> table django_content_type\r\
+      \n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table django_session\r\
+      \n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table django_site\r\n\
+      \r\n<a href=\"/docs/overview.htmlYou/\">You</a> just installed <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a>'s auth system, which means you don't have any \r\nsuperusers defined.\
+      \  <a href=\"/docs/overview.htmlWould/\">Would</a> you like to create one now?\
+      \ (yes/no): yes\r\n<a href=\"/docs/overview.htmlUsername/\">Username</a> (<a\
+      \ href=\"/docs/overview.htmlLeave/\">Leave</a> blank to use 'djangy'): dave\
+      \           \r\nE-mail address: dave@djangy.com\r\n<a href=\"/docs/overview.htmlPassword/\"\
+      >Password</a>:\r\n<a href=\"/docs/overview.htmlPassword/\">Password</a> (again):\r\
+      \n\r\n<a href=\"/docs/overview.htmlSuperuser/\">Superuser</a> created successfully.\r\
+      \n<a href=\"/docs/overview.htmlInstalling/\">Installing</a> index for auth.<a\
+      \ href=\"/docs/overview.htmlPermission/\">Permission</a> model\r\n<a href=\"\
+      /docs/overview.htmlInstalling/\">Installing</a> index for auth.Group_permissions\
+      \ model\r\n<a href=\"/docs/overview.htmlInstalling/\">Installing</a> index for\
+      \ auth.User_user_permissions model\r\n<a href=\"/docs/overview.htmlInstalling/\"\
+      >Installing</a> index for auth.User_groups model\r\n<a href=\"/docs/overview.htmlInstalling/\"\
+      >Installing</a> index for auth.<a href=\"/docs/overview.htmlMessage/\">Message</a>\
+      \ model\r\n<a href=\"/docs/overview.htmlNo/\">No</a> fixtures found.\r\n</pre>\r\
+      \n<br />\r\n<a name=\"migrate\"></a>\r\n<h3>migrate</h3>\r\n<br />\r\n<p><a\
+      \ href=\"/docs/overview.htmlDjango/\">Django</a>'s <tt>syncdb</tt> only creates\
+      \ tables that don't already exist in\r\nthe database; it doesn't even try to\
+      \ help when you change the structure of\r\nan existing <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a> model.  <a href=\"http://south.aeracode.org/\"><a href=\"/docs/overview.htmlSouth/\"\
+      >South</a></a> is\r\na <a href=\"/docs/overview.htmlDjango/\">Django</a> extension\
+      \ which provides <i>migrations</i> that allow you to change\r\nthe schema of\
+      \ an existing database.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> fully supports <a href=\"/docs/overview.htmlSouth/\">South</a>,\
+      \ using the following workflow:</p>\r\n\r\n<ol>\r\n<li><a href=\"/docs/overview.htmlUpdate/\"\
+      >Update</a> your <a href=\"/docs/overview.htmlDjango/\">Django</a> models locally\
+      \ on your development workstation.</li>\r\n<li><a href=\"/docs/overview.htmlRun/\"\
+      >Run</a> <tt>python manage.py schemamigration</tt>, e.g.\r\n    <pre>python\
+      \ manage.py schemamigration appname --auto</pre>\r\n    <a href=\"/docs/overview.htmlThis/\"\
+      >This</a> will generate migration files in your local git repository.</li>\r\
+      \n<li><a href=\"/docs/overview.htmlRun/\">Run</a> <tt>git commit</tt> and <tt>git\
+      \ push</tt> to upload the\r\n    migrations to <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a>.\r\n    <pre>git add .\r\ngit commit -m \"<a href=\"/docs/overview.htmlCreated/\"\
+      >Created</a> migrations\"\r\ngit push djangy master</pre></li>\r\n<li><a href=\"\
+      /docs/overview.htmlRun/\">Run</a> <tt>djangy manage.py migrate</tt> to apply\
+      \ the migrations.  <a href=\"/docs/overview.htmlThe/\">The</a> <tt>djangy\r\n\
+      \    manage.py migrate</tt> command accepts the same arguments as <tt>python\
+      \ manage.py\r\n    migrate</tt>, but runs on <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a>'s servers rather than your local\r\n    development workstation.\r\
+      \n    <pre>djangy manage.py migrate [args...]</pre></li>\r\n</ol>\r\n<br />\r\
+      \n<a name=\"loaddata\"></a>\r\n<h3>loaddata</h3>\r\n<br />\r\n<p><tt>loaddata</tt>\
+      \ is the standard django-esque method of prepopulating your database.  <a href=\"\
+      /docs/overview.htmlUsing/\">Using</a> loaddata on <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> is no different from using loaddata normally.  <a href=\"/docs/overview.htmlMake/\"\
+      >Make</a> sure your fixture is in your repository and pushed to <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a>, then run:\r\n<pre>\r\n$ djangy manage.py loaddata &lt;fixture-name&gt;\r\
+      \n</pre>\r\n<a href=\"/docs/overview.htmlFor/\">For</a> more information on\
+      \ loaddata and fixtures, see the <a href=\"http://docs.djangoproject.com/en/1.2/ref/django-admin/#loaddata-fixture-fixture\"\
+      \ target=\"_blank\"><a href=\"/docs/overview.htmlDjango/\">Django</a> <a href=\"\
+      /docs/overview.htmlDocumentation/\">Documentation</a></a>.\r\n</p>\r\n<br />\r\
+      \n<a name=\"dumpdata\"></a>\r\n<h3>dumpdata</h3>\r\n<br />\r\n<p><tt>dumpdata</tt>\
+      \ is the standard django-esque method of downloading all of the data currently\
+      \ in your database.  <a href=\"/docs/overview.htmlUsing/\">Using</a> dumpdata\
+      \ on <a href=\"/docs/overview.htmlDjangy/\">Djangy</a> is no different from\
+      \ using dumpdata normally.  <a href=\"/docs/overview.htmlSimply/\">Simply</a>\
+      \ run:\r\n<pre>\r\n$ djangy manage.py dumpdata [app-name] > fixture-name.json\r\
+      \n</pre>\r\n<a href=\"/docs/overview.htmlNote/\">Note</a> that if no app name\
+      \ is provided, an entire database dump will be downloaded.  <a href=\"/docs/overview.htmlIt/\"\
+      >It</a>'s also important to note that all output will be directed to <tt>stdout</tt>.\
+      \  <a href=\"/docs/overview.htmlHence/\">Hence</a> the need to use <tt>&gt;\
+      \ fixture-name.json</tt> at the end of the command.  <a href=\"/docs/overview.htmlFor/\"\
+      >For</a> more information on dumpdata and fixtures, see the <a href=\"http://docs.djangoproject.com/en/1.2/ref/django-admin/#dumpdata-appname-appname-appname-model\"\
+      \ target=\"_blank\"><a href=\"/docs/overview.htmlDjango/\">Django</a> <a href=\"\
+      /docs/overview.htmlDocumentation/\">Documentation</a></a>.</p>\r\n<br />\r\n\
+      <a name=\"reset\"></a>\r\n<h3>reset</h3>\r\n<br />\r\n<p><tt>reset</tt> is the\
+      \ standard django-esque method of dropping database tables.  <a href=\"/docs/overview.htmlUsage/\"\
+      >Usage</a> is identical to local usage:\r\n<pre>\r\n$ djangy manage.py reset\
+      \ &lt;app-name&gt;\r\n</pre>\r\n<a href=\"/docs/overview.htmlSince/\">Since</a>\
+      \ this is such a sensitive operation, you'll be prompted before resetting any\
+      \ of your applications' data.  <a href=\"/docs/overview.htmlFor/\">For</a> more\
+      \ information, see the official <a href=\"http://docs.djangoproject.com/en/1.2/ref/django-admin/#reset-appname-appname\"\
+      \ target=\"_blank\"><a href=\"/docs/overview.htmlDjango/\">Django</a> docs</a>.</p>"}
+  model: docs.page
+  pk: 10
+- fields: {content: "<h2>Managing Dependencies</h2>\r\n<br />\r\n<p>Python offers\
+      \ a wide range of installable packages.  Djangy offers native support for automatically\
+      \ installing dependencies using <tt>easy_install</tt> or <tt>pip</tt>.  All\
+      \ you have to do is create a file called \"<tt>djangy.eggs</tt>\" (for Python\
+      \ <i>eggs,</i> installed using <tt>easy_install</tt>) or \"<tt>djangy.pip</tt>\"\
+      \ (for Python <i>source packages,</i> installed using <tt>pip</tt>) in the root\
+      \ directory of your git repository, containing a list of packages you would\
+      \ like Djangy to install.</p>\r\n\r\n<p>If you don't create a <tt>djangy.pip</tt>\
+      \ or <tt>djangy.eggs</tt> file, Djangy will assume that your application's only\
+      \ dependencies are Python iself, <tt>Django</tt>, and <tt>South</tt>.</p>\r\n\
+      \r\n<p>In general, you can list any Python source package that is available\
+      \ on <a href=\"http://pypi.python.org/pypi\">PyPI</a>.  There are <b>over 12,000</b>\
+      \ packages available on PyPI.</p>\r\n\r\n<h3>djangy.pip file format</h3>\r\n\
+      <br />\r\n<p>The optional <tt>djangy.pip</tt> file is used to specify Python\
+      \ source packages to install.  It follows the <a href=\"http://pip.openplans.org/requirement-format.html\"\
+      ><tt>pip</tt> requirements file format</a>.  For example:\r\n<pre>\r\nMyPackage==3.0\r\
+      \ne svn+http://svn.myproject.org/svn/MyProject/trunk#egg=MyProject\r\n</pre>\r\
+      \nThe main advantage of using <tt>pip</tt> over <tt>easy_install</tt> is pip's\
+      \ ability to install python libraries from remote repositories or website URLs.\r\
+      \n</p>\r\n\r\n<h3>djangy.eggs file format</h3>\r\n\r\n<p>The optional <tt>djangy.eggs</tt>\
+      \ file in the root directory of your git repository should list one egg requirement\
+      \ on each line.  By default, <tt>djangy create</tt> will automatically create\
+      \ a minimal <tt>djangy.eggs</tt> file in the correct location.</p>\r\n\r\n<p>For\
+      \ example, the following example requires Django (version 1.2 or later), South,\
+      \ Mako, a custom package <tt>my_package.egg</tt> stored in a directory named\
+      \ <tt>local_eggs/</tt> in your git repository, and another custom package located\
+      \ at <tt>http://djangy.com/example.egg</tt> (note: this file doesn't actually\
+      \ exist):</p>\r\n\r\n<pre>Django>=1.2\r\nSouth\r\nMako\r\n./local_eggs/my_package.egg\r\
+      \nhttp://djangy.com/example.egg</pre>\r\n\r\n<p>Note that we explicitly included\
+      \ Django and South in the list.  If you\r\nhave a <tt>djangy.eggs</tt> file\
+      \ but it doesn't list Django or South, those\r\npackages will <i>not</i> be\
+      \ installed.</p>\r\n\r\n<p>In general, you can list any Python egg that is available\
+      \ on <a href=\"http://pypi.python.org/pypi\">PyPI</a>.  Django, South, and Mako\
+      \ are just a few examples; there are <b>over 12,000</b> packages available on\
+      \ PyPI.</p>\r\n\r\n<p>You can also construct more elaborate egg requirements\
+      \ if you'd like;\r\neach line is the same as the <tt>requirement_or_url</tt>\
+      \ you'd pass to\r\n<tt>pip</tt> or <tt>easy_install</tt> on your local development\
+      \ workstation.  For example,\r\nyou can use this to force installation of a\
+      \ custom version of Django or\r\nSouth or any other package.  Or you can use\
+      \ a URL to force installation of a Python egg which isn't available on PyPI.</p>\r\
+      \n", name: Dependencies, rendered: "<h2><a href=\"/docs/overview.htmlManaging/\"\
+      >Managing</a> <a href=\"/docs/overview.htmlDependencies/\">Dependencies</a></h2>\r\
+      \n<br />\r\n<p><a href=\"/docs/overview.htmlPython/\">Python</a> offers a wide\
+      \ range of installable packages.  <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>\
+      \ offers native support for automatically installing dependencies using <tt>easy_install</tt>\
+      \ or <tt>pip</tt>.  <a href=\"/docs/overview.htmlAll/\">All</a> you have to\
+      \ do is create a file called \"<tt>djangy.eggs</tt>\" (for <a href=\"/docs/overview.htmlPython/\"\
+      >Python</a> <i>eggs,</i> installed using <tt>easy_install</tt>) or \"<tt>djangy.pip</tt>\"\
+      \ (for <a href=\"/docs/overview.htmlPython/\">Python</a> <i>source packages,</i>\
+      \ installed using <tt>pip</tt>) in the root directory of your git repository,\
+      \ containing a list of packages you would like <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> to install.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlIf/\">If</a>\
+      \ you don't create a <tt>djangy.pip</tt> or <tt>djangy.eggs</tt> file, <a href=\"\
+      /docs/overview.htmlDjangy/\">Djangy</a> will assume that your application's\
+      \ only dependencies are <a href=\"/docs/overview.htmlPython/\">Python</a> iself,\
+      \ <tt><a href=\"/docs/overview.htmlDjango/\">Django</a></tt>, and <tt><a href=\"\
+      /docs/overview.htmlSouth/\">South</a></tt>.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlIn/\"\
+      >In</a> general, you can list any <a href=\"/docs/overview.htmlPython/\">Python</a>\
+      \ source package that is available on <a href=\"http://pypi.python.org/pypi\"\
+      >PyPI</a>.  <a href=\"/docs/overview.htmlThere/\">There</a> are <b>over 12,000</b>\
+      \ packages available on PyPI.</p>\r\n\r\n<h3>djangy.pip file format</h3>\r\n\
+      <br />\r\n<p><a href=\"/docs/overview.htmlThe/\">The</a> optional <tt>djangy.pip</tt>\
+      \ file is used to specify <a href=\"/docs/overview.htmlPython/\">Python</a>\
+      \ source packages to install.  <a href=\"/docs/overview.htmlIt/\">It</a> follows\
+      \ the <a href=\"http://pip.openplans.org/requirement-format.html\"><tt>pip</tt>\
+      \ requirements file format</a>.  <a href=\"/docs/overview.htmlFor/\">For</a>\
+      \ example:\r\n<pre>\r\n<a href=\"/docs/overview.htmlMyPackage/\">MyPackage</a>==3.0\r\
+      \ne svn+http://svn.myproject.org/svn/<a href=\"/docs/overview.htmlMyProject/\"\
+      >MyProject</a>/trunk#egg=<a href=\"/docs/overview.htmlMyProject/\">MyProject</a>\r\
+      \n</pre>\r\n<a href=\"/docs/overview.htmlThe/\">The</a> main advantage of using\
+      \ <tt>pip</tt> over <tt>easy_install</tt> is pip's ability to install python\
+      \ libraries from remote repositories or website <a href=\"/docs/overview.htmlURLs/\"\
+      >URLs</a>.\r\n</p>\r\n\r\n<h3>djangy.eggs file format</h3>\r\n\r\n<p><a href=\"\
+      /docs/overview.htmlThe/\">The</a> optional <tt>djangy.eggs</tt> file in the\
+      \ root directory of your git repository should list one egg requirement on each\
+      \ line.  <a href=\"/docs/overview.htmlBy/\">By</a> default, <tt>djangy create</tt>\
+      \ will automatically create a minimal <tt>djangy.eggs</tt> file in the correct\
+      \ location.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlFor/\">For</a> example,\
+      \ the following example requires <a href=\"/docs/overview.htmlDjango/\">Django</a>\
+      \ (version 1.2 or later), <a href=\"/docs/overview.htmlSouth/\">South</a>, <a\
+      \ href=\"/docs/overview.htmlMako/\">Mako</a>, a custom package <tt>my_package.egg</tt>\
+      \ stored in a directory named <tt>local_eggs/</tt> in your git repository, and\
+      \ another custom package located at <tt>http://djangy.com/example.egg</tt> (note:\
+      \ this file doesn't actually exist):</p>\r\n\r\n<pre><a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a>>=1.2\r\n<a href=\"/docs/overview.htmlSouth/\">South</a>\r\n<a href=\"\
+      /docs/overview.htmlMako/\">Mako</a>\r\n./local_eggs/my_package.egg\r\nhttp://djangy.com/example.egg</pre>\r\
+      \n\r\n<p><a href=\"/docs/overview.htmlNote/\">Note</a> that we explicitly included\
+      \ <a href=\"/docs/overview.htmlDjango/\">Django</a> and <a href=\"/docs/overview.htmlSouth/\"\
+      >South</a> in the list.  <a href=\"/docs/overview.htmlIf/\">If</a> you\r\nhave\
+      \ a <tt>djangy.eggs</tt> file but it doesn't list <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a> or <a href=\"/docs/overview.htmlSouth/\">South</a>, those\r\npackages\
+      \ will <i>not</i> be installed.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlIn/\"\
+      >In</a> general, you can list any <a href=\"/docs/overview.htmlPython/\">Python</a>\
+      \ egg that is available on <a href=\"http://pypi.python.org/pypi\">PyPI</a>.\
+      \  <a href=\"/docs/overview.htmlDjango/\">Django</a>, <a href=\"/docs/overview.htmlSouth/\"\
+      >South</a>, and <a href=\"/docs/overview.htmlMako/\">Mako</a> are just a few\
+      \ examples; there are <b>over 12,000</b> packages available on PyPI.</p>\r\n\
+      \r\n<p><a href=\"/docs/overview.htmlYou/\">You</a> can also construct more elaborate\
+      \ egg requirements if you'd like;\r\neach line is the same as the <tt>requirement_or_url</tt>\
+      \ you'd pass to\r\n<tt>pip</tt> or <tt>easy_install</tt> on your local development\
+      \ workstation.  <a href=\"/docs/overview.htmlFor/\">For</a> example,\r\nyou\
+      \ can use this to force installation of a custom version of <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a> or\r\n<a href=\"/docs/overview.htmlSouth/\">South</a> or any other\
+      \ package.  <a href=\"/docs/overview.htmlOr/\">Or</a> you can use a URL to force\
+      \ installation of a <a href=\"/docs/overview.htmlPython/\">Python</a> egg which\
+      \ isn't available on PyPI.</p>\r\n"}
+  model: docs.page
+  pk: 25
+- fields: {content: "<h2>Deploying with Git</h2>\r\n<br />\r\n<p>After you've created\
+      \ your application with Djangy, the final step is to deploy.  This is where\
+      \ Djangy really shines.  There's just ONE COMMAND separating you from deployment:\r\
+      \n<pre>\r\n$ git push djangy master\r\n\r\nCounting objects: 10, done.\r\nDelta\
+      \ compression using up to 2 threads.\r\nCompressing objects: 100% (8/8), done.\r\
+      \nWriting objects: 100% (10/10), 2.67 KiB, done.\r\nTotal 10 (delta 1), reused\
+      \ 0 (delta 0)\r\n\r\n\r\nWelcome to Djangy!\r\n\r\nDeploying project myapp.\r\
+      \n\r\nCloning git repository... Done.\r\n\r\nCreating production settings.py\
+      \ file... Done.\r\n\r\nInstalling dependencies...\r\n  Dependencies from djangy.eggs\
+      \ using easy_install:\r\n    Installing Django... Success.\r\n    Installing\
+      \ South... Success.\r\n    Installing gunicorn... Success.\r\n  Dependencies\
+      \ from djangy.pip using pip:\r\n    None found.\r\nDone.\r\n\r\nSaving bundle\
+      \ info... Done.\r\n\r\nDeploying to worker hosts... Done.\r\n\r\nTo git@api.djangy.com:myapp.git\r\
+      \n * [new branch]      master -> master\r\n</pre>\r\n<br />\r\nThat's it!  You\
+      \ can now access your running application at http://myapp.djangy.com.  However,\
+      \ you might want to remember to <a href=\"/docs/Databases\">sync your database</a>.\r\
+      \n</p>", name: DeployingWithGit, rendered: "<h2><a href=\"/docs/overview.htmlDeploying/\"\
+      >Deploying</a> with <a href=\"/docs/overview.htmlGit/\">Git</a></h2>\r\n<br\
+      \ />\r\n<p><a href=\"/docs/overview.htmlAfter/\">After</a> you've created your\
+      \ application with <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>, the final\
+      \ step is to deploy.  <a href=\"/docs/overview.htmlThis/\">This</a> is where\
+      \ <a href=\"/docs/overview.htmlDjangy/\">Djangy</a> really shines.  <a href=\"\
+      /docs/overview.htmlThere/\">There</a>'s just ONE COMMAND separating you from\
+      \ deployment:\r\n<pre>\r\n$ git push djangy master\r\n\r\n<a href=\"/docs/overview.htmlCounting/\"\
+      >Counting</a> objects: 10, done.\r\n<a href=\"/docs/overview.htmlDelta/\">Delta</a>\
+      \ compression using up to 2 threads.\r\n<a href=\"/docs/overview.htmlCompressing/\"\
+      >Compressing</a> objects: 100% (8/8), done.\r\n<a href=\"/docs/overview.htmlWriting/\"\
+      >Writing</a> objects: 100% (10/10), 2.67 KiB, done.\r\n<a href=\"/docs/overview.htmlTotal/\"\
+      >Total</a> 10 (delta 1), reused 0 (delta 0)\r\n\r\n\r\n<a href=\"/docs/overview.htmlWelcome/\"\
+      >Welcome</a> to <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>!\r\n\r\n<a\
+      \ href=\"/docs/overview.htmlDeploying/\">Deploying</a> project myapp.\r\n\r\n\
+      <a href=\"/docs/overview.htmlCloning/\">Cloning</a> git repository... <a href=\"\
+      /docs/overview.htmlDone/\">Done</a>.\r\n\r\n<a href=\"/docs/overview.htmlCreating/\"\
+      >Creating</a> production settings.py file... <a href=\"/docs/overview.htmlDone/\"\
+      >Done</a>.\r\n\r\n<a href=\"/docs/overview.htmlInstalling/\">Installing</a>\
+      \ dependencies...\r\n  <a href=\"/docs/overview.htmlDependencies/\">Dependencies</a>\
+      \ from djangy.eggs using easy_install:\r\n    <a href=\"/docs/overview.htmlInstalling/\"\
+      >Installing</a> <a href=\"/docs/overview.htmlDjango/\">Django</a>... <a href=\"\
+      /docs/overview.htmlSuccess/\">Success</a>.\r\n    <a href=\"/docs/overview.htmlInstalling/\"\
+      >Installing</a> <a href=\"/docs/overview.htmlSouth/\">South</a>... <a href=\"\
+      /docs/overview.htmlSuccess/\">Success</a>.\r\n    <a href=\"/docs/overview.htmlInstalling/\"\
+      >Installing</a> gunicorn... <a href=\"/docs/overview.htmlSuccess/\">Success</a>.\r\
+      \n  <a href=\"/docs/overview.htmlDependencies/\">Dependencies</a> from djangy.pip\
+      \ using pip:\r\n    <a href=\"/docs/overview.htmlNone/\">None</a> found.\r\n\
+      <a href=\"/docs/overview.htmlDone/\">Done</a>.\r\n\r\n<a href=\"/docs/overview.htmlSaving/\"\
+      >Saving</a> bundle info... <a href=\"/docs/overview.htmlDone/\">Done</a>.\r\n\
+      \r\n<a href=\"/docs/overview.htmlDeploying/\">Deploying</a> to worker hosts...\
+      \ <a href=\"/docs/overview.htmlDone/\">Done</a>.\r\n\r\n<a href=\"/docs/overview.htmlTo/\"\
+      >To</a> git@api.djangy.com:myapp.git\r\n * [new branch]      master -> master\r\
+      \n</pre>\r\n<br />\r\n<a href=\"/docs/overview.htmlThat/\">That</a>'s it!  <a\
+      \ href=\"/docs/overview.htmlYou/\">You</a> can now access your running application\
+      \ at http://myapp.djangy.com.  <a href=\"/docs/overview.htmlHowever/\">However</a>,\
+      \ you might want to remember to <a href=\"/docs/<a href=\"/docs/overview.htmlDatabases/\"\
+      >Databases</a>\">sync your database</a>.\r\n</p>"}
+  model: docs.page
+  pk: 23
+- fields: {content: "<p>The pages listed on the right explain how to host Django applications\
+      \ on\r\n djangy.com.  Since Djangy is currently in beta, the documentation and\
+      \ how\r\n things work are likely to change over time.  Please feel free to email\r\
+      \n <a href=\"mailto:support@djangy.com\">support@djangy.com</a> with any\r\n\
+      \ questions or comments.</p>\r\n", name: Documentation, rendered: "<p><a href=\"\
+      /docs/overview.htmlThe/\">The</a> pages listed on the right explain how to host\
+      \ <a href=\"/docs/overview.htmlDjango/\">Django</a> applications on\r\n djangy.com.\
+      \  <a href=\"/docs/overview.htmlSince/\">Since</a> <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> is currently in beta, the documentation and how\r\n things work\
+      \ are likely to change over time.  <a href=\"/docs/overview.htmlPlease/\">Please</a>\
+      \ feel free to email\r\n <a href=\"mailto:support@djangy.com\">support@djangy.com</a>\
+      \ with any\r\n questions or comments.</p>\r\n"}
+  model: docs.page
+  pk: 1
+- fields: {content: "<h2>Installing dependencies</h2>\r\n\r\n<p>Python offers a wide\
+      \ range of installable packages.  Djangy offers native support for automatically\
+      \ installing dependencies using <tt>easy_install</tt> or <tt>pip</tt>.  All\
+      \ you have to do is create a file called \"<tt>djangy.eggs</tt>\" (for Python\
+      \ <i>eggs,</i> installed using <tt>easy_install</tt>) or \"<tt>djangy.pip</tt>\"\
+      \ (for Python <i>source packages,</i> installed using <tt>pip</tt>) in the root\
+      \ directory of your git repository, containing a list of packages you would\
+      \ like Djangy to install.</p>\r\n\r\n<p>If you don't create a <tt>djangy.pip</tt>\
+      \ or <tt>djangy.eggs</tt> file, Djangy will assume that your application's only\
+      \ dependencies are Python iself, <tt>Django</tt>, and <tt>South</tt>.</p>\r\n\
+      \r\n<h3>djangy.pip file format</h3>\r\n\r\n<p>The optional <tt>djangy.pip</tt>\
+      \ file is used to specify Python source packages to install.  It follows the\
+      \ <a href=\"http://pip.openplans.org/requirement-format.html\"><tt>pip</tt>\
+      \ requirements file format</a>.</p>\r\n\r\n<p>In general, you can list any Python\
+      \ source package that is available on <a href=\"http://pypi.python.org/pypi\"\
+      >PyPI</a>.  There are <b>over 12,000</b> packages available on PyPI.</p>\r\n\
+      \r\n<h3>djangy.eggs file format</h3>\r\n\r\n<p>The optional <tt>djangy.eggs</tt>\
+      \ file in the root directory of your git repository should list one egg requirement\
+      \ on each line.  By default, <tt>djangy create</tt> will automatically create\
+      \ a minimal <tt>djangy.eggs</tt> file in the correct location.</p>\r\n\r\n<p>For\
+      \ example, the following example requires Django (version 1.2 or later), South,\
+      \ Mako, a custom package <tt>my_package.egg</tt> stored in a directory named\
+      \ <tt>local_eggs/</tt> in your git repository, and another custom package located\
+      \ at <tt>http://djangy.com/example.egg</tt> (note: this file doesn't actually\
+      \ exist):</p>\r\n\r\n<pre>Django>=1.2\r\nSouth\r\nMako\r\n./local_eggs/my_package.egg\r\
+      \nhttp://djangy.com/example.egg</pre>\r\n\r\n<p>Note that we explicitly included\
+      \ Django and South in the list.  If you\r\nhave a <tt>djangy.eggs</tt> file\
+      \ but it doesn't list Django or South, those\r\npackages will <i>not</i> be\
+      \ installed.</p>\r\n\r\n<p>In general, you can list any Python egg that is available\
+      \ on <a href=\"http://pypi.python.org/pypi\">PyPI</a>.  Django, South, and Mako\
+      \ are just a few examples; there are <b>over 12,000</b> packages available on\
+      \ PyPI.</p>\r\n\r\n<p>You can also construct more elaborate egg requirements\
+      \ if you'd like;\r\neach line is the same as the <tt>requirement_or_url</tt>\
+      \ you'd pass to\r\n<tt>easy_install</tt> on your local development workstation.\
+      \  For example,\r\nyou can use this to force installation of a custom version\
+      \ of Django or\r\nSouth or any other package.  Or you can use a URL to force\
+      \ installation of a Python egg which isn't available on PyPI.</p>\r\n", name: Eggs,
+    rendered: "<h2><a href=\"/docs/overview.htmlInstalling/\">Installing</a> dependencies</h2>\r\
+      \n\r\n<p><a href=\"/docs/overview.htmlPython/\">Python</a> offers a wide range\
+      \ of installable packages.  <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>\
+      \ offers native support for automatically installing dependencies using <tt>easy_install</tt>\
+      \ or <tt>pip</tt>.  <a href=\"/docs/overview.htmlAll/\">All</a> you have to\
+      \ do is create a file called \"<tt>djangy.eggs</tt>\" (for <a href=\"/docs/overview.htmlPython/\"\
+      >Python</a> <i>eggs,</i> installed using <tt>easy_install</tt>) or \"<tt>djangy.pip</tt>\"\
+      \ (for <a href=\"/docs/overview.htmlPython/\">Python</a> <i>source packages,</i>\
+      \ installed using <tt>pip</tt>) in the root directory of your git repository,\
+      \ containing a list of packages you would like <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> to install.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlIf/\">If</a>\
+      \ you don't create a <tt>djangy.pip</tt> or <tt>djangy.eggs</tt> file, <a href=\"\
+      /docs/overview.htmlDjangy/\">Djangy</a> will assume that your application's\
+      \ only dependencies are <a href=\"/docs/overview.htmlPython/\">Python</a> iself,\
+      \ <tt><a href=\"/docs/overview.htmlDjango/\">Django</a></tt>, and <tt><a href=\"\
+      /docs/overview.htmlSouth/\">South</a></tt>.</p>\r\n\r\n<h3>djangy.pip file format</h3>\r\
+      \n\r\n<p><a href=\"/docs/overview.htmlThe/\">The</a> optional <tt>djangy.pip</tt>\
+      \ file is used to specify <a href=\"/docs/overview.htmlPython/\">Python</a>\
+      \ source packages to install.  <a href=\"/docs/overview.htmlIt/\">It</a> follows\
+      \ the <a href=\"http://pip.openplans.org/requirement-format.html\"><tt>pip</tt>\
+      \ requirements file format</a>.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlIn/\"\
+      >In</a> general, you can list any <a href=\"/docs/overview.htmlPython/\">Python</a>\
+      \ source package that is available on <a href=\"http://pypi.python.org/pypi\"\
+      >PyPI</a>.  <a href=\"/docs/overview.htmlThere/\">There</a> are <b>over 12,000</b>\
+      \ packages available on PyPI.</p>\r\n\r\n<h3>djangy.eggs file format</h3>\r\n\
+      \r\n<p><a href=\"/docs/overview.htmlThe/\">The</a> optional <tt>djangy.eggs</tt>\
+      \ file in the root directory of your git repository should list one egg requirement\
+      \ on each line.  <a href=\"/docs/overview.htmlBy/\">By</a> default, <tt>djangy\
+      \ create</tt> will automatically create a minimal <tt>djangy.eggs</tt> file\
+      \ in the correct location.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlFor/\"\
+      >For</a> example, the following example requires <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a> (version 1.2 or later), <a href=\"/docs/overview.htmlSouth/\">South</a>,\
+      \ <a href=\"/docs/overview.htmlMako/\">Mako</a>, a custom package <tt>my_package.egg</tt>\
+      \ stored in a directory named <tt>local_eggs/</tt> in your git repository, and\
+      \ another custom package located at <tt>http://djangy.com/example.egg</tt> (note:\
+      \ this file doesn't actually exist):</p>\r\n\r\n<pre><a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a>>=1.2\r\n<a href=\"/docs/overview.htmlSouth/\">South</a>\r\n<a href=\"\
+      /docs/overview.htmlMako/\">Mako</a>\r\n./local_eggs/my_package.egg\r\nhttp://djangy.com/example.egg</pre>\r\
+      \n\r\n<p><a href=\"/docs/overview.htmlNote/\">Note</a> that we explicitly included\
+      \ <a href=\"/docs/overview.htmlDjango/\">Django</a> and <a href=\"/docs/overview.htmlSouth/\"\
+      >South</a> in the list.  <a href=\"/docs/overview.htmlIf/\">If</a> you\r\nhave\
+      \ a <tt>djangy.eggs</tt> file but it doesn't list <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a> or <a href=\"/docs/overview.htmlSouth/\">South</a>, those\r\npackages\
+      \ will <i>not</i> be installed.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlIn/\"\
+      >In</a> general, you can list any <a href=\"/docs/overview.htmlPython/\">Python</a>\
+      \ egg that is available on <a href=\"http://pypi.python.org/pypi\">PyPI</a>.\
+      \  <a href=\"/docs/overview.htmlDjango/\">Django</a>, <a href=\"/docs/overview.htmlSouth/\"\
+      >South</a>, and <a href=\"/docs/overview.htmlMako/\">Mako</a> are just a few\
+      \ examples; there are <b>over 12,000</b> packages available on PyPI.</p>\r\n\
+      \r\n<p><a href=\"/docs/overview.htmlYou/\">You</a> can also construct more elaborate\
+      \ egg requirements if you'd like;\r\neach line is the same as the <tt>requirement_or_url</tt>\
+      \ you'd pass to\r\n<tt>easy_install</tt> on your local development workstation.\
+      \  <a href=\"/docs/overview.htmlFor/\">For</a> example,\r\nyou can use this\
+      \ to force installation of a custom version of <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a> or\r\n<a href=\"/docs/overview.htmlSouth/\">South</a> or any other\
+      \ package.  <a href=\"/docs/overview.htmlOr/\">Or</a> you can use a URL to force\
+      \ installation of a <a href=\"/docs/overview.htmlPython/\">Python</a> egg which\
+      \ isn't available on PyPI.</p>\r\n"}
+  model: docs.page
+  pk: 11
+- fields: {content: "<h2>Configuring email</h2>\r\n<p>Configuring email for your application\
+      \ on Djangy is the same as for any other Django application.  You need, at a\
+      \ minimum, the following in your settings.py:</p>\r\n<pre>\r\nEMAIL_HOST\r\n\
+      EMAIL_PORT\r\n</pre>\r\n<p>If your email server requires authentication for\
+      \ SMTP, you must also set:</p>\r\n<pre>\r\nEMAIL_HOST_USER\r\nEMAIL_HOST_PASSWORD\r\
+      \n</pre>\r\n\r\n<p>Finally, <pre>EMAIL_USE_TLS</pre> controls whether or not\
+      \ a secure connection is used.  For more information on how to send mail using\
+      \ Django, see the <a href=\"http://docs.djangoproject.com/en/1.2/topics/email/\"\
+      \ target=\"_blank\">official documentation</a>.</p>\r\n\r\nWe recommend using\
+      \ <a href=\"http://www.google.com/apps/intl/en/group/index.html\" target=\"\
+      _blank\">Google Apps</a> for your email service (it's what we use).", name: Email,
+    rendered: "<h2><a href=\"/docs/Configuring/\">Configuring</a> email</h2>\r\n<p><a\
+      \ href=\"/docs/Configuring/\">Configuring</a> email for your application on\
+      \ <a href=\"/docs/Djangy/\">Djangy</a> is the same as for any other <a href=\"\
+      /docs/Django/\">Django</a> application.  <a href=\"/docs/You/\">You</a> need,\
+      \ at a minimum, the following in your settings.py:</p>\r\n<pre>\r\nEMAIL_HOST\r\
+      \nEMAIL_PORT\r\n</pre>\r\n<p><a href=\"/docs/If/\">If</a> your email server\
+      \ requires authentication for SMTP, you must also set:</p>\r\n<pre>\r\nEMAIL_HOST_USER\r\
+      \nEMAIL_HOST_PASSWORD\r\n</pre>\r\n\r\n<p><a href=\"/docs/Finally/\">Finally</a>,\
+      \ <pre>EMAIL_USE_TLS</pre> controls whether or not a secure connection is used.\
+      \  <a href=\"/docs/For/\">For</a> more information on how to send mail using\
+      \ <a href=\"/docs/Django/\">Django</a>, see the <a href=\"http://docs.djangoproject.com/en/1.2/topics/email/\"\
+      \ target=\"_blank\">official documentation</a>.</p>\r\n\r\n<a href=\"/docs/We/\"\
+      >We</a> recommend using <a href=\"http://www.google.com/apps/intl/en/group/index.html\"\
+      \ target=\"_blank\"><a href=\"/docs/Google/\">Google</a> <a href=\"/docs/Apps/\"\
+      >Apps</a></a> for your email service (it's what we use)."}
+  model: docs.page
+  pk: 16
+- fields: {content: "<h2>Billing and Pricing</h2>\r\n\r\n<ul>\r\n  <li><a href=\"\
+      #why\">Why do you need my billing information?</a></li>\r\n  <li><a href=\"\
+      #prorating\">How do you prorate charges?</a></li>\r\n  <li><a href=\"#delete-account\"\
+      >How do I delete my account?</a></li>\r\n</ul>\r\n<a name=\"why\"></a>\r\n<h5>Why\
+      \ do you need my billing information?</h5>\r\n<br />\r\n<p>Djangy only needs\
+      \ your billing information so we can charge you for premium features.  These\
+      \ premium features include things like more performance workers, background\
+      \ jobs, and dedicated databases.  Running a single app instance on Djangy will\
+      \ always be free.</p>\r\n\r\n<a name=\"prorating\"></a>\r\n<h5>How do you prorate\
+      \ charges?</h5>\r\n<br />\r\n<p>Worker processes are prorated per second at\
+      \ a rate of $0.05/hr. Please note that we'll charge you for how many workers\
+      \ you have allocated -- not the amount of activity per process.</p>\r\n\r\n\
+      <a name=\"delete-account\"></a>\r\n<h5>How do I delete my account?</h5>\r\n\
+      <br />\r\n<p>To delete your Djangy account, send an email to <a href=\"mailto:support@djangy.com\"\
+      >support@djangy.com</a>.  Please be sure to email us from the address associated\
+      \ with your Djangy account.</p>", name: FAQBillingPricing, rendered: "<h2><a\
+      \ href=\"/docs/overview.htmlBilling/\">Billing</a> and <a href=\"/docs/overview.htmlPricing/\"\
+      >Pricing</a></h2>\r\n\r\n<ul>\r\n  <li><a href=\"#why\"><a href=\"/docs/overview.htmlWhy/\"\
+      >Why</a> do you need my billing information?</a></li>\r\n  <li><a href=\"#prorating\"\
+      ><a href=\"/docs/overview.htmlHow/\">How</a> do you prorate charges?</a></li>\r\
+      \n  <li><a href=\"#delete-account\"><a href=\"/docs/overview.htmlHow/\">How</a>\
+      \ do I delete my account?</a></li>\r\n</ul>\r\n<a name=\"why\"></a>\r\n<h5><a\
+      \ href=\"/docs/overview.htmlWhy/\">Why</a> do you need my billing information?</h5>\r\
+      \n<br />\r\n<p><a href=\"/docs/overview.htmlDjangy/\">Djangy</a> only needs\
+      \ your billing information so we can charge you for premium features.  <a href=\"\
+      /docs/overview.htmlThese/\">These</a> premium features include things like more\
+      \ performance workers, background jobs, and dedicated databases.  <a href=\"\
+      /docs/overview.htmlRunning/\">Running</a> a single app instance on <a href=\"\
+      /docs/overview.htmlDjangy/\">Djangy</a> will always be free.</p>\r\n\r\n<a name=\"\
+      prorating\"></a>\r\n<h5><a href=\"/docs/overview.htmlHow/\">How</a> do you prorate\
+      \ charges?</h5>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlWorker/\">Worker</a>\
+      \ processes are prorated per second at a rate of $0.05/hr. <a href=\"/docs/overview.htmlPlease/\"\
+      >Please</a> note that we'll charge you for how many workers you have allocated\
+      \ -- not the amount of activity per process.</p>\r\n\r\n<a name=\"delete-account\"\
+      ></a>\r\n<h5><a href=\"/docs/overview.htmlHow/\">How</a> do I delete my account?</h5>\r\
+      \n<br />\r\n<p><a href=\"/docs/overview.htmlTo/\">To</a> delete your <a href=\"\
+      /docs/overview.htmlDjangy/\">Djangy</a> account, send an email to <a href=\"\
+      mailto:support@djangy.com\">support@djangy.com</a>.  <a href=\"/docs/overview.htmlPlease/\"\
+      >Please</a> be sure to email us from the address associated with your <a href=\"\
+      /docs/overview.htmlDjangy/\">Djangy</a> account.</p>"}
+  model: docs.page
+  pk: 31
+- fields: {content: "<h2>Installing dependencies</h2>\r\n\r\n<p>Python offers a wide\
+      \ range of installable packages.  Djangy offers native support for automatically\
+      \ installing dependencies using <tt>easy_install</tt> or <tt>pip</tt>.  All\
+      \ you have to do is create a file called \"<tt>djangy.eggs</tt>\" (for Python\
+      \ <i>eggs,</i> installed using <tt>easy_install</tt>) or \"<tt>djangy.pip</tt>\"\
+      \ (for Python <i>source packages,</i> installed using <tt>pip</tt>) in the root\
+      \ directory of your git repository, containing a list of packages you would\
+      \ like Djangy to install.</p>\r\n\r\n<p>If you don't create a <tt>djangy.pip</tt>\
+      \ or <tt>djangy.eggs</tt> file, Djangy will assume that your application's only\
+      \ dependencies are Python iself, <tt>Django</tt>, and <tt>South</tt>.</p>\r\n\
+      \r\n<h3>djangy.pip file format</h3>\r\n\r\n<p>The optional <tt>djangy.pip</tt>\
+      \ file is used to specify Python source packages to install.  It follows the\
+      \ <a href=\"http://pip.openplans.org/requirement-format.html\"><tt>pip</tt>\
+      \ requirements file format</a>.</p>\r\n\r\n<p>In general, you can list any Python\
+      \ source package that is available on <a href=\"http://pypi.python.org/pypi\"\
+      >PyPI</a>.  There are <b>over 12,000</b> packages available on PyPI.</p>\r\n\
+      \r\n<h3>djangy.eggs file format</h3>\r\n\r\n<p>The optional <tt>djangy.eggs</tt>\
+      \ file in the root directory of your git repository should list one egg requirement\
+      \ on each line.  By default, <tt>djangy create</tt> will automatically create\
+      \ a minimal <tt>djangy.eggs</tt> file in the correct location.</p>\r\n\r\n<p>For\
+      \ example, the following example requires Django (version 1.2 or later), South,\
+      \ Mako, a custom package <tt>my_package.egg</tt> stored in a directory named\
+      \ <tt>local_eggs/</tt> in your git repository, and another custom package located\
+      \ at <tt>http://djangy.com/example.egg</tt> (note: this file doesn't actually\
+      \ exist):</p>\r\n\r\n<pre>Django>=1.2\r\nSouth\r\nMako\r\n./local_eggs/my_package.egg\r\
+      \nhttp://djangy.com/example.egg</pre>\r\n\r\n<p>Note that we explicitly included\
+      \ Django and South in the list.  If you\r\nhave a <tt>djangy.eggs</tt> file\
+      \ but it doesn't list Django or South, those\r\npackages will <i>not</i> be\
+      \ installed.</p>\r\n\r\n<p>In general, you can list any Python egg that is available\
+      \ on <a href=\"http://pypi.python.org/pypi\">PyPI</a>.  Django, South, and Mako\
+      \ are just a few examples; there are <b>over 12,000</b> packages available on\
+      \ PyPI.</p>\r\n\r\n<p>You can also construct more elaborate egg requirements\
+      \ if you'd like;\r\neach line is the same as the <tt>requirement_or_url</tt>\
+      \ you'd pass to\r\n<tt>easy_install</tt> on your local development workstation.\
+      \  For example,\r\nyou can use this to force installation of a custom version\
+      \ of Django or\r\nSouth or any other package.  Or you can use a URL to force\
+      \ installation of a Python egg which isn't available on PyPI.</p>\r\n", name: InstallingDependencies,
+    rendered: "<h2><a href=\"/docs/overview.htmlInstalling/\">Installing</a> dependencies</h2>\r\
+      \n\r\n<p><a href=\"/docs/overview.htmlPython/\">Python</a> offers a wide range\
+      \ of installable packages.  <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>\
+      \ offers native support for automatically installing dependencies using <tt>easy_install</tt>\
+      \ or <tt>pip</tt>.  <a href=\"/docs/overview.htmlAll/\">All</a> you have to\
+      \ do is create a file called \"<tt>djangy.eggs</tt>\" (for <a href=\"/docs/overview.htmlPython/\"\
+      >Python</a> <i>eggs,</i> installed using <tt>easy_install</tt>) or \"<tt>djangy.pip</tt>\"\
+      \ (for <a href=\"/docs/overview.htmlPython/\">Python</a> <i>source packages,</i>\
+      \ installed using <tt>pip</tt>) in the root directory of your git repository,\
+      \ containing a list of packages you would like <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> to install.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlIf/\">If</a>\
+      \ you don't create a <tt>djangy.pip</tt> or <tt>djangy.eggs</tt> file, <a href=\"\
+      /docs/overview.htmlDjangy/\">Djangy</a> will assume that your application's\
+      \ only dependencies are <a href=\"/docs/overview.htmlPython/\">Python</a> iself,\
+      \ <tt><a href=\"/docs/overview.htmlDjango/\">Django</a></tt>, and <tt><a href=\"\
+      /docs/overview.htmlSouth/\">South</a></tt>.</p>\r\n\r\n<h3>djangy.pip file format</h3>\r\
+      \n\r\n<p><a href=\"/docs/overview.htmlThe/\">The</a> optional <tt>djangy.pip</tt>\
+      \ file is used to specify <a href=\"/docs/overview.htmlPython/\">Python</a>\
+      \ source packages to install.  <a href=\"/docs/overview.htmlIt/\">It</a> follows\
+      \ the <a href=\"http://pip.openplans.org/requirement-format.html\"><tt>pip</tt>\
+      \ requirements file format</a>.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlIn/\"\
+      >In</a> general, you can list any <a href=\"/docs/overview.htmlPython/\">Python</a>\
+      \ source package that is available on <a href=\"http://pypi.python.org/pypi\"\
+      >PyPI</a>.  <a href=\"/docs/overview.htmlThere/\">There</a> are <b>over 12,000</b>\
+      \ packages available on PyPI.</p>\r\n\r\n<h3>djangy.eggs file format</h3>\r\n\
+      \r\n<p><a href=\"/docs/overview.htmlThe/\">The</a> optional <tt>djangy.eggs</tt>\
+      \ file in the root directory of your git repository should list one egg requirement\
+      \ on each line.  <a href=\"/docs/overview.htmlBy/\">By</a> default, <tt>djangy\
+      \ create</tt> will automatically create a minimal <tt>djangy.eggs</tt> file\
+      \ in the correct location.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlFor/\"\
+      >For</a> example, the following example requires <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a> (version 1.2 or later), <a href=\"/docs/overview.htmlSouth/\">South</a>,\
+      \ <a href=\"/docs/overview.htmlMako/\">Mako</a>, a custom package <tt>my_package.egg</tt>\
+      \ stored in a directory named <tt>local_eggs/</tt> in your git repository, and\
+      \ another custom package located at <tt>http://djangy.com/example.egg</tt> (note:\
+      \ this file doesn't actually exist):</p>\r\n\r\n<pre><a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a>>=1.2\r\n<a href=\"/docs/overview.htmlSouth/\">South</a>\r\n<a href=\"\
+      /docs/overview.htmlMako/\">Mako</a>\r\n./local_eggs/my_package.egg\r\nhttp://djangy.com/example.egg</pre>\r\
+      \n\r\n<p><a href=\"/docs/overview.htmlNote/\">Note</a> that we explicitly included\
+      \ <a href=\"/docs/overview.htmlDjango/\">Django</a> and <a href=\"/docs/overview.htmlSouth/\"\
+      >South</a> in the list.  <a href=\"/docs/overview.htmlIf/\">If</a> you\r\nhave\
+      \ a <tt>djangy.eggs</tt> file but it doesn't list <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a> or <a href=\"/docs/overview.htmlSouth/\">South</a>, those\r\npackages\
+      \ will <i>not</i> be installed.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlIn/\"\
+      >In</a> general, you can list any <a href=\"/docs/overview.htmlPython/\">Python</a>\
+      \ egg that is available on <a href=\"http://pypi.python.org/pypi\">PyPI</a>.\
+      \  <a href=\"/docs/overview.htmlDjango/\">Django</a>, <a href=\"/docs/overview.htmlSouth/\"\
+      >South</a>, and <a href=\"/docs/overview.htmlMako/\">Mako</a> are just a few\
+      \ examples; there are <b>over 12,000</b> packages available on PyPI.</p>\r\n\
+      \r\n<p><a href=\"/docs/overview.htmlYou/\">You</a> can also construct more elaborate\
+      \ egg requirements if you'd like;\r\neach line is the same as the <tt>requirement_or_url</tt>\
+      \ you'd pass to\r\n<tt>easy_install</tt> on your local development workstation.\
+      \  <a href=\"/docs/overview.htmlFor/\">For</a> example,\r\nyou can use this\
+      \ to force installation of a custom version of <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a> or\r\n<a href=\"/docs/overview.htmlSouth/\">South</a> or any other\
+      \ package.  <a href=\"/docs/overview.htmlOr/\">Or</a> you can use a URL to force\
+      \ installation of a <a href=\"/docs/overview.htmlPython/\">Python</a> egg which\
+      \ isn't available on PyPI.</p>\r\n"}
+  model: docs.page
+  pk: 18
+- fields: {content: "<h2>Logging</h2>\r\n<br />\r\n<p>There are two options for logging\
+      \ in your Djangy app:\r\n<ul>\r\n  <li><a href=\"#standard-logging\">Standard\
+      \ logging</a></li>\r\n  <li><a href=\"#django-sentry\">Logging using django-sentry</a></li>\r\
+      \n</ul>\r\n</p>\r\n<br />\r\n<a name=\"standard-logging\"></a>\r\n<h3>Standard\
+      \ Logging</h3>\r\n<br />\r\n<p>To use standard logging from your applications,\
+      \ use the following code as a template:\r\n<pre>\r\nimport logging\r\nlogger\
+      \ = logging.getLogger('djangy')\r\nlogger.setLevel(logging.DEBUG) # the default\
+      \ is logging.INFO\r\n\r\ndef myview(request):\r\n    logger.error(\"my error\
+      \ message\")\r\n    return \"Hello, world!\"\r\n</pre>\r\nTo access your logs,\
+      \ run the following command:\r\n<pre>\r\n$ djangy logs\r\n</pre>\r\nfrom inside\
+      \ your application's repository.  Alternatively, you can find the \"View logs\"\
+      \ button from your application's web dashboard.</p>\r\n<p>NOTE: This is a limited\
+      \ logging facility.  It will only show you the last 100 lines of your application's\
+      \ log.  For a better logging solution, we recommend using <a href=\"#django-sentry\"\
+      >django-sentry</a>.</p>\r\n<br />\r\n<a name=\"django-sentry\"></a>\r\n<h3>Using\
+      \ django-sentry for enhanced logging</h3>\r\n<br />\r\n<p>If you require more\
+      \ sophisticated logging, we recommend using <a href=\"https://github.com/dcramer/django-sentry\"\
+      \ target=\"_blank\">django-sentry</a>.  To get sentry working for your application\
+      \ (you'll be able to access it at the \"/sentry\" URL), add the following to\
+      \ your djangy.eggs or djangy.pip file:</p>\r\n\r\n<pre>\r\ndjango-indexer\r\n\
+      django-paging\r\ndjango-sentry\r\n</pre>\r\n\r\n<p>Then, add the \"sentry\"\
+      , \"sentry.client\", \"indexer\", and \"paging\" to your INSTALLED_APPS in your\
+      \ settings.py:</p>\r\n\r\n<pre>\r\nINSTALLED_APPS = [\r\n...\r\n    'sentry',\r\
+      \n    'sentry.client',\r\n    'indexer',\r\n    'paging'\r\n]\r\n</pre>\r\n\r\
+      \n<p>Finally, add the sentry URLs module to your urls.py:</p>\r\n<pre>\r\nurlpatterns\
+      \ = patterns('',\r\n    ...\r\n    (r'^sentry/', include('sentry.urls')),\r\n\
+      )\r\n</pre>\r\n\r\n<p>Sentry will catch exceptions and log them.  If you'd like\
+      \ to log additional messages to sentry, use the following code as a template:</p>\r\
+      \n<pre>\r\nimport logging\r\nfrom sentry.client.handlers import SentryHandler\r\
+      \n\r\nlogging.getLogger().addHandler(SentryHandler())\r\n\r\n# Add StreamHandler\
+      \ to sentry's default so you can catch missed exceptions\r\nlogger = logging.getLogger('sentry.errors')\r\
+      \nlogger.propagate = False\r\nlogger.addHandler(logging.StreamHandler())\r\n\
+      \r\nlogger.error(\"my error message\")\r\n</pre>\r\n\r\n<p>For more information,\
+      \ see the <a href=\"http://dcramer.github.com/django-sentry/\" target=\"_blank\"\
+      >official documentation</a>.</p>", name: Logging, rendered: "<h2><a href=\"\
+      /docs/overview.htmlLogging/\">Logging</a></h2>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlThere/\"\
+      >There</a> are two options for logging in your <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> app:\r\n<ul>\r\n  <li><a href=\"#standard-logging\"><a href=\"/docs/overview.htmlStandard/\"\
+      >Standard</a> logging</a></li>\r\n  <li><a href=\"#django-sentry\"><a href=\"\
+      /docs/overview.htmlLogging/\">Logging</a> using django-sentry</a></li>\r\n</ul>\r\
+      \n</p>\r\n<br />\r\n<a name=\"standard-logging\"></a>\r\n<h3><a href=\"/docs/overview.htmlStandard/\"\
+      >Standard</a> <a href=\"/docs/overview.htmlLogging/\">Logging</a></h3>\r\n<br\
+      \ />\r\n<p><a href=\"/docs/overview.htmlTo/\">To</a> use standard logging from\
+      \ your applications, use the following code as a template:\r\n<pre>\r\nimport\
+      \ logging\r\nlogger = logging.getLogger('djangy')\r\nlogger.setLevel(logging.DEBUG)\
+      \ # the default is logging.INFO\r\n\r\ndef myview(request):\r\n    logger.error(\"\
+      my error message\")\r\n    return \"<a href=\"/docs/overview.htmlHello/\">Hello</a>,\
+      \ world!\"\r\n</pre>\r\n<a href=\"/docs/overview.htmlTo/\">To</a> access your\
+      \ logs, run the following command:\r\n<pre>\r\n$ djangy logs\r\n</pre>\r\nfrom\
+      \ inside your application's repository.  <a href=\"/docs/overview.htmlAlternatively/\"\
+      >Alternatively</a>, you can find the \"<a href=\"/docs/overview.htmlView/\"\
+      >View</a> logs\" button from your application's web dashboard.</p>\r\n<p>NOTE:\
+      \ <a href=\"/docs/overview.htmlThis/\">This</a> is a limited logging facility.\
+      \  <a href=\"/docs/overview.htmlIt/\">It</a> will only show you the last 100\
+      \ lines of your application's log.  <a href=\"/docs/overview.htmlFor/\">For</a>\
+      \ a better logging solution, we recommend using <a href=\"#django-sentry\">django-sentry</a>.</p>\r\
+      \n<br />\r\n<a name=\"django-sentry\"></a>\r\n<h3><a href=\"/docs/overview.htmlUsing/\"\
+      >Using</a> django-sentry for enhanced logging</h3>\r\n<br />\r\n<p><a href=\"\
+      /docs/overview.htmlIf/\">If</a> you require more sophisticated logging, we recommend\
+      \ using <a href=\"https://github.com/dcramer/django-sentry\" target=\"_blank\"\
+      >django-sentry</a>.  <a href=\"/docs/overview.htmlTo/\">To</a> get sentry working\
+      \ for your application (you'll be able to access it at the \"/sentry\" URL),\
+      \ add the following to your djangy.eggs or djangy.pip file:</p>\r\n\r\n<pre>\r\
+      \ndjango-indexer\r\ndjango-paging\r\ndjango-sentry\r\n</pre>\r\n\r\n<p><a href=\"\
+      /docs/overview.htmlThen/\">Then</a>, add the \"sentry\", \"sentry.client\",\
+      \ \"indexer\", and \"paging\" to your INSTALLED_APPS in your settings.py:</p>\r\
+      \n\r\n<pre>\r\nINSTALLED_APPS = [\r\n...\r\n    'sentry',\r\n    'sentry.client',\r\
+      \n    'indexer',\r\n    'paging'\r\n]\r\n</pre>\r\n\r\n<p><a href=\"/docs/overview.htmlFinally/\"\
+      >Finally</a>, add the sentry <a href=\"/docs/overview.htmlURLs/\">URLs</a> module\
+      \ to your urls.py:</p>\r\n<pre>\r\nurlpatterns = patterns('',\r\n    ...\r\n\
+      \    (r'^sentry/', include('sentry.urls')),\r\n)\r\n</pre>\r\n\r\n<p><a href=\"\
+      /docs/overview.htmlSentry/\">Sentry</a> will catch exceptions and log them.\
+      \  <a href=\"/docs/overview.htmlIf/\">If</a> you'd like to log additional messages\
+      \ to sentry, use the following code as a template:</p>\r\n<pre>\r\nimport logging\r\
+      \nfrom sentry.client.handlers import <a href=\"/docs/overview.htmlSentryHandler/\"\
+      >SentryHandler</a>\r\n\r\nlogging.getLogger().addHandler(<a href=\"/docs/overview.htmlSentryHandler/\"\
+      >SentryHandler</a>())\r\n\r\n# <a href=\"/docs/overview.htmlAdd/\">Add</a> <a\
+      \ href=\"/docs/overview.htmlStreamHandler/\">StreamHandler</a> to sentry's default\
+      \ so you can catch missed exceptions\r\nlogger = logging.getLogger('sentry.errors')\r\
+      \nlogger.propagate = <a href=\"/docs/overview.htmlFalse/\">False</a>\r\nlogger.addHandler(logging.<a\
+      \ href=\"/docs/overview.htmlStreamHandler/\">StreamHandler</a>())\r\n\r\nlogger.error(\"\
+      my error message\")\r\n</pre>\r\n\r\n<p><a href=\"/docs/overview.htmlFor/\"\
+      >For</a> more information, see the <a href=\"http://dcramer.github.com/django-sentry/\"\
+      \ target=\"_blank\">official documentation</a>.</p>"}
+  model: docs.page
+  pk: 17
+- fields: {content: "<h2>Manage.py Commands</h2>\r\n<br />\r\n<p>The <a href=\"/docs/Client\"\
+      >Djangy command-line client</a> supports running manage.py commands remotely.\
+      \  The behavior is designed to be identical to what you'd expect when you run\
+      \ the commands locally, except that everything happens within the context of\
+      \ your live Djangy application.</p>\r\n<ul>\r\n  <li><a href=\"#usage\">Usage</a></li>\r\
+      \n  <li><a href=\"#exceptions\">Exceptions</a></li>\r\n</ul>\r\n<br />\r\n<a\
+      \ name=\"usage\"></a>\r\n<h3>Usage</h3>\r\n<br />\r\n<p>Executing remote manage.py\
+      \ commands is identical to executing them locally, except you pass everything\
+      \ to the djangy command-line client instead:\r\n<pre>\r\n$ djangy manage.py\
+      \ <command>\r\n</pre>\r\nAs the ability to implement your own commands is supported,\
+      \ it would be impossible to list each supported command.  Instead, you'll find\
+      \ the following commands offically supported by Djangy (others will almost certainly\
+      \ work, but we can't make any guarantees):\r\n<ul>\r\n  <li><tt>syncdb</tt></li>\r\
+      \n  <li><tt>migrate</tt></li>\r\n  <li><tt>shell</tt></li>\r\n  <li><tt>loaddata</tt></li>\r\
+      \n  <li><tt>dumpdata</tt></li>\r\n  <li><tt>migrate</tt></li>\r\n  <li><tt>reset</tt></li>\r\
+      \n</ul>\r\n</p>\r\n<br />\r\n<a name=\"exceptions\"></a>\r\n<h3>Exceptions</h3>\r\
+      \n<br />\r\n<p>There are a few manage.py commands that don't make sense to execute\
+      \ remotely.  For security and logical reasons the following commands have been\
+      \ disallowed:\r\n<ul>\r\n  <li><tt>changepassword</tt></li>\r\n  <li><tt>compilemessages</tt></li>\r\
+      \n  <li><tt>dbshell</tt></li>\r\n  <li><tt>makemessages</tt></li>\r\n  <li><tt>runfcgi</tt></li>\r\
+      \n  <li><tt>runserver</tt></li>\r\n  <li><tt>schemamigration</tt></li>\r\n \
+      \ <li><tt>datamigration</tt></li>\r\n  <li><tt>test</tt></li>\r\n  <li><tt>testserver</tt></li>\r\
+      \n</ul>\r\nIn general, it doesn't make sense to execute a remote command that\
+      \ changes your code in some way -- for example, schemamigration or makemessages.\
+      \  Running the development server is obviously disallowed for performance and\
+      \ security reasons.</p>\r\n", name: ManagePyCommands, rendered: "<h2><a href=\"\
+      /docs/overview.htmlManage/\">Manage</a>.py <a href=\"/docs/overview.htmlCommands/\"\
+      >Commands</a></h2>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlThe/\">The</a>\
+      \ <a href=\"/docs/<a href=\"/docs/overview.htmlClient/\">Client</a>\"><a href=\"\
+      /docs/overview.htmlDjangy/\">Djangy</a> command-line client</a> supports running\
+      \ manage.py commands remotely.  <a href=\"/docs/overview.htmlThe/\">The</a>\
+      \ behavior is designed to be identical to what you'd expect when you run the\
+      \ commands locally, except that everything happens within the context of your\
+      \ live <a href=\"/docs/overview.htmlDjangy/\">Djangy</a> application.</p>\r\n\
+      <ul>\r\n  <li><a href=\"#usage\"><a href=\"/docs/overview.htmlUsage/\">Usage</a></a></li>\r\
+      \n  <li><a href=\"#exceptions\"><a href=\"/docs/overview.htmlExceptions/\">Exceptions</a></a></li>\r\
+      \n</ul>\r\n<br />\r\n<a name=\"usage\"></a>\r\n<h3><a href=\"/docs/overview.htmlUsage/\"\
+      >Usage</a></h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlExecuting/\">Executing</a>\
+      \ remote manage.py commands is identical to executing them locally, except you\
+      \ pass everything to the djangy command-line client instead:\r\n<pre>\r\n$ djangy\
+      \ manage.py <command>\r\n</pre>\r\n<a href=\"/docs/overview.htmlAs/\">As</a>\
+      \ the ability to implement your own commands is supported, it would be impossible\
+      \ to list each supported command.  <a href=\"/docs/overview.htmlInstead/\">Instead</a>,\
+      \ you'll find the following commands offically supported by <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> (others will almost certainly work, but we can't make any guarantees):\r\
+      \n<ul>\r\n  <li><tt>syncdb</tt></li>\r\n  <li><tt>migrate</tt></li>\r\n  <li><tt>shell</tt></li>\r\
+      \n  <li><tt>loaddata</tt></li>\r\n  <li><tt>dumpdata</tt></li>\r\n  <li><tt>migrate</tt></li>\r\
+      \n  <li><tt>reset</tt></li>\r\n</ul>\r\n</p>\r\n<br />\r\n<a name=\"exceptions\"\
+      ></a>\r\n<h3><a href=\"/docs/overview.htmlExceptions/\">Exceptions</a></h3>\r\
+      \n<br />\r\n<p><a href=\"/docs/overview.htmlThere/\">There</a> are a few manage.py\
+      \ commands that don't make sense to execute remotely.  <a href=\"/docs/overview.htmlFor/\"\
+      >For</a> security and logical reasons the following commands have been disallowed:\r\
+      \n<ul>\r\n  <li><tt>changepassword</tt></li>\r\n  <li><tt>compilemessages</tt></li>\r\
+      \n  <li><tt>dbshell</tt></li>\r\n  <li><tt>makemessages</tt></li>\r\n  <li><tt>runfcgi</tt></li>\r\
+      \n  <li><tt>runserver</tt></li>\r\n  <li><tt>schemamigration</tt></li>\r\n \
+      \ <li><tt>datamigration</tt></li>\r\n  <li><tt>test</tt></li>\r\n  <li><tt>testserver</tt></li>\r\
+      \n</ul>\r\n<a href=\"/docs/overview.htmlIn/\">In</a> general, it doesn't make\
+      \ sense to execute a remote command that changes your code in some way -- for\
+      \ example, schemamigration or makemessages.  <a href=\"/docs/overview.htmlRunning/\"\
+      >Running</a> the development server is obviously disallowed for performance\
+      \ and security reasons.</p>\r\n"}
+  model: docs.page
+  pk: 27
+- fields: {content: " <ul class=\"docnav\">\r\n <li>Getting Started</li>\r\n     <ul>\r\
+      \n        <li><a href=\"/docs/WhatIsDjangy\">What is Djangy?</a></li>\r\n  \
+      \      <li><a href=\"/docs/Quickstart\">Quickstart Guide</a></li>\r\n     </ul>\r\
+      \n <li>FAQ</li>\r\n     <ul>\r\n       <li><a href=\"/docs/Architecture\">How\
+      \ does it work?</a></li>\r\n       <li><a href=\"/docs/FAQBillingPricing\">Billing\
+      \ and Pricing</a></li>\r\n     </ul>\r\n <li>Using Djangy</li>\r\n     <ul>\r\
+      \n       <li><a href=\"/docs/Client\">Djangy command-line client</a></li>\r\n\
+      \       <li><a href=\"/docs/CreatingApps\">Creating applications</a></li>\r\n\
+      \       <li><a href=\"/docs/DeployingWithGit\">Deploying with Git</a></li>\r\
+      \n       <li><a href=\"/docs/Collaboration\">Collaboration</a></li>\r\n    \
+      \   <li><a href=\"/docs/Databases\">Databases</a></li>\r\n       <li><a href=\"\
+      /docs/Backups\">Backups</a></li>\r\n       <li><a href=\"/docs/ConfigFiles\"\
+      >Configuration files</a></li>\r\n     </ul>\r\n <li>How To</li>\r\n     <ul>\
+      \   \r\n       <li><a href=\"/docs/Celery\">Background jobs with Celery</a></li>\r\
+      \n       <li><a href=\"/docs/Dependencies\">Managing dependencies</a></li>\r\
+      \n       <li><a href=\"/docs/UsingTheShell\">Using the shell</a></li>\r\n  \
+      \     <li><a href=\"/docs/ManagePyCommands\">Manage.py commands</a></li>\r\n\
+      \       <li><a href=\"/docs/TemplateDirs\">Template directories</a></li>\r\n\
+      \       <li><a href=\"/docs/Logging\">Logging</a></li>\r\n       <li><a href=\"\
+      /docs/StaticContent\">Static content</a></li>\r\n       <li><a href=\"/docs/Email\"\
+      >Email</a></li>\r\n       <li><a href=\"/docs/StoringUploads\">Storing uploads\
+      \ with S3</a></li>\r\n     </ul>\r\n </ul>", name: NavBar, rendered: " <ul class=\"\
+      docnav\">\r\n <li><a href=\"/docs/overview.htmlGetting/\">Getting</a> <a href=\"\
+      /docs/overview.htmlStarted/\">Started</a></li>\r\n     <ul>\r\n        <li><a\
+      \ href=\"/docs/<a href=\"/docs/overview.htmlWhatIsDjangy/\">WhatIsDjangy</a>\"\
+      ><a href=\"/docs/overview.htmlWhat/\">What</a> is <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a>?</a></li>\r\n        <li><a href=\"/docs/<a href=\"/docs/overview.htmlQuickstart/\"\
+      >Quickstart</a>\"><a href=\"/docs/overview.htmlQuickstart/\">Quickstart</a>\
+      \ <a href=\"/docs/overview.htmlGuide/\">Guide</a></a></li>\r\n     </ul>\r\n\
+      \ <li>FAQ</li>\r\n     <ul>\r\n       <li><a href=\"/docs/<a href=\"/docs/overview.htmlArchitecture/\"\
+      >Architecture</a>\"><a href=\"/docs/overview.htmlHow/\">How</a> does it work?</a></li>\r\
+      \n       <li><a href=\"/docs/<a href=\"/docs/overview.htmlFAQBillingPricing/\"\
+      >FAQBillingPricing</a>\"><a href=\"/docs/overview.htmlBilling/\">Billing</a>\
+      \ and <a href=\"/docs/overview.htmlPricing/\">Pricing</a></a></li>\r\n     </ul>\r\
+      \n <li><a href=\"/docs/overview.htmlUsing/\">Using</a> <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a></li>\r\n     <ul>\r\n       <li><a href=\"/docs/<a href=\"/docs/overview.htmlClient/\"\
+      >Client</a>\"><a href=\"/docs/overview.htmlDjangy/\">Djangy</a> command-line\
+      \ client</a></li>\r\n       <li><a href=\"/docs/<a href=\"/docs/overview.htmlCreatingApps/\"\
+      >CreatingApps</a>\"><a href=\"/docs/overview.htmlCreating/\">Creating</a> applications</a></li>\r\
+      \n       <li><a href=\"/docs/<a href=\"/docs/overview.htmlDeployingWithGit/\"\
+      >DeployingWithGit</a>\"><a href=\"/docs/overview.htmlDeploying/\">Deploying</a>\
+      \ with <a href=\"/docs/overview.htmlGit/\">Git</a></a></li>\r\n       <li><a\
+      \ href=\"/docs/<a href=\"/docs/overview.htmlCollaboration/\">Collaboration</a>\"\
+      ><a href=\"/docs/overview.htmlCollaboration/\">Collaboration</a></a></li>\r\n\
+      \       <li><a href=\"/docs/<a href=\"/docs/overview.htmlDatabases/\">Databases</a>\"\
+      ><a href=\"/docs/overview.htmlDatabases/\">Databases</a></a></li>\r\n      \
+      \ <li><a href=\"/docs/<a href=\"/docs/overview.htmlBackups/\">Backups</a>\"\
+      ><a href=\"/docs/overview.htmlBackups/\">Backups</a></a></li>\r\n       <li><a\
+      \ href=\"/docs/<a href=\"/docs/overview.htmlConfigFiles/\">ConfigFiles</a>\"\
+      ><a href=\"/docs/overview.htmlConfiguration/\">Configuration</a> files</a></li>\r\
+      \n     </ul>\r\n <li><a href=\"/docs/overview.htmlHow/\">How</a> <a href=\"\
+      /docs/overview.htmlTo/\">To</a></li>\r\n     <ul>   \r\n       <li><a href=\"\
+      /docs/<a href=\"/docs/overview.htmlCelery/\">Celery</a>\"><a href=\"/docs/overview.htmlBackground/\"\
+      >Background</a> jobs with <a href=\"/docs/overview.htmlCelery/\">Celery</a></a></li>\r\
+      \n       <li><a href=\"/docs/<a href=\"/docs/overview.htmlDependencies/\">Dependencies</a>\"\
+      ><a href=\"/docs/overview.htmlManaging/\">Managing</a> dependencies</a></li>\r\
+      \n       <li><a href=\"/docs/<a href=\"/docs/overview.htmlUsingTheShell/\">UsingTheShell</a>\"\
+      ><a href=\"/docs/overview.htmlUsing/\">Using</a> the shell</a></li>\r\n    \
+      \   <li><a href=\"/docs/<a href=\"/docs/overview.htmlManagePyCommands/\">ManagePyCommands</a>\"\
+      ><a href=\"/docs/overview.htmlManage/\">Manage</a>.py commands</a></li>\r\n\
+      \       <li><a href=\"/docs/<a href=\"/docs/overview.htmlTemplateDirs/\">TemplateDirs</a>\"\
+      ><a href=\"/docs/overview.htmlTemplate/\">Template</a> directories</a></li>\r\
+      \n       <li><a href=\"/docs/<a href=\"/docs/overview.htmlLogging/\">Logging</a>\"\
+      ><a href=\"/docs/overview.htmlLogging/\">Logging</a></a></li>\r\n       <li><a\
+      \ href=\"/docs/<a href=\"/docs/overview.htmlStaticContent/\">StaticContent</a>\"\
+      ><a href=\"/docs/overview.htmlStatic/\">Static</a> content</a></li>\r\n    \
+      \   <li><a href=\"/docs/<a href=\"/docs/overview.htmlEmail/\">Email</a>\"><a\
+      \ href=\"/docs/overview.htmlEmail/\">Email</a></a></li>\r\n       <li><a href=\"\
+      /docs/<a href=\"/docs/overview.htmlStoringUploads/\">StoringUploads</a>\"><a\
+      \ href=\"/docs/overview.htmlStoring/\">Storing</a> uploads with <a href=\"/docs/overview.htmlS3/\"\
+      >S3</a></a></li>\r\n     </ul>\r\n </ul>"}
+  model: docs.page
+  pk: 13
+- fields: {content: '<p>This document has been moved to <a href="/docs/WhatIsDjangy">What
+      is Djangy?</a>.</p>', name: Overview, rendered: '<p><a href="/docs/overview.htmlThis/">This</a>
+      document has been moved to <a href="/docs/<a href="/docs/overview.htmlWhatIsDjangy/">WhatIsDjangy</a>"><a
+      href="/docs/overview.htmlWhat/">What</a> is <a href="/docs/overview.htmlDjangy/">Djangy</a>?</a>.</p>'}
+  model: docs.page
+  pk: 2
+- fields: {content: "<h2>Djangy Quickstart Guide</h2>\r\n<br />\r\n<p>Djangy is the\
+      \ best way to deploy your applications.  Develop your app locally like always,\
+      \ then use the djang client to deploy to Djangy's cloud infrastructure.  It's\
+      \ that simple!\r\n<ul>\r\n  <li><a href=\"#prerequisites\">Prerequisites</a></li>\r\
+      \n  <li><a href=\"#deploying\">Deploying to Djangy</a></li>\r\n  <li><a href=\"\
+      #epilogue\">Epilogue</a></li>\r\n</ul>\r\n</p>\r\n<br />\r\n<a name=\"prerequisites\"\
+      ></a>\r\n<h3>Prerequisites</h3>\r\n<br />\r\n<p>To use Djangy, you need three\
+      \ things:\r\n<ul>\r\n  <li>Run your django app locally: <a href=\"http://docs.djangoproject.com/en/1.2/intro/tutorial01/\"\
+      \ target=\"_blank\">Writing your first Django app</a></li>\r\n  <li>Install\
+      \ Git on <a href=\"http://github.com/guides/get-git-on-mac\" target=\"_blank\"\
+      >OS X</a>, <a href=\"http://code.google.com/p/msysgit/\" target=\"_blank\">Windows</a>,\
+      \ or <a href=\"http://book.git-scm.com/2_installing_git.html\" target=\"_blank\"\
+      >Unix/Linux</a>.</li>\r\n  <li>Create a Djangy account and install the <a href=\"\
+      /docs/Client\" target=\"_blank\">djangy egg</a></li>\r\n</ul>\r\n</p>\r\n<br\
+      \ />\r\n<a name=\"deploying\"></a>\r\n<h3>Deploying to Djangy</h3>\r\n<br />\r\
+      \n<h5>1. Ensure your application is in a valid Git repository</h5>\r\n<br >\r\
+      \n<p>If you don't already use git, run the following commands (replacing \"\
+      myapp\" with your own application's name, of course):</p>\r\n<pre>\r\n$ cd myapp\r\
+      \n$ git init\r\nInitialized empty Git repository in .git/\r\n$ git add .\r\n\
+      $ git commit -m \"my application\"\r\nCreated initial commit 3a9245c: my application\r\
+      \n21 files changed, 2142 insertions(+), 0 deletions(-)\r\n</pre>\r\n<h5>2. Ensure\
+      \ you have a public SSH key</h5>\r\n<br />\r\n<p>Git uses SSH to push and pull\
+      \ changes, so you need to have a public key.  Follow these instructions for\
+      \ <a href=\"http://help.github.com/mac-key-setup/\" target=\"_blank\">OS X</a>,\
+      \ <a href=\"http://help.github.com/msysgit-key-setup/\" target=\"_blank\">Windows</a>,\
+      \ or <a href=\"http://help.github.com/linux-key-setup/\" target=\"_blank\">Linux</a>.</p>\r\
+      \n<h5>3. Create your app on Djangy</h5>\r\n<br />\r\n<p>From inside your application's\
+      \ git repository, run \"djangy create\".  When prompted, enter your Djangy username\
+      \ and password.  They are saved into ~/.djangy for future runs.  The client\
+      \ will also upload your public SSH key so that you can interact with the newly\
+      \ created \"djangy\" remote.</p>\r\n<pre>\r\n$ cd myapp\r\n$ djangy create\r\
+      \nUsing git repository \"/Users/dave/projects/myapp\"\r\n\r\nEnter your email\
+      \ address: dave@djangy.com\r\nPlease enter your password: \r\n \r\nSaved credentials.\r\
+      \nTo change your email address or password, remove \"/Users/dave/.djangy\"\r\
+      \n\r\nPlease enter your application name [Enter for myapp]: \r\n \r\nUsing application\
+      \ name \"myapp\" from user input\r\nUsing public key file \"/Users/dave/.ssh/id_rsa.pub\"\
+      \r\nApplication created.\r\n[master 83b657d] added \"djangy.config\", \"djangy.eggs\"\
+      \ and \"djangy.pip\" to repository\r\n 2 files changed, 5 insertions(+), 0 deletions(-)\r\
+      \n create mode 100644 djangy.config\r\n create mode 100644 djangy.eggs\r\n create\
+      \ mode 100644 djangy.pip\r\n\r\nYou can now run \"git push djangy master\"\r\
+      \n</pre>\r\n<p>You can see that djangy added three files (djangy.config, djangy.eggs,\
+      \ and djangy.pip) to your repository.  Everything is ready to go.  If you'd\
+      \ like, you can <a href=\"/docs/ConfigFiles\" target=\"_blank\">customize the\
+      \ configuration files</a>.</p>\r\n</pre>\r\n<h5>4. Push your application to\
+      \ Djangy</h5>\r\n<br />\r\n<pre>\r\n$ git push djangy master\r\n\r\nCounting\
+      \ objects: 10, done.\r\nDelta compression using up to 2 threads.\r\nCompressing\
+      \ objects: 100% (8/8), done.\r\nWriting objects: 100% (10/10), 2.67 KiB, done.\r\
+      \nTotal 10 (delta 1), reused 0 (delta 0)\r\n\r\n\r\nWelcome to Djangy!\r\n\r\
+      \nDeploying project myapp.\r\n\r\nCloning git repository... Done.\r\n\r\nCreating\
+      \ production settings.py file... Done.\r\n\r\nInstalling dependencies...\r\n\
+      \  Dependencies from djangy.eggs using easy_install:\r\n    Installing Django...\
+      \ Success.\r\n    Installing South... Success.\r\n    Installing gunicorn...\
+      \ Success.\r\n  Dependencies from djangy.pip using pip:\r\n    None found.\r\
+      \nDone.\r\n\r\nSaving bundle info... Done.\r\n\r\nDeploying to worker hosts...\
+      \ Done.\r\n\r\nTo git@api.djangy.com:myapp.git\r\n * [new branch]      master\
+      \ -> master\r\n</pre>\r\n<br />\r\n<h5>5. Sync your models</h5>\r\n<br />\r\n\
+      <p>Your app is now up and running on Djangy.  However, it still has an empty\
+      \ database.  To fix that, run the usual syncdb command:</p>\r\n<pre>\r\n$ djangy\
+      \ manage.py syncdb\r\n\r\nUsing git repository \"/Users/dave/myapp\"\r\nUsing\
+      \ application name \"myapp\" from \"/Users/dave/myapp/djangy.config\"\r\n\r\n\
+      Creating table auth_permission\r\nCreating table auth_group_permissions\r\n\
+      Creating table auth_group\r\nCreating table auth_user_user_permissions\r\nCreating\
+      \ table auth_user_groups\r\nCreating table auth_user\r\nCreating table auth_message\r\
+      \nCreating table django_content_type\r\nCreating table django_session\r\nCreating\
+      \ table django_site\r\n\r\nYou just installed Django's auth system, which means\
+      \ you don't have any \r\nsuperusers defined.  Would you like to create one now?\
+      \ (yes/no): yes\r\nUsername (Leave blank to use 'djangy'): dave           \r\
+      \nE-mail address: dave@djangy.com\r\nPassword:\r\nPassword (again):\r\n\r\n\
+      Superuser created successfully.\r\nInstalling index for auth.Permission model\r\
+      \nInstalling index for auth.Group_permissions model\r\nInstalling index for\
+      \ auth.User_user_permissions model\r\nInstalling index for auth.User_groups\
+      \ model\r\nInstalling index for auth.Message model\r\nNo fixtures found.\r\n\
+      </pre>\r\n<p>As you can see, this behavior is very familiar.  In fact, most\
+      \ manage.py commands will work just as expected, including South migrations.\
+      \  For more info, see <a href=\"/docs/ManagePyCommands\" target=\"_blank\">Manage.py\
+      \ Commands</a>.</p>\r\n<br />\r\n<a name=\"epilogue\"></a>\r\n<h3>Epilogue</h3>\r\
+      \n<br />\r\n<p>Congratulations, your app is now up and running on Djangy!  Your\
+      \ workflow is now incredibly simple.  Any time you make any changes, you need\
+      \ to simply:\r\n<ul>\r\n  <li>Commit your changes to git</li>\r\n  <li>Push\
+      \ your changes to Djangy with \"git push djangy master\"</li>\r\n</ul>\r\n<p>As\
+      \ always, you can email <a mailto:\"support@djangy.com\">support@djangy.com</a>\
+      \ if you have any questions, problems, or suggestions.  We welcome your feedback!</p>",
+    name: Quickstart, rendered: "<h2><a href=\"/docs/overview.htmlDjangy/\">Djangy</a>\
+      \ <a href=\"/docs/overview.htmlQuickstart/\">Quickstart</a> <a href=\"/docs/overview.htmlGuide/\"\
+      >Guide</a></h2>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlDjangy/\">Djangy</a>\
+      \ is the best way to deploy your applications.  <a href=\"/docs/overview.htmlDevelop/\"\
+      >Develop</a> your app locally like always, then use the djang client to deploy\
+      \ to <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>'s cloud infrastructure.\
+      \  <a href=\"/docs/overview.htmlIt/\">It</a>'s that simple!\r\n<ul>\r\n  <li><a\
+      \ href=\"#prerequisites\"><a href=\"/docs/overview.htmlPrerequisites/\">Prerequisites</a></a></li>\r\
+      \n  <li><a href=\"#deploying\"><a href=\"/docs/overview.htmlDeploying/\">Deploying</a>\
+      \ to <a href=\"/docs/overview.htmlDjangy/\">Djangy</a></a></li>\r\n  <li><a\
+      \ href=\"#epilogue\"><a href=\"/docs/overview.htmlEpilogue/\">Epilogue</a></a></li>\r\
+      \n</ul>\r\n</p>\r\n<br />\r\n<a name=\"prerequisites\"></a>\r\n<h3><a href=\"\
+      /docs/overview.htmlPrerequisites/\">Prerequisites</a></h3>\r\n<br />\r\n<p><a\
+      \ href=\"/docs/overview.htmlTo/\">To</a> use <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a>, you need three things:\r\n<ul>\r\n  <li><a href=\"/docs/overview.htmlRun/\"\
+      >Run</a> your django app locally: <a href=\"http://docs.djangoproject.com/en/1.2/intro/tutorial01/\"\
+      \ target=\"_blank\"><a href=\"/docs/overview.htmlWriting/\">Writing</a> your\
+      \ first <a href=\"/docs/overview.htmlDjango/\">Django</a> app</a></li>\r\n \
+      \ <li><a href=\"/docs/overview.htmlInstall/\">Install</a> <a href=\"/docs/overview.htmlGit/\"\
+      >Git</a> on <a href=\"http://github.com/guides/get-git-on-mac\" target=\"_blank\"\
+      >OS X</a>, <a href=\"http://code.google.com/p/msysgit/\" target=\"_blank\"><a\
+      \ href=\"/docs/overview.htmlWindows/\">Windows</a></a>, or <a href=\"http://book.git-scm.com/2_installing_git.html\"\
+      \ target=\"_blank\"><a href=\"/docs/overview.htmlUnix/\">Unix</a>/<a href=\"\
+      /docs/overview.htmlLinux/\">Linux</a></a>.</li>\r\n  <li><a href=\"/docs/overview.htmlCreate/\"\
+      >Create</a> a <a href=\"/docs/overview.htmlDjangy/\">Djangy</a> account and\
+      \ install the <a href=\"/docs/<a href=\"/docs/overview.htmlClient/\">Client</a>\"\
+      \ target=\"_blank\">djangy egg</a></li>\r\n</ul>\r\n</p>\r\n<br />\r\n<a name=\"\
+      deploying\"></a>\r\n<h3><a href=\"/docs/overview.htmlDeploying/\">Deploying</a>\
+      \ to <a href=\"/docs/overview.htmlDjangy/\">Djangy</a></h3>\r\n<br />\r\n<h5>1.\
+      \ <a href=\"/docs/overview.htmlEnsure/\">Ensure</a> your application is in a\
+      \ valid <a href=\"/docs/overview.htmlGit/\">Git</a> repository</h5>\r\n<br >\r\
+      \n<p><a href=\"/docs/overview.htmlIf/\">If</a> you don't already use git, run\
+      \ the following commands (replacing \"myapp\" with your own application's name,\
+      \ of course):</p>\r\n<pre>\r\n$ cd myapp\r\n$ git init\r\n<a href=\"/docs/overview.htmlInitialized/\"\
+      >Initialized</a> empty <a href=\"/docs/overview.htmlGit/\">Git</a> repository\
+      \ in .git/\r\n$ git add .\r\n$ git commit -m \"my application\"\r\n<a href=\"\
+      /docs/overview.htmlCreated/\">Created</a> initial commit 3a9245c: my application\r\
+      \n21 files changed, 2142 insertions(+), 0 deletions(-)\r\n</pre>\r\n<h5>2. <a\
+      \ href=\"/docs/overview.htmlEnsure/\">Ensure</a> you have a public SSH key</h5>\r\
+      \n<br />\r\n<p><a href=\"/docs/overview.htmlGit/\">Git</a> uses SSH to push\
+      \ and pull changes, so you need to have a public key.  <a href=\"/docs/overview.htmlFollow/\"\
+      >Follow</a> these instructions for <a href=\"http://help.github.com/mac-key-setup/\"\
+      \ target=\"_blank\">OS X</a>, <a href=\"http://help.github.com/msysgit-key-setup/\"\
+      \ target=\"_blank\"><a href=\"/docs/overview.htmlWindows/\">Windows</a></a>,\
+      \ or <a href=\"http://help.github.com/linux-key-setup/\" target=\"_blank\"><a\
+      \ href=\"/docs/overview.htmlLinux/\">Linux</a></a>.</p>\r\n<h5>3. <a href=\"\
+      /docs/overview.htmlCreate/\">Create</a> your app on <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a></h5>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlFrom/\">From</a>\
+      \ inside your application's git repository, run \"djangy create\".  <a href=\"\
+      /docs/overview.htmlWhen/\">When</a> prompted, enter your <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a> username and password.  <a href=\"/docs/overview.htmlThey/\">They</a>\
+      \ are saved into ~/.djangy for future runs.  <a href=\"/docs/overview.htmlThe/\"\
+      >The</a> client will also upload your public SSH key so that you can interact\
+      \ with the newly created \"djangy\" remote.</p>\r\n<pre>\r\n$ cd myapp\r\n$\
+      \ djangy create\r\n<a href=\"/docs/overview.htmlUsing/\">Using</a> git repository\
+      \ \"/<a href=\"/docs/overview.htmlUsers/\">Users</a>/dave/projects/myapp\"\r\
+      \n\r\n<a href=\"/docs/overview.htmlEnter/\">Enter</a> your email address: dave@djangy.com\r\
+      \n<a href=\"/docs/overview.htmlPlease/\">Please</a> enter your password: \r\n\
+      \ \r\n<a href=\"/docs/overview.htmlSaved/\">Saved</a> credentials.\r\n<a href=\"\
+      /docs/overview.htmlTo/\">To</a> change your email address or password, remove\
+      \ \"/<a href=\"/docs/overview.htmlUsers/\">Users</a>/dave/.djangy\"\r\n\r\n\
+      <a href=\"/docs/overview.htmlPlease/\">Please</a> enter your application name\
+      \ [<a href=\"/docs/overview.htmlEnter/\">Enter</a> for myapp]: \r\n \r\n<a href=\"\
+      /docs/overview.htmlUsing/\">Using</a> application name \"myapp\" from user input\r\
+      \n<a href=\"/docs/overview.htmlUsing/\">Using</a> public key file \"/<a href=\"\
+      /docs/overview.htmlUsers/\">Users</a>/dave/.ssh/id_rsa.pub\"\r\n<a href=\"/docs/overview.htmlApplication/\"\
+      >Application</a> created.\r\n[master 83b657d] added \"djangy.config\", \"djangy.eggs\"\
+      \ and \"djangy.pip\" to repository\r\n 2 files changed, 5 insertions(+), 0 deletions(-)\r\
+      \n create mode 100644 djangy.config\r\n create mode 100644 djangy.eggs\r\n create\
+      \ mode 100644 djangy.pip\r\n\r\n<a href=\"/docs/overview.htmlYou/\">You</a>\
+      \ can now run \"git push djangy master\"\r\n</pre>\r\n<p><a href=\"/docs/overview.htmlYou/\"\
+      >You</a> can see that djangy added three files (djangy.config, djangy.eggs,\
+      \ and djangy.pip) to your repository.  <a href=\"/docs/overview.htmlEverything/\"\
+      >Everything</a> is ready to go.  <a href=\"/docs/overview.htmlIf/\">If</a> you'd\
+      \ like, you can <a href=\"/docs/<a href=\"/docs/overview.htmlConfigFiles/\"\
+      >ConfigFiles</a>\" target=\"_blank\">customize the configuration files</a>.</p>\r\
+      \n</pre>\r\n<h5>4. <a href=\"/docs/overview.htmlPush/\">Push</a> your application\
+      \ to <a href=\"/docs/overview.htmlDjangy/\">Djangy</a></h5>\r\n<br />\r\n<pre>\r\
+      \n$ git push djangy master\r\n\r\n<a href=\"/docs/overview.htmlCounting/\">Counting</a>\
+      \ objects: 10, done.\r\n<a href=\"/docs/overview.htmlDelta/\">Delta</a> compression\
+      \ using up to 2 threads.\r\n<a href=\"/docs/overview.htmlCompressing/\">Compressing</a>\
+      \ objects: 100% (8/8), done.\r\n<a href=\"/docs/overview.htmlWriting/\">Writing</a>\
+      \ objects: 100% (10/10), 2.67 KiB, done.\r\n<a href=\"/docs/overview.htmlTotal/\"\
+      >Total</a> 10 (delta 1), reused 0 (delta 0)\r\n\r\n\r\n<a href=\"/docs/overview.htmlWelcome/\"\
+      >Welcome</a> to <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>!\r\n\r\n<a\
+      \ href=\"/docs/overview.htmlDeploying/\">Deploying</a> project myapp.\r\n\r\n\
+      <a href=\"/docs/overview.htmlCloning/\">Cloning</a> git repository... <a href=\"\
+      /docs/overview.htmlDone/\">Done</a>.\r\n\r\n<a href=\"/docs/overview.htmlCreating/\"\
+      >Creating</a> production settings.py file... <a href=\"/docs/overview.htmlDone/\"\
+      >Done</a>.\r\n\r\n<a href=\"/docs/overview.htmlInstalling/\">Installing</a>\
+      \ dependencies...\r\n  <a href=\"/docs/overview.htmlDependencies/\">Dependencies</a>\
+      \ from djangy.eggs using easy_install:\r\n    <a href=\"/docs/overview.htmlInstalling/\"\
+      >Installing</a> <a href=\"/docs/overview.htmlDjango/\">Django</a>... <a href=\"\
+      /docs/overview.htmlSuccess/\">Success</a>.\r\n    <a href=\"/docs/overview.htmlInstalling/\"\
+      >Installing</a> <a href=\"/docs/overview.htmlSouth/\">South</a>... <a href=\"\
+      /docs/overview.htmlSuccess/\">Success</a>.\r\n    <a href=\"/docs/overview.htmlInstalling/\"\
+      >Installing</a> gunicorn... <a href=\"/docs/overview.htmlSuccess/\">Success</a>.\r\
+      \n  <a href=\"/docs/overview.htmlDependencies/\">Dependencies</a> from djangy.pip\
+      \ using pip:\r\n    <a href=\"/docs/overview.htmlNone/\">None</a> found.\r\n\
+      <a href=\"/docs/overview.htmlDone/\">Done</a>.\r\n\r\n<a href=\"/docs/overview.htmlSaving/\"\
+      >Saving</a> bundle info... <a href=\"/docs/overview.htmlDone/\">Done</a>.\r\n\
+      \r\n<a href=\"/docs/overview.htmlDeploying/\">Deploying</a> to worker hosts...\
+      \ <a href=\"/docs/overview.htmlDone/\">Done</a>.\r\n\r\n<a href=\"/docs/overview.htmlTo/\"\
+      >To</a> git@api.djangy.com:myapp.git\r\n * [new branch]      master -> master\r\
+      \n</pre>\r\n<br />\r\n<h5>5. <a href=\"/docs/overview.htmlSync/\">Sync</a> your\
+      \ models</h5>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlYour/\">Your</a>\
+      \ app is now up and running on <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>.\
+      \  <a href=\"/docs/overview.htmlHowever/\">However</a>, it still has an empty\
+      \ database.  <a href=\"/docs/overview.htmlTo/\">To</a> fix that, run the usual\
+      \ syncdb command:</p>\r\n<pre>\r\n$ djangy manage.py syncdb\r\n\r\n<a href=\"\
+      /docs/overview.htmlUsing/\">Using</a> git repository \"/<a href=\"/docs/overview.htmlUsers/\"\
+      >Users</a>/dave/myapp\"\r\n<a href=\"/docs/overview.htmlUsing/\">Using</a> application\
+      \ name \"myapp\" from \"/<a href=\"/docs/overview.htmlUsers/\">Users</a>/dave/myapp/djangy.config\"\
+      \r\n\r\n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_permission\r\
+      \n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_group_permissions\r\
+      \n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_group\r\n\
+      <a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_user_user_permissions\r\
+      \n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_user_groups\r\
+      \n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_user\r\n\
+      <a href=\"/docs/overview.htmlCreating/\">Creating</a> table auth_message\r\n\
+      <a href=\"/docs/overview.htmlCreating/\">Creating</a> table django_content_type\r\
+      \n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table django_session\r\
+      \n<a href=\"/docs/overview.htmlCreating/\">Creating</a> table django_site\r\n\
+      \r\n<a href=\"/docs/overview.htmlYou/\">You</a> just installed <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a>'s auth system, which means you don't have any \r\nsuperusers defined.\
+      \  <a href=\"/docs/overview.htmlWould/\">Would</a> you like to create one now?\
+      \ (yes/no): yes\r\n<a href=\"/docs/overview.htmlUsername/\">Username</a> (<a\
+      \ href=\"/docs/overview.htmlLeave/\">Leave</a> blank to use 'djangy'): dave\
+      \           \r\nE-mail address: dave@djangy.com\r\n<a href=\"/docs/overview.htmlPassword/\"\
+      >Password</a>:\r\n<a href=\"/docs/overview.htmlPassword/\">Password</a> (again):\r\
+      \n\r\n<a href=\"/docs/overview.htmlSuperuser/\">Superuser</a> created successfully.\r\
+      \n<a href=\"/docs/overview.htmlInstalling/\">Installing</a> index for auth.<a\
+      \ href=\"/docs/overview.htmlPermission/\">Permission</a> model\r\n<a href=\"\
+      /docs/overview.htmlInstalling/\">Installing</a> index for auth.Group_permissions\
+      \ model\r\n<a href=\"/docs/overview.htmlInstalling/\">Installing</a> index for\
+      \ auth.User_user_permissions model\r\n<a href=\"/docs/overview.htmlInstalling/\"\
+      >Installing</a> index for auth.User_groups model\r\n<a href=\"/docs/overview.htmlInstalling/\"\
+      >Installing</a> index for auth.<a href=\"/docs/overview.htmlMessage/\">Message</a>\
+      \ model\r\n<a href=\"/docs/overview.htmlNo/\">No</a> fixtures found.\r\n</pre>\r\
+      \n<p><a href=\"/docs/overview.htmlAs/\">As</a> you can see, this behavior is\
+      \ very familiar.  <a href=\"/docs/overview.htmlIn/\">In</a> fact, most manage.py\
+      \ commands will work just as expected, including <a href=\"/docs/overview.htmlSouth/\"\
+      >South</a> migrations.  <a href=\"/docs/overview.htmlFor/\">For</a> more info,\
+      \ see <a href=\"/docs/<a href=\"/docs/overview.htmlManagePyCommands/\">ManagePyCommands</a>\"\
+      \ target=\"_blank\"><a href=\"/docs/overview.htmlManage/\">Manage</a>.py <a\
+      \ href=\"/docs/overview.htmlCommands/\">Commands</a></a>.</p>\r\n<br />\r\n\
+      <a name=\"epilogue\"></a>\r\n<h3><a href=\"/docs/overview.htmlEpilogue/\">Epilogue</a></h3>\r\
+      \n<br />\r\n<p><a href=\"/docs/overview.htmlCongratulations/\">Congratulations</a>,\
+      \ your app is now up and running on <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>!\
+      \  <a href=\"/docs/overview.htmlYour/\">Your</a> workflow is now incredibly\
+      \ simple.  <a href=\"/docs/overview.htmlAny/\">Any</a> time you make any changes,\
+      \ you need to simply:\r\n<ul>\r\n  <li><a href=\"/docs/overview.htmlCommit/\"\
+      >Commit</a> your changes to git</li>\r\n  <li><a href=\"/docs/overview.htmlPush/\"\
+      >Push</a> your changes to <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>\
+      \ with \"git push djangy master\"</li>\r\n</ul>\r\n<p><a href=\"/docs/overview.htmlAs/\"\
+      >As</a> always, you can email <a mailto:\"support@djangy.com\">support@djangy.com</a>\
+      \ if you have any questions, problems, or suggestions.  <a href=\"/docs/overview.htmlWe/\"\
+      >We</a> welcome your feedback!</p>"}
+  model: docs.page
+  pk: 20
+- fields: {content: "<h2>Serving static content</h2>\r\n\r\n<p>Web applications consist\
+      \ of a combination of code that must run on the server and static content such\
+      \ as images, CSS files, and JavaScript files that run purely on the client web\
+      \ browser.  Djangy's solution for serving static content is a custom hardened\
+      \ implementation of <tt>django.views.static.serve</tt>.  Unlike the stock Django\
+      \ version of static serve, Djangy's implementation performs additional request\
+      \ validation for improved security, and automatically serves content off of\
+      \ Djangy's high-performance front end cache servers, rather than hitting your\
+      \ application for each static content request.</p>\r\n\r\n<p>Here is an example\
+      \ of a simple <tt>urls.py</tt> which serves static content, assuming there is\
+      \ a subdirectory called <tt>site_media</tt> in the same directory as <tt>urls.py</tt>:</p>\r\
+      \n\r\n<pre>\r\nfrom django.conf.urls.defaults import *\r\n\r\nurlpatterns =\
+      \ patterns('',\r\n    (r'^site_media/(?P&lt;path&gt;.*)$',\r\n        'django.views.static.serve',\
+      \ {'document_root': 'site_media/'}),\r\n    (r'^', 'testapp.main.views.index')\r\
+      \n)\r\n</pre>\r\n\r\n<p>For more information on <tt>django.views.static.serve</tt>,\
+      \ please refer to the <a href=\"http://docs.djangoproject.com/en/1.2/howto/static-files/\"\
+      >Django documentation on serving static files</a>.  Please note that the disclaimer\
+      \ about efficiency and security in the Django documentation doesn't apply to\
+      \ Djangy's custom static content server.  <i>(You may also find other documentation\
+      \ online that describes more complicated ways to serve static content; again,\
+      \ these other approaches do not apply to Djangy.)</i></p>\r\n", name: ServingStaticContent,
+    rendered: "<h2><a href=\"/docs/overview.htmlServing/\">Serving</a> static content</h2>\r\
+      \n\r\n<p><a href=\"/docs/overview.htmlWeb/\">Web</a> applications consist of\
+      \ a combination of code that must run on the server and static content such\
+      \ as images, CSS files, and <a href=\"/docs/overview.htmlJavaScript/\">JavaScript</a>\
+      \ files that run purely on the client web browser.  <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a>'s solution for serving static content is a custom hardened implementation\
+      \ of <tt>django.views.static.serve</tt>.  <a href=\"/docs/overview.htmlUnlike/\"\
+      >Unlike</a> the stock <a href=\"/docs/overview.htmlDjango/\">Django</a> version\
+      \ of static serve, <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>'s implementation\
+      \ performs additional request validation for improved security, and automatically\
+      \ serves content off of <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>'s\
+      \ high-performance front end cache servers, rather than hitting your application\
+      \ for each static content request.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlHere/\"\
+      >Here</a> is an example of a simple <tt>urls.py</tt> which serves static content,\
+      \ assuming there is a subdirectory called <tt>site_media</tt> in the same directory\
+      \ as <tt>urls.py</tt>:</p>\r\n\r\n<pre>\r\nfrom django.conf.urls.defaults import\
+      \ *\r\n\r\nurlpatterns = patterns('',\r\n    (r'^site_media/(?P&lt;path&gt;.*)$',\r\
+      \n        'django.views.static.serve', {'document_root': 'site_media/'}),\r\n\
+      \    (r'^', 'testapp.main.views.index')\r\n)\r\n</pre>\r\n\r\n<p><a href=\"\
+      /docs/overview.htmlFor/\">For</a> more information on <tt>django.views.static.serve</tt>,\
+      \ please refer to the <a href=\"http://docs.djangoproject.com/en/1.2/howto/static-files/\"\
+      ><a href=\"/docs/overview.htmlDjango/\">Django</a> documentation on serving\
+      \ static files</a>.  <a href=\"/docs/overview.htmlPlease/\">Please</a> note\
+      \ that the disclaimer about efficiency and security in the <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a> documentation doesn't apply to <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a>'s custom static content server.  <i>(<a href=\"/docs/overview.htmlYou/\"\
+      >You</a> may also find other documentation online that describes more complicated\
+      \ ways to serve static content; again, these other approaches do not apply to\
+      \ <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>.)</i></p>\r\n"}
+  model: docs.page
+  pk: 14
+- fields: {content: "<h2>Serving static content</h2>\r\n\r\n<p>Web applications consist\
+      \ of a combination of code that must run on the server and static content such\
+      \ as images, CSS files, and JavaScript files that run purely on the client web\
+      \ browser.  Djangy's solution for serving static content is a custom hardened\
+      \ implementation of <tt>django.views.static.serve</tt>.  Unlike the stock Django\
+      \ version of static serve, Djangy's implementation performs additional request\
+      \ validation for improved security, and automatically serves content off of\
+      \ Djangy's high-performance front end cache servers, rather than hitting your\
+      \ application for each static content request.</p>\r\n\r\n<p>Here is an example\
+      \ of a simple <tt>urls.py</tt> which serves static content, assuming there is\
+      \ a subdirectory called <tt>site_media</tt> in the same directory as <tt>urls.py</tt>:</p>\r\
+      \n\r\n<pre>\r\nfrom django.conf.urls.defaults import *\r\n\r\nurlpatterns =\
+      \ patterns('',\r\n    (r'^site_media/(?P&lt;path&gt;.*)$',\r\n        'django.views.static.serve',\
+      \ {'document_root': 'site_media/'}),\r\n    (r'^', 'testapp.main.views.index')\r\
+      \n)\r\n</pre>\r\n\r\n<p>For more information on <tt>django.views.static.serve</tt>,\
+      \ please refer to the <a href=\"http://docs.djangoproject.com/en/1.2/howto/static-files/\"\
+      >Django documentation on serving static files</a>.  Please note that the disclaimer\
+      \ about efficiency and security in the Django documentation doesn't apply to\
+      \ Djangy's custom static content server.  <i>(You may also find other documentation\
+      \ online that describes more complicated ways to serve static content; again,\
+      \ these other approaches do not apply to Djangy.)</i></p>\r\n", name: StaticContent,
+    rendered: "<h2><a href=\"/docs/overview.htmlServing/\">Serving</a> static content</h2>\r\
+      \n\r\n<p><a href=\"/docs/overview.htmlWeb/\">Web</a> applications consist of\
+      \ a combination of code that must run on the server and static content such\
+      \ as images, CSS files, and <a href=\"/docs/overview.htmlJavaScript/\">JavaScript</a>\
+      \ files that run purely on the client web browser.  <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a>'s solution for serving static content is a custom hardened implementation\
+      \ of <tt>django.views.static.serve</tt>.  <a href=\"/docs/overview.htmlUnlike/\"\
+      >Unlike</a> the stock <a href=\"/docs/overview.htmlDjango/\">Django</a> version\
+      \ of static serve, <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>'s implementation\
+      \ performs additional request validation for improved security, and automatically\
+      \ serves content off of <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>'s\
+      \ high-performance front end cache servers, rather than hitting your application\
+      \ for each static content request.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlHere/\"\
+      >Here</a> is an example of a simple <tt>urls.py</tt> which serves static content,\
+      \ assuming there is a subdirectory called <tt>site_media</tt> in the same directory\
+      \ as <tt>urls.py</tt>:</p>\r\n\r\n<pre>\r\nfrom django.conf.urls.defaults import\
+      \ *\r\n\r\nurlpatterns = patterns('',\r\n    (r'^site_media/(?P&lt;path&gt;.*)$',\r\
+      \n        'django.views.static.serve', {'document_root': 'site_media/'}),\r\n\
+      \    (r'^', 'testapp.main.views.index')\r\n)\r\n</pre>\r\n\r\n<p><a href=\"\
+      /docs/overview.htmlFor/\">For</a> more information on <tt>django.views.static.serve</tt>,\
+      \ please refer to the <a href=\"http://docs.djangoproject.com/en/1.2/howto/static-files/\"\
+      ><a href=\"/docs/overview.htmlDjango/\">Django</a> documentation on serving\
+      \ static files</a>.  <a href=\"/docs/overview.htmlPlease/\">Please</a> note\
+      \ that the disclaimer about efficiency and security in the <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a> documentation doesn't apply to <a href=\"/docs/overview.htmlDjangy/\"\
+      >Djangy</a>'s custom static content server.  <i>(<a href=\"/docs/overview.htmlYou/\"\
+      >You</a> may also find other documentation online that describes more complicated\
+      \ ways to serve static content; again, these other approaches do not apply to\
+      \ <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>.)</i></p>\r\n"}
+  model: docs.page
+  pk: 29
+- fields: {content: "<h2>Storing File uploads with S3</h2>\r\n<br />\r\n<p>We recommend\
+      \ using <a href=\"http://code.welldev.org/django-storages/\" target=\"_blank\"\
+      >django-storages</a> along with <a href=\"\" target=\"_blank\">Amazon's S3 service</a>\
+      \ to handle file uploads.</p>\r\n<ul>\r\n  <li><a href=\"#dependencies\">Specifying\
+      \ dependencies</a></li>\r\n  <li><a href=\"#settings\">Required settings</a></li>\r\
+      \n  <li><a href=\"#usage\">Usage</a></li>\r\n</ul>\r\n<br />\r\n<a name=\"dependencies\"\
+      ></a>\r\n<h3>Specifying dependencies</h3>\r\n<br />\r\n<p>Add the following\
+      \ to your <tt>djangy.pip</tt> file:\r\n<pre>\r\nboto\r\nhg+http://code.welldev.org/django-storage\r\
+      \n</pre>\r\n<tt>boto</tt> is Amazon's S3 backend storage library, which we'll\
+      \ configure <tt>django-storages</tt> to use.\r\n</p>\r\n<br />\r\n<a name=\"\
+      settings\"></a>\r\n<h3>Required settings</h3>\r\n<br />\r\n<p>First, you need\
+      \ to add the 'storages' app to your <tt>INSTALLED_APPS</tt> (in <tt>settings.py</tt>):\r\
+      \n<pre>\r\nINSTALLED_APPS = (\r\n    ...\r\n    'storages',\r\n)\r\n</pre>\r\
+      \nNow add the following to the end of your <tt>settings.py</tt> (replacing the\
+      \ appropriate values):\r\n<pre>\r\nDEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'\r\
+      \nAWS_ACCESS_KEY_ID = 'REPLACE ME'\r\nAWS_SECRET_ACCESS_KEY = 'REPLACE ME'\r\
+      \nAWS_STORAGE_BUCKET_NAME = 'REPLACE ME'\r\nfrom S3 import CallingFormat\r\n\
+      AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN\r\n</pre>\r\n</p>\r\n<br />\r\n\
+      <a name=\"usage\"></a>\r\n<h3>Usage</h3>\r\n<br />\r\n<p>Now all you need to\
+      \ do is use Django's built-in FileField in your models, like so:</p>\r\n<pre>\r\
+      \nfrom django.db import models\r\n\r\nclass MyModel(models.Model):\r\n    data\
+      \ = models.FileField(upload_to='sub-bucket-name')\r\n</pre>\r\n<p>That's it!\
+      \  All uploads that happen through the <tt>MyModel.data</tt> field will be put\
+      \ into your Amazon S3 bucket automatically.  For more information on using Django's\
+      \ FileField, see the <a href=\"http://docs.djangoproject.com/en/1.2/ref/models/fields/#filefield\"\
+      \ target=\"_blank\">Official documentation</a>.</p>", name: StoringUploads,
+    rendered: "<h2><a href=\"/docs/overview.htmlStoring/\">Storing</a> <a href=\"\
+      /docs/overview.htmlFile/\">File</a> uploads with <a href=\"/docs/overview.htmlS3/\"\
+      >S3</a></h2>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlWe/\">We</a> recommend\
+      \ using <a href=\"http://code.welldev.org/django-storages/\" target=\"_blank\"\
+      >django-storages</a> along with <a href=\"\" target=\"_blank\"><a href=\"/docs/overview.htmlAmazon/\"\
+      >Amazon</a>'s <a href=\"/docs/overview.htmlS3/\">S3</a> service</a> to handle\
+      \ file uploads.</p>\r\n<ul>\r\n  <li><a href=\"#dependencies\"><a href=\"/docs/overview.htmlSpecifying/\"\
+      >Specifying</a> dependencies</a></li>\r\n  <li><a href=\"#settings\"><a href=\"\
+      /docs/overview.htmlRequired/\">Required</a> settings</a></li>\r\n  <li><a href=\"\
+      #usage\"><a href=\"/docs/overview.htmlUsage/\">Usage</a></a></li>\r\n</ul>\r\
+      \n<br />\r\n<a name=\"dependencies\"></a>\r\n<h3><a href=\"/docs/overview.htmlSpecifying/\"\
+      >Specifying</a> dependencies</h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlAdd/\"\
+      >Add</a> the following to your <tt>djangy.pip</tt> file:\r\n<pre>\r\nboto\r\n\
+      hg+http://code.welldev.org/django-storage\r\n</pre>\r\n<tt>boto</tt> is <a href=\"\
+      /docs/overview.htmlAmazon/\">Amazon</a>'s <a href=\"/docs/overview.htmlS3/\"\
+      >S3</a> backend storage library, which we'll configure <tt>django-storages</tt>\
+      \ to use.\r\n</p>\r\n<br />\r\n<a name=\"settings\"></a>\r\n<h3><a href=\"/docs/overview.htmlRequired/\"\
+      >Required</a> settings</h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlFirst/\"\
+      >First</a>, you need to add the 'storages' app to your <tt>INSTALLED_APPS</tt>\
+      \ (in <tt>settings.py</tt>):\r\n<pre>\r\nINSTALLED_APPS = (\r\n    ...\r\n \
+      \   'storages',\r\n)\r\n</pre>\r\n<a href=\"/docs/overview.htmlNow/\">Now</a>\
+      \ add the following to the end of your <tt>settings.py</tt> (replacing the appropriate\
+      \ values):\r\n<pre>\r\nDEFAULT_FILE_STORAGE = 'storages.backends.s3boto.<a href=\"\
+      /docs/overview.htmlS3BotoStorage/\">S3BotoStorage</a>'\r\nAWS_ACCESS_KEY_ID\
+      \ = 'REPLACE ME'\r\nAWS_SECRET_ACCESS_KEY = 'REPLACE ME'\r\nAWS_STORAGE_BUCKET_NAME\
+      \ = 'REPLACE ME'\r\nfrom <a href=\"/docs/overview.htmlS3/\">S3</a> import <a\
+      \ href=\"/docs/overview.htmlCallingFormat/\">CallingFormat</a>\r\nAWS_CALLING_FORMAT\
+      \ = <a href=\"/docs/overview.htmlCallingFormat/\">CallingFormat</a>.SUBDOMAIN\r\
+      \n</pre>\r\n</p>\r\n<br />\r\n<a name=\"usage\"></a>\r\n<h3><a href=\"/docs/overview.htmlUsage/\"\
+      >Usage</a></h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlNow/\">Now</a>\
+      \ all you need to do is use <a href=\"/docs/overview.htmlDjango/\">Django</a>'s\
+      \ built-in <a href=\"/docs/overview.htmlFileField/\">FileField</a> in your models,\
+      \ like so:</p>\r\n<pre>\r\nfrom django.db import models\r\n\r\nclass <a href=\"\
+      /docs/overview.htmlMyModel/\">MyModel</a>(models.<a href=\"/docs/overview.htmlModel/\"\
+      >Model</a>):\r\n    data = models.<a href=\"/docs/overview.htmlFileField/\"\
+      >FileField</a>(upload_to='sub-bucket-name')\r\n</pre>\r\n<p><a href=\"/docs/overview.htmlThat/\"\
+      >That</a>'s it!  <a href=\"/docs/overview.htmlAll/\">All</a> uploads that happen\
+      \ through the <tt><a href=\"/docs/overview.htmlMyModel/\">MyModel</a>.data</tt>\
+      \ field will be put into your <a href=\"/docs/overview.htmlAmazon/\">Amazon</a>\
+      \ <a href=\"/docs/overview.htmlS3/\">S3</a> bucket automatically.  <a href=\"\
+      /docs/overview.htmlFor/\">For</a> more information on using <a href=\"/docs/overview.htmlDjango/\"\
+      >Django</a>'s <a href=\"/docs/overview.htmlFileField/\">FileField</a>, see the\
+      \ <a href=\"http://docs.djangoproject.com/en/1.2/ref/models/fields/#filefield\"\
+      \ target=\"_blank\"><a href=\"/docs/overview.htmlOfficial/\">Official</a> documentation</a>.</p>"}
+  model: docs.page
+  pk: 32
+- fields: {content: "<h2>Configuring Django TEMPLATE_DIRS</h2>\r\n\r\n<p>A key feature\
+      \ of Django is its powerful templating system, which allows you to separate\
+      \ HTML markup and styling from the logic of your web application.  The general\
+      \ idea is a Django developer creates a set of HTML, CSS, etc. template files\
+      \ with \"holes\" in them, that can then be filled in by Python code.  Django\
+      \ needs to know where these template files are located in order to access them\
+      \ from Python.</p>\r\n\r\n<p>There are three recommended ways to configure the\
+      \ location of your templates when using Djangy.  These are not Djangy-specific\
+      \ quirks, but rather best practices for portable Django applications.</p>\r\n\
+      \r\n<h3>Option 1: implicit configuration</h3>\r\n<p>Put templates in a directory\
+      \ called <tt>templates</tt>, which is a subdirectory of a Django app directory.\
+      \  For example, you might have a directory tree that looks like this:</p>\r\n\
+      \r\n<pre>\r\ntestapp/\r\n    djangy.config\r\n    djangy.eggs\r\n    manage.py\r\
+      \n    settings.py\r\n    testapp/\r\n        __init__.py\r\n        models.py\r\
+      \n        <b>templates/</b>\r\n            <i>template files go here</i>\r\n\
+      \        views.py\r\n</pre>\r\n\r\n<h3>Option 2: explicit relative paths</h3>\r\
+      \n<p>Unless you call <tt>os.chdir()</tt>, your Djangy application will run from\
+      \ the directory containing your <tt>settings.py</tt> file.  As such, your <tt>settings.py</tt>\
+      \ file may contain a <tt>TEMPLATE_DIRS</tt> section listing paths <i>relative\
+      \ to the directory containing</i> <tt>settings.py</tt>.</p>\r\n\r\n<p>For example,\
+      \ if we assume the directory layout above, the corresponding <tt>TEMPLATE_DIRS</tt>\
+      \ section in <tt>settings.py</tt> would be:</p>\r\n\r\n<pre>\r\nTEMPLATE_DIRS\
+      \ = (\r\n    'testapp/templates'\r\n)\r\n</pre>\r\n\r\n<p>Now, if you wanted\
+      \ to move the templates to some other directory, you'd just have to update settings.py\
+      \ to point to that directory.  Similarly, you could add a list of several different\
+      \ directories containing groups of template files.</p>\r\n\r\n<h3>Option 3:\
+      \ explicit absolute paths</h3>\r\n<p>If you're having trouble accessing your\
+      \ templates even after configuring explicit relative paths, you might consider\
+      \ using absolute paths instead.  However, a hardcoded absolute path is not a\
+      \ good idea because it means your application will only work if it is installed\
+      \ in a specific directory.  The solution is to use Python's <tt>os.path</tt>\
+      \ module to build an absolute path from a relative path and the <tt>__file__</tt>\
+      \ variable, like so:</p>\r\n\r\n<pre>\r\nimport os.path\r\n\r\nTEMPLATE_DIRS\
+      \ = (\r\n    os.path.join(os.path.dirname(__file__), 'testapp/templates')\r\n\
+      )\r\n</pre>\r\n", name: TemplateDirs, rendered: "<h2><a href=\"/docs/Configuring/\"\
+      >Configuring</a> <a href=\"/docs/Django/\">Django</a> TEMPLATE_DIRS</h2>\r\n\
+      \r\n<p>A key feature of <a href=\"/docs/Django/\">Django</a> is its powerful\
+      \ templating system, which allows you to separate HTML markup and styling from\
+      \ the logic of your web application.  <a href=\"/docs/The/\">The</a> general\
+      \ idea is a <a href=\"/docs/Django/\">Django</a> developer creates a set of\
+      \ HTML, CSS, etc. template files with \"holes\" in them, that can then be filled\
+      \ in by <a href=\"/docs/Python/\">Python</a> code.  <a href=\"/docs/Django/\"\
+      >Django</a> needs to know where these template files are located in order to\
+      \ access them from <a href=\"/docs/Python/\">Python</a>.</p>\r\n\r\n<p><a href=\"\
+      /docs/There/\">There</a> are three recommended ways to configure the location\
+      \ of your templates when using <a href=\"/docs/Djangy/\">Djangy</a>.  <a href=\"\
+      /docs/These/\">These</a> are not <a href=\"/docs/Djangy/\">Djangy</a>-specific\
+      \ quirks, but rather best practices for portable <a href=\"/docs/Django/\">Django</a>\
+      \ applications.</p>\r\n\r\n<h3><a href=\"/docs/Option/\">Option</a> 1: implicit\
+      \ configuration</h3>\r\n<p><a href=\"/docs/Put/\">Put</a> templates in a directory\
+      \ called <tt>templates</tt>, which is a subdirectory of a <a href=\"/docs/Django/\"\
+      >Django</a> app directory.  <a href=\"/docs/For/\">For</a> example, you might\
+      \ have a directory tree that looks like this:</p>\r\n\r\n<pre>\r\ntestapp/\r\
+      \n    djangy.config\r\n    djangy.eggs\r\n    manage.py\r\n    settings.py\r\
+      \n    testapp/\r\n        __init__.py\r\n        models.py\r\n        <b>templates/</b>\r\
+      \n            <i>template files go here</i>\r\n        views.py\r\n</pre>\r\n\
+      \r\n<h3><a href=\"/docs/Option/\">Option</a> 2: explicit relative paths</h3>\r\
+      \n<p><a href=\"/docs/Unless/\">Unless</a> you call <tt>os.chdir()</tt>, your\
+      \ <a href=\"/docs/Djangy/\">Djangy</a> application will run from the directory\
+      \ containing your <tt>settings.py</tt> file.  <a href=\"/docs/As/\">As</a> such,\
+      \ your <tt>settings.py</tt> file may contain a <tt>TEMPLATE_DIRS</tt> section\
+      \ listing paths <i>relative to the directory containing</i> <tt>settings.py</tt>.</p>\r\
+      \n\r\n<p><a href=\"/docs/For/\">For</a> example, if we assume the directory\
+      \ layout above, the corresponding <tt>TEMPLATE_DIRS</tt> section in <tt>settings.py</tt>\
+      \ would be:</p>\r\n\r\n<pre>\r\nTEMPLATE_DIRS = (\r\n    'testapp/templates'\r\
+      \n)\r\n</pre>\r\n\r\n<p><a href=\"/docs/Now/\">Now</a>, if you wanted to move\
+      \ the templates to some other directory, you'd just have to update settings.py\
+      \ to point to that directory.  <a href=\"/docs/Similarly/\">Similarly</a>, you\
+      \ could add a list of several different directories containing groups of template\
+      \ files.</p>\r\n\r\n<h3><a href=\"/docs/Option/\">Option</a> 3: explicit absolute\
+      \ paths</h3>\r\n<p><a href=\"/docs/If/\">If</a> you're having trouble accessing\
+      \ your templates even after configuring explicit relative paths, you might consider\
+      \ using absolute paths instead.  <a href=\"/docs/However/\">However</a>, a hardcoded\
+      \ absolute path is not a good idea because it means your application will only\
+      \ work if it is installed in a specific directory.  <a href=\"/docs/The/\">The</a>\
+      \ solution is to use <a href=\"/docs/Python/\">Python</a>'s <tt>os.path</tt>\
+      \ module to build an absolute path from a relative path and the <tt>__file__</tt>\
+      \ variable, like so:</p>\r\n\r\n<pre>\r\nimport os.path\r\n\r\nTEMPLATE_DIRS\
+      \ = (\r\n    os.path.join(os.path.dirname(__file__), 'testapp/templates')\r\n\
+      )\r\n</pre>\r\n"}
+  model: docs.page
+  pk: 15
+- fields: {content: <p>This document has been moved to <a href="/docs/Quickstart">Quickstart
+      Guide</a>.</p>, name: Tutorial, rendered: <p><a href="/docs/overview.htmlThis/">This</a>
+      document has been moved to <a href="/docs/<a href="/docs/overview.htmlQuickstart/">Quickstart</a>"><a
+      href="/docs/overview.htmlQuickstart/">Quickstart</a> <a href="/docs/overview.htmlGuide/">Guide</a></a>.</p>}
+  model: docs.page
+  pk: 3
+- fields: {content: <p>Please refer to the <a href="/docs/Quickstart">Quickstart Guide</a>
+      for information on getting started with Djangy.</p>, name: TutorialStep1, rendered: <p><a
+      href="/docs/overview.htmlPlease/">Please</a> refer to the <a href="/docs/<a
+      href="/docs/overview.htmlQuickstart/">Quickstart</a>"><a href="/docs/overview.htmlQuickstart/">Quickstart</a>
+      <a href="/docs/overview.htmlGuide/">Guide</a></a> for information on getting
+      started with <a href="/docs/overview.htmlDjangy/">Djangy</a>.</p>}
+  model: docs.page
+  pk: 4
+- fields: {content: <p>Please refer to the <a href="/docs/Quickstart">Quickstart Guide</a>
+      for information on getting started with Djangy.</p>, name: TutorialStep2, rendered: <p><a
+      href="/docs/overview.htmlPlease/">Please</a> refer to the <a href="/docs/<a
+      href="/docs/overview.htmlQuickstart/">Quickstart</a>"><a href="/docs/overview.htmlQuickstart/">Quickstart</a>
+      <a href="/docs/overview.htmlGuide/">Guide</a></a> for information on getting
+      started with <a href="/docs/overview.htmlDjangy/">Djangy</a>.</p>}
+  model: docs.page
+  pk: 5
+- fields: {content: <p>Please refer to the <a href="/docs/Quickstart">Quickstart Guide</a>
+      for information on getting started with Djangy.</p>, name: TutorialStep3, rendered: <p><a
+      href="/docs/overview.htmlPlease/">Please</a> refer to the <a href="/docs/<a
+      href="/docs/overview.htmlQuickstart/">Quickstart</a>"><a href="/docs/overview.htmlQuickstart/">Quickstart</a>
+      <a href="/docs/overview.htmlGuide/">Guide</a></a> for information on getting
+      started with <a href="/docs/overview.htmlDjangy/">Djangy</a>.</p>}
+  model: docs.page
+  pk: 6
+- fields: {content: <p>Please refer to the <a href="/docs/Quickstart">Quickstart Guide</a>
+      for information on getting started with Djangy.</p>, name: TutorialStep4, rendered: <p><a
+      href="/docs/overview.htmlPlease/">Please</a> refer to the <a href="/docs/<a
+      href="/docs/overview.htmlQuickstart/">Quickstart</a>"><a href="/docs/overview.htmlQuickstart/">Quickstart</a>
+      <a href="/docs/overview.htmlGuide/">Guide</a></a> for information on getting
+      started with <a href="/docs/overview.htmlDjangy/">Djangy</a>.</p>}
+  model: docs.page
+  pk: 7
+- fields: {content: <p>Please refer to the <a href="/docs/Quickstart">Quickstart Guide</a>
+      for information on getting started with Djangy.</p>, name: TutorialStep5, rendered: <p><a
+      href="/docs/overview.htmlPlease/">Please</a> refer to the <a href="/docs/<a
+      href="/docs/overview.htmlQuickstart/">Quickstart</a>"><a href="/docs/overview.htmlQuickstart/">Quickstart</a>
+      <a href="/docs/overview.htmlGuide/">Guide</a></a> for information on getting
+      started with <a href="/docs/overview.htmlDjangy/">Djangy</a>.</p>}
+  model: docs.page
+  pk: 8
+- fields: {content: "<h2>Using the Shell</h2>\r\n<br />\r\n<p>One of the most rigorously\
+      \ used features of django is the ability to quickly and easily spawn an interactive\
+      \ python shell within the context of your application.  The shell is useful\
+      \ for anything from debugging to testing, quickly interacting with your database,\
+      \ and the like.</p>\r\n\r\n<p>To use the shell within the context of your live\
+      \ Djangy application, simply run:\r\n<pre>\r\n$ djangy manage.py shell\r\nUsing\
+      \ git repository \"/Users/dave/myapp\"\r\nUsing application name \"davezor\"\
+      \ from \"/Users/dave/myapp/djangy.config\"\r\n\r\nPython 2.6.5 (r265:79063,\
+      \ Apr 16 2010, 13:57:41) \r\n[GCC 4.4.3] on linux2\r\nType \"help\", \"copyright\"\
+      , \"credits\" or \"license\" for more information.\r\n(InteractiveConsole)\r\
+      \n>>> \r\n</pre>\r\n<p>For more information, see the official <a href=\"http://docs.djangoproject.com/en/1.2/ref/django-admin/#shell\"\
+      \ target=\"_blank\">Django docs</a>.\r\n", name: UsingTheShell, rendered: "<h2><a\
+      \ href=\"/docs/overview.htmlUsing/\">Using</a> the <a href=\"/docs/overview.htmlShell/\"\
+      >Shell</a></h2>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlOne/\">One</a>\
+      \ of the most rigorously used features of django is the ability to quickly and\
+      \ easily spawn an interactive python shell within the context of your application.\
+      \  <a href=\"/docs/overview.htmlThe/\">The</a> shell is useful for anything\
+      \ from debugging to testing, quickly interacting with your database, and the\
+      \ like.</p>\r\n\r\n<p><a href=\"/docs/overview.htmlTo/\">To</a> use the shell\
+      \ within the context of your live <a href=\"/docs/overview.htmlDjangy/\">Djangy</a>\
+      \ application, simply run:\r\n<pre>\r\n$ djangy manage.py shell\r\n<a href=\"\
+      /docs/overview.htmlUsing/\">Using</a> git repository \"/<a href=\"/docs/overview.htmlUsers/\"\
+      >Users</a>/dave/myapp\"\r\n<a href=\"/docs/overview.htmlUsing/\">Using</a> application\
+      \ name \"davezor\" from \"/<a href=\"/docs/overview.htmlUsers/\">Users</a>/dave/myapp/djangy.config\"\
+      \r\n\r\n<a href=\"/docs/overview.htmlPython/\">Python</a> 2.6.5 (r265:79063,\
+      \ <a href=\"/docs/overview.htmlApr/\">Apr</a> 16 2010, 13:57:41) \r\n[GCC 4.4.3]\
+      \ on linux2\r\n<a href=\"/docs/overview.htmlType/\">Type</a> \"help\", \"copyright\"\
+      , \"credits\" or \"license\" for more information.\r\n(<a href=\"/docs/overview.htmlInteractiveConsole/\"\
+      >InteractiveConsole</a>)\r\n>>> \r\n</pre>\r\n<p><a href=\"/docs/overview.htmlFor/\"\
+      >For</a> more information, see the official <a href=\"http://docs.djangoproject.com/en/1.2/ref/django-admin/#shell\"\
+      \ target=\"_blank\"><a href=\"/docs/overview.htmlDjango/\">Django</a> docs</a>.\r\
+      \n"}
+  model: docs.page
+  pk: 26
+- fields: {content: "<h2>Introduction to Djangy</h2>\r\n\r\n<p>Djangy is the best\
+      \ way to host and scale Django apps.  It's instant and simple.  Never worry\
+      \ about servers, hosting, downtime, or system administration again!</p>\r\n\
+      <br />\r\n\r\n<h3>Instant deployment</h3>\r\n<br />\r\n<p>Deploying your app\
+      \ is as simple as doing a familiar \"git push\".  Our system does the rest.</p>\r\
+      \n<br />\r\n<h3>Instant scaling</h3>\r\n<br />\r\n<p>Quickly throw more resources\
+      \ behind your app to handle higher loads and more traffic.</p>\r\n<br />\r\n\
+      <h3>Familiar controls</h3>\r\n<br />\r\n<p>Interact with your app using manage.py\
+      \ in exactly the same way you'd expect.  Syncdb, migrate, loaddata, dumpdata,\
+      \ and shell are all where you expect them to be!</p>\r\n<br />\r\n<h3>Pay only\
+      \ for what you use</h3>\r\n<br />\r\n<p>Djangy gives you the ability to scale\
+      \ up and down your app usage, which means we only charge you for what you choose\
+      \ to use.</p>\r\n<br />\r\n<p>For more information on how Djangy works, check\
+      \ out <a href=\"/docs/Architecture\">Djangy's architecture</a>.</p>", name: WhatIsDjangy,
+    rendered: "<h2><a href=\"/docs/overview.htmlIntroduction/\">Introduction</a> to\
+      \ <a href=\"/docs/overview.htmlDjangy/\">Djangy</a></h2>\r\n\r\n<p><a href=\"\
+      /docs/overview.htmlDjangy/\">Djangy</a> is the best way to host and scale <a\
+      \ href=\"/docs/overview.htmlDjango/\">Django</a> apps.  <a href=\"/docs/overview.htmlIt/\"\
+      >It</a>'s instant and simple.  <a href=\"/docs/overview.htmlNever/\">Never</a>\
+      \ worry about servers, hosting, downtime, or system administration again!</p>\r\
+      \n<br />\r\n\r\n<h3><a href=\"/docs/overview.htmlInstant/\">Instant</a> deployment</h3>\r\
+      \n<br />\r\n<p><a href=\"/docs/overview.htmlDeploying/\">Deploying</a> your\
+      \ app is as simple as doing a familiar \"git push\".  <a href=\"/docs/overview.htmlOur/\"\
+      >Our</a> system does the rest.</p>\r\n<br />\r\n<h3><a href=\"/docs/overview.htmlInstant/\"\
+      >Instant</a> scaling</h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlQuickly/\"\
+      >Quickly</a> throw more resources behind your app to handle higher loads and\
+      \ more traffic.</p>\r\n<br />\r\n<h3><a href=\"/docs/overview.htmlFamiliar/\"\
+      >Familiar</a> controls</h3>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlInteract/\"\
+      >Interact</a> with your app using manage.py in exactly the same way you'd expect.\
+      \  <a href=\"/docs/overview.htmlSyncdb/\">Syncdb</a>, migrate, loaddata, dumpdata,\
+      \ and shell are all where you expect them to be!</p>\r\n<br />\r\n<h3><a href=\"\
+      /docs/overview.htmlPay/\">Pay</a> only for what you use</h3>\r\n<br />\r\n<p><a\
+      \ href=\"/docs/overview.htmlDjangy/\">Djangy</a> gives you the ability to scale\
+      \ up and down your app usage, which means we only charge you for what you choose\
+      \ to use.</p>\r\n<br />\r\n<p><a href=\"/docs/overview.htmlFor/\">For</a> more\
+      \ information on how <a href=\"/docs/overview.htmlDjangy/\">Djangy</a> works,\
+      \ check out <a href=\"/docs/<a href=\"/docs/overview.htmlArchitecture/\">Architecture</a>\"\
+      ><a href=\"/docs/overview.htmlDjangy/\">Djangy</a>'s architecture</a>.</p>"}
+  model: docs.page
+  pk: 19
+

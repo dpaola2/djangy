@@ -1,0 +1,5 @@
+The www_* projects will be exposed on the web:
+
+web_api is the django project that the djangy.py client calls.  It lives on api.djangy.com.
+
+web_ui is the django project we'll use as our main website, dashboard, and admin interface.  It lives on [www.]djangy.com

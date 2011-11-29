@@ -1,0 +1,132 @@
+import django, django.http, django.utils.http, django.views.static, imp, logging, os.path, sys, time
+import django.conf.urls.defaults as urls
+
+ADMIN_MEDIA_PREFIX = '/admin_media/'
+
+# Configure logging to go to our log file
+LOG_FILENAME = "/srv/logs/${ bundle_name }/django.log"
+
+_old_logging_basicConfig = logging.basicConfig
+
+def _new_logging_basicConfig(**kwargs):
+    if kwargs.has_key('filename'):
+        kwargs['filename'] = LOG_FILENAME
+    return _old_logging_basicConfig(**kwargs)
+
+logging.basicConfig = _new_logging_basicConfig
+logger = logging.getLogger("djangy")
+glogger = logging.getLogger("gunicorn")
+for handler in glogger.handlers:
+    logger.addHandler(handler)
+logger.setLevel(logging.INFO)
+
+# Extend django.views.static.serve with extra validation and cache-control
+# headers.  Perhaps _new_static_serve should be defined in an egg?
+_old_static_serve = django.views.static.serve
+
+def _new_static_serve(request, path, document_root=None, show_indexes=False):
+    # Only allow GET requests for static content
+    if not request.method == 'GET':
+        return django.http.HttpResponseNotAllowed(['GET'])
+    # The document_root must be within the application
+    abs_document_root = os.path.abspath(document_root)
+    if not \
+    (abs_document_root.startswith('/srv/bundles/${ bundle_name }/application/')
+    or abs_document_root.startswith('/srv/bundles/${ bundle_name }/python-virtual/')
+    or abs_document_root.startswith('/usr/local/lib/python2.6/dist-packages/')):
+        return django.http.HttpResponseServerError('HTTP server error')
+    # The requested path must remain within the document_root
+    abs_path = os.path.abspath(os.path.join(abs_document_root, path))
+    if abs_path == abs_document_root:
+        path = ''
+    elif abs_path.startswith(abs_document_root + '/'):
+        path = abs_path[len(abs_document_root + '/'):]
+    else:
+        return django.http.HttpResponseNotFound('HTTP not found')
+    # Create a sanitized HttpRequest object
+    request = django.http.HttpRequest()
+    request.method = 'GET'
+    request.path = path
+    request.path_info = path
+    # Pass off sanitized request to django.views.static.serve
+    response = _old_static_serve(request, path, document_root=document_root, show_indexes=show_indexes)
+    # Set Expires and Cache-Control headers (should check if it's already
+    # set?)
+    # We use: expires in 1 day, allow 10 minutes of staleness past that.
+    response['Expires'] = django.utils.http.http_date(time.time() + 24*60*60)
+    response['Cache-Control'] = 'max-stale=%i' % (10*60)
+    # Finally return the response.
+    return response
+
+django.views.static.serve = _new_static_serve
+
+# We don't yet support caching
+CACHE_BACKEND = 'dummy://'
+
+DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
+
+DEBUG = ${ debug }
+TEMPLATE_DEBUG = DEBUG
+
+_DATABASES = {
+    'default' : {
+        'ENGINE':'django.db.backends.mysql',
+        'HOST':'${ db_host }',
+        'PORT':'${ db_port }',
+        'NAME':'${ db_name }',
+        'USER':'${ db_username }',
+        'PASSWORD':'${ db_password }'
+    }
+}
+
+
+# Save settings
+_LOG_FILENAME       = LOG_FILENAME
+_CACHE_BACKEND      = CACHE_BACKEND
+_DJANGO_ROOT        = DJANGO_ROOT
+_DEBUG              = DEBUG
+_TEMPLATE_DEBUG     = TEMPLATE_DEBUG
+
+
+# Call user's settings.py
+from ${ user_settings_module_name } import *
+
+
+# Restore settings
+LOG_FILENAME       = _LOG_FILENAME
+CACHE_BACKEND      = _CACHE_BACKEND
+DJANGO_ROOT        = _DJANGO_ROOT
+DEBUG              = _DEBUG
+TEMPLATE_DEBUG     = _TEMPLATE_DEBUG
+DATABASES          = _DATABASES
+
+# celery configuration
+CARROT_BACKEND          = 'ghettoq.taproot.Database'
+CELERYD_CONCURRENCY     = ${ celery_procs }
+CELERYD_LOG_FILE        = "/srv/logs/${ bundle_name }/celery.log"
+CELERYD_LOG_LEVEL       = logging.INFO
+
+def _enable_admin_media_serving():
+    dir_path = os.path.dirname(os.path.abspath(__file__))
+    path = [dir_path, os.path.dirname(dir_path)] + sys.path
+    (file, pathname, description) = imp.find_module(ROOT_URLCONF.replace('.', '/'), path)
+    urls_module = imp.load_module(ROOT_URLCONF, file, pathname, description)
+    if file:
+    	file.close()
+    if not urls_module.urlpatterns:
+    	urls_module.urlpatterns = []
+    prefix = ADMIN_MEDIA_PREFIX
+    if prefix.startswith('/'):
+        prefix = prefix[1:]
+    urls_module.urlpatterns.reverse()
+    urls_module.urlpatterns += urls.patterns('',
+        ('^%s(?P<path>.*)$' % prefix, 'django.views.static.serve', {'document_root': '/usr/local/lib/python2.6/dist-packages/Django-1.2.1-py2.6.egg/django/contrib/admin/media/'}))
+    urls_module.urlpatterns.reverse()
+
+# Only run _enable_admin_media_serving() if we're serving a web app; don't
+# do it if we're running manage.py, since loading ROOT_URLCONF doesn't work
+# correctly in that context (some sort of path issue).
+# Note: the uid check makes sure it's a web uid
+if ((os.getuid() - 100000) % 3) == 1 \
+and os.environ.has_key('DJANGO_SETTINGS_MODULE'):
+    _enable_admin_media_serving()

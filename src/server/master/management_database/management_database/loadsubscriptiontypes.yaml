@@ -1,0 +1,6 @@
+- model: management_database.SubscriptionType
+  pk: 1
+  fields:
+    name: launch_plan
+    description: Launch Plan
+    price: 500

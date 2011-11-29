@@ -1,0 +1,26 @@
+{% extends 'wiki/wiki_base.html' %}
+
+
+{% block wiki_content %}
+	{% comment %}
+    <h1><a href="../{{ page.name }}/" rel="bookmark">{{ page.name }}</a></h1>
+    {% endcomment %}
+	{% if not page.id %}
+        {% if admin %}
+		<p>This page does not exist, <a href="edit/">create it now</a>?</p>
+        {% endif %}
+	{% endif %}
+
+	{{ page.content|safe }}
+{% endblock %}
+
+
+{% block footer %}
+    {% if admin %}
+	{% if page.id %}
+		<a href="edit/">Edit this page</a>
+	{% else %}
+		<a href="edit/">Create this page</a>
+	{% endif %}
+    {% endif %}
+{% endblock %}

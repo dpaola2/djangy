@@ -1,0 +1,11 @@
+- model: management_database.Chargable
+  pk: 1
+  fields:
+    component: 0 # application processes
+    price: 5
+- model: management_database.Chargable
+  pk: 2
+  fields:
+    component: 1 # celeryd processes
+    price: 5
+

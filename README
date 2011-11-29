@@ -1,0 +1,59 @@
+djangy.git layout
+=================
+
+docs@ -- symlink to user docs in web_ui/
+install/ -- used to install/deploy djangy to a host
+    conf/ -- configuration files installed on a host
+        apache/
+        git_hooks/
+            post_receive.py@
+        gitosis.conf
+        nginx.conf@
+        rc.local
+        ssh_keys/
+        ssl_keys/
+misc/
+src/
+    client/ -- code run by users on their own machine
+    server/
+        master/ -- code run on the master node
+            management_database/ -- used by master_manager, web_ui, web_api
+            master_api/ -- internal API used by web_api and web_ui
+            master_manager/ -- privileged operations of master_api
+            post_receive.py -- goes in git_hooks
+            web_api/ -- django project for API called by client
+            web_ui/ -- django project for website
+        proxycache/ -- code run on the frontend nginx proxy/cache nodes
+            nginx.conf
+            proxycache_manager/
+        shared/
+            lib/
+        worker/ -- code run on the application worker nodes
+            worker_manager/
+test/ -- test cases
+
+generated files
+===============
+
+run/ -- runtime environment; generated, not checked into repository
+    python-virtual/ -- used by all server components
+    master_manager/sbin/
+    proxycache_manager/sbin/
+    worker_manager/sbin/
+
+/srv layout
+===========
+
+/srv/
+    bundles/            0711 root      root
+        <bundle_name>/  0550 <web_uid> bundles
+    djangy/             0510 root      djangy
+    gitosis/            0700 gitosis   gitosis
+    local_manager/      0700 root      root
+    logs/               0710 root      www-data
+        <bundle_name>/  0710 root      www-data
+
+Notes:
+ * djangy group = root, gitosis, www-data
+ * <bundle_name> = <application_name>-<bundle_version>
+ * not 100% sure about all the permissions (e.g., logs)

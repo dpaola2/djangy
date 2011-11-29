@@ -1,0 +1,26 @@
+import resource
+
+def dup(x):
+    return (x, x)
+
+resource.setrlimit(resource.RLIMIT_CORE,    dup(0))
+resource.setrlimit(resource.RLIMIT_DATA,    dup(${rlimit_data}*1024*1024))
+resource.setrlimit(resource.RLIMIT_STACK,   dup(${rlimit_stack}*1024*1024))
+resource.setrlimit(resource.RLIMIT_RSS,     dup(${rlimit_rss}*1024*1024))
+resource.setrlimit(resource.RLIMIT_NPROC,   dup(${rlimit_nproc}))
+#resource.setrlimit(resource.RLIMIT_NOFILE,  dup(64))
+resource.setrlimit(resource.RLIMIT_MEMLOCK, dup(0))
+
+import site
+site.addsitedir("/srv/bundles/${ bundle_name }/python-virtual/lib/python2.6/site-packages")
+
+import os, sys
+
+sys.path.append('${ django_project_parent_path }')
+sys.path.append('${ django_project_path }')
+os.chdir('${ django_project_path }')
+
+os.environ['DJANGO_SETTINGS_MODULE'] = '${ settings_module }'
+
+import django.core.handlers.wsgi
+application = django.core.handlers.wsgi.WSGIHandler()

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>{% block title %}Djangy - Instant deployment and scaling for your Django applications{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+    <!-- Cascading Style Sheets -->
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/assets/lightbox/css/jquery.lightbox-0.5.css" />
+
+    <!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/assets/css/ie.css" />
+    <![endif]-->
+
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/static/assets/js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="/static/assets/lightbox/js/jquery.lightbox-0.5.js"></script>
+    <script type="text/javascript" src="/static/assets/js/jquery.innerfade.js"></script>
+    <script type="text/javascript" src="/static/assets/js/jquery.functions.js"></script>
+    <script type="text/ecmascript" src="/static/assets/js/jquery.infieldlabel.js"></script>
+    <!--[if IE 6]>
+    <script src="/static/assets/js/pngfix.js"></script>
+    <![endif]-->
+
+    {% block scripts %}
+    {% endblock %}
+
+</head>
+{% if index %}
+<!-- container -->
+<div class="container">
+{% else %}
+<body class="subpage">
+<!-- container -->
+<div class="container">
+{% endif %}
+
+    {% if index %}
+    <!-- wrapper -->
+    <div class="wrapper frontpage">
+    {% else %}
+    <!-- wrapper -->
+    <div class="wrapper">
+    {% endif %}
+
+        <!-- header -->
+        <div class="header">
+            <div class="top-nav">
+                <a href="/"><h1>Djangy - Instant deployment and scaling for your Django applications</h1></a>
+                {% include "navbar.html" %}
+            </div>
+            {% block showcase %}
+            {% endblock %}
+            {% block pagetitle %}
+            {% endblock %}
+        </div>
+        <!-- // header -->
+
+        <!-- sub-header -->
+        <div class="sub-header{% if index %} frontpage{% endif %}">
+
+            <!-- content -->
+            <div class="content-top{% if index %} frontpage{% endif %}"></div>
+            <div class="content clearfix{% if index %} frontpage{% endif %}">
+                {% if message %}
+                    <h3 style="text-align: center;">{{ message }}</h3><br/><br/>
+                {% endif %}
+                {% block content %}
+                {% endblock %}
+            </div>
+            <div class="content-btm{% if index %} frontpage{% endif %}"></div>
+            <!-- // content -->
+
+        </div>
+        <!-- // sub-header -->
+
+        <!-- footer -->
+        <div class="footer">
+            <div class="copy">
+                <p>Copyright &copy; 2010 Djangy. All rights reserved.</p>
+            </div>
+        </div>
+        <!-- // footer -->
+
+    </div>
+    <!-- // wrapper -->
+
+</div>
+<!-- // container -->
+</body>
+</html>

@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+    <div class="page-title">
+        <h2>{{ application_name }}</h2>
+        <ul class="nav">
+            <li><a href="/dashboard" class="selected">Applications</a></li>
+            <li><a href="/dashboard/account">Account</a></li>
+            <li><a href="/dashboard/invite">Invite</a></li>
+            <li><a href="/dashboard/billing">Billing</a></li>
+        </ul>
+    </div>
+{% endblock %}
+{% block content %}
+<table>
+    <tr><td style="vertical-align: top; padding: 0 20px 20px 0; padding-right: 20px;"><h3>Total&nbsp;Cost</h3></td><td>
+        <h3><b id="total_monthly_cost_estimate">$0</span></b>/month estimated</h3>
+        <script type="text/javascript"><!--
+            var totalMonthlyCostEstimate = document.getElementById('total_monthly_cost_estimate');
+        //--></script>
+    </td></tr>
+
+    <tr><td style="vertical-align: top; padding: 0 20px 20px 0;"><h3>Performance</h3></td><td>
+        <form action="/dashboard/application/{{ application_name }}/allocation" method="POST">
+            Application instances:
+            <select name="application_instances" id="application_instances" onchange="document.getElementById('save_performance').style.display = 'inline-block';">
+            {% for n in application_instances_range %}
+                <option value="{{ n }}"{% if application_instances == n %} selected{% endif %}>{{ n }}</option>
+            {% endfor %}
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            Background workers:
+            <select name="background_workers" id="background_workers" onchange="document.getElementById('save_performance').style.display = 'inline-block';">
+            {% for n in background_workers_range %}
+                <option value="{{ n }}"{% if background_workers == n %} selected{% endif %}>{{ n }}</option>
+            {% endfor %}
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="hidden" name="application_name" value="{{ application_name }}"/>
+            <input type="hidden" name="sessionid" value="{{ sessionid }}"/>
+            <input type="submit" id="save_performance" class="submit" value="Save" style="display: none;"/>
+            <br/>
+            <span id="performance_cost_estimate"></span>
+            <script type="text/javascript"><!--
+                var applicationInstances    = document.getElementById('application_instances');
+                var backgroundWorkers       = document.getElementById('background_workers');
+                var performanceCostEstimate = document.getElementById('performance_cost_estimate');
+                function updatePerformanceCostEstimate() {
+                    var hourCost = ((applicationInstances.value - 1) + (backgroundWorkers.value - 0)) * 0.05
+                    var monthCost = Math.round(730 * hourCost);
+                    performanceCostEstimate.innerHTML = '<b>$' + hourCost.toFixed(2) + '</b>/hour, or about <b>$' + monthCost + '</b>/month';
+                    totalMonthlyCostEstimate.innerHTML = '$' + monthCost;
+                }
+                applicationInstances.addEventListener('change', updatePerformanceCostEstimate, false);
+                backgroundWorkers.addEventListener('change', updatePerformanceCostEstimate, false);
+                updatePerformanceCostEstimate();
+            //--></script>
+            <br/>
+            Crank up your application instances to support more concurrent
+            users.  Run queued tasks using background workers.
+        </form>
+    </td></tr>
+
+    <tr><td><br/>&nbsp;</td></tr>
+
+    {% comment %}
+    <tr><td style="vertical-align: top; padding: 0 20px 20px 0; padding-right: 20px;"><h3>SNI SSL</h3></td><td>
+        <form method="POST" action="/dashboard/application/{{ application_name }}/sni_ssl">
+            <input type="checkbox" name="sni_ssl" value="yes"{% if paid_sni_ssl %} checked="yes"{% endif %} style="display: inline; width: auto;" onchange="document.getElementById('save_sni_ssl').style.display = 'block';"/>
+            <input type="hidden" name="sessionid" value="{{ sessionid }}"/>
+            $5/month&nbsp;&nbsp;
+            Purchase <b>SNI SSL</b> to enable secure https connections using
+            your custom domain.<br/>
+            <i>An SNI-compatible SSL certificate must be separately
+            purchased from a certificate authority.</i>
+            <br/>
+            <input type="submit" id="save_sni_ssl" class="submit" value="Save" style="display: none;"/>
+            <br/>
+        </form>
+    </td></tr>
+    {% endcomment %}
+
+    <tr><td style="vertical-align: top; padding: 0 20px 20px 0;"><h3>Domains</h3></td><td>
+        <a href="http://{{ application_name }}.djangy.com/">{{ application_name }}.djangy.com</a><br/>
+        Custom domains:<br/>
+        {% for custom_domain in custom_domains %}
+            <b>{{ custom_domain }}</b> (<a href="/dashboard/application/{{ application_name }}/remove_domain?domain={{ custom_domain }}&sessionid={{ sessionid }}">remove</a>)<br/>
+        {% endfor %}
+        <form action="/dashboard/application/{{ application_name }}/add_domain" method="POST">
+            <input type="text" name="domain" style="width: 200px; margin-right: 10px;"/><input type="submit" class="submit" value="Add domain" style="display: inline-block;"/>
+            <input type="hidden" name="application_name" value="{{ application_name }}"/>
+            <input type="hidden" name="sessionid" value="{{ sessionid }}"/>
+        </form>
+    </td></tr>
+
+    <tr><td><br/>&nbsp;</td></tr>
+
+    <tr><td style="vertical-align: top; padding: 0 20px 20px 0; padding-right: 20px;"><h3>Django&nbsp;Debug</h3></td><td>
+        <form method="POST" action="/dashboard/application/{{ application_name }}/debug">
+            <input type="checkbox" name="enable_debug" value="yes"{% if enable_debug %} checked="yes"{% endif %} style="display: inline; width: auto;" onchange="document.getElementById('save_debug').style.display = 'block';"/>
+            <input type="hidden" name="sessionid" value="{{ sessionid }}"/>
+            &nbsp;&nbsp; (Should be <b>disabled</b> for production sites)
+            <br/>
+            <input type="submit" id="save_debug" class="submit" value="Save" style="display: none;"/>
+            <br/>
+        </form>
+    </td></tr>
+
+    <tr><td style="vertical-align: top; padding: 0 20px 20px 0; padding-right: 20px;"><h3>Server&nbsp;Cache</h3></td><td>
+        <form method="POST" action="/dashboard/application/{{ application_name }}/server_cache">
+            <input type="checkbox" name="enable_server_cache" value="yes"{% if enable_server_cache %} checked="yes"{% endif %} style="display: inline; width: auto;" onchange="document.getElementById('save_server_cache').style.display = 'block';"/>
+            <input type="hidden" name="sessionid" value="{{ sessionid }}"/>
+            &nbsp;&nbsp; (Should be <b>enabled</b> for production sites)
+            <br/>
+            <input type="submit" id="save_server_cache" class="submit" value="Save" style="display: none;"/>
+            <br/>
+        </form>
+    </td></tr>
+
+    <tr><td style="vertical-align: top; padding: 0 20px 20px 0;"><h3>Logs</h3></td><td>
+        <form method="GET" action="/dashboard/application/{{ application_name }}/logs">
+            <input type="submit" class="submit" value="View Logs"/>
+        </form>
+    </td></tr>
+
+    <tr><td><br/>&nbsp;</td></tr>
+
+    <tr><td style="vertical-align: top; padding: 0 20px 20px 0;"><h3>Collaboration</h3></td><td>
+        Owner: <b>{{ owner_email }}</b><br/>
+        Collaborators:<br/>
+        {% for collaborator_email in collaborator_emails %}
+            <b>{{ collaborator_email }}</b> (<a href="/dashboard/application/{{ application_name }}/remove_collaborator?email={{ collaborator_email }}&sessionid={{ sessionid }}">remove</a>)<br/>
+        {% endfor %}
+        <form method="POST" action="/dashboard/application/{{ application_name }}/add_collaborator">
+            <input type="text" name="email" style="width: 200px; margin-right: 10px;"/>
+            <input type="hidden" name="sessionid" value="{{ sessionid }}"/>
+            <input type="submit" class="submit" value="Add Collaborator" style="display: inline-block;"/>
+        </form>
+    </td></tr>
+
+    <tr><td><br/>&nbsp;</td></tr>
+
+    <tr><td style="vertical-align: top; padding: 0 20px 20px 0;"><h3>Delete</h3></td><td>
+        <form method="POST" action="/dashboard/application/{{ application_name }}/delete">
+            Really delete?&nbsp;&nbsp;
+            <input type="checkbox" name="really_delete" value="yes" style="width: auto;"/>
+            <input type="hidden" name="sessionid" value="{{ sessionid }}"/>
+            <br/><br/>
+            <input type="submit" class="submit" value="Delete Application" style="background: #c00000;"/>
+        </form>
+    </td></tr>
+</table>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        jQuery(function(){ jQuery("label").inFieldLabels(); });
+    </script>
+{% endblock %}

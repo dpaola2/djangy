@@ -1,0 +1,30 @@
+{% extends 'wiki/wiki_base.html' %}
+
+
+{% block wiki_content %}
+	<h1>Edit</h1>
+
+	<form action="" method="post">
+
+		<div class="field_wrapper required{% if form.name.errors %} errors{% endif %}" id="field_name">
+			<label for="id_name" class="field_name"><strong>Page name</strong></label>
+			{% if form.name.errors %}{{ form.name.errors }}{% endif %}
+			<div class="field text_input">
+				{{ form.name }}
+			</div>
+		</div>
+
+		<div class="field_wrapper required{% if form.content.errors %} errors{% endif %}" id="field_content">
+			<label for="id_content" class="field_name"><strong>Content</strong></label>
+			{% if form.content.errors %}{{ form.content.errors }}{% endif %}
+			<div class="field textarea">
+				{{ form.content }}
+			</div>
+		</div>
+
+		<div class="submit">
+			<input type="submit" value="Save" />
+		</div>
+
+	</form>
+{% endblock %}

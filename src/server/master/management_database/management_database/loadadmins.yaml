@@ -1,0 +1,6 @@
+- model: management_database.User
+  pk: 1
+  fields:
+    email: bob@jones.mil
+    passwd: encrypted password hash goes here
+    admin: True

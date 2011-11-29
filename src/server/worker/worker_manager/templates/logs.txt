@@ -1,0 +1,4 @@
+***** BEGIN DJANGY LOG OUTPUT   *****
+${ error_log }
+
+***** END DJANGY LOG OUTPUT     *****

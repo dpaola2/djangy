@@ -1,0 +1,6 @@
+run_deploy
+run_soft_remove
+run_retrieve_logs
+run_soft_remove_application
+run_start
+run_stop

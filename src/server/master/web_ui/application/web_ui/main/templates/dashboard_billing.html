@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+    <div class="page-title">
+        <h2>Billing</h2>
+        <ul class="nav">
+            <li><a href="/dashboard">Applications</a></li>
+            <li><a href="/dashboard/account">Account</a></li>
+            <li><a href="/dashboard/invite">Invite</a></li>
+            <li><a href="/dashboard/billing" class="selected">Billing</a></li>
+        </ul>
+    </div>
+{% endblock %}
+{% block content %}
+    <table style="width:100%;"><tr><td width="50%">
+    <form id="clientLogin" method="post" action="/dashboard/billing">
+        <table>
+        <tr>
+            <td></td>
+            <td>
+            <img src="/static/images/Visa.png" alt="Visa"/>
+            <img src="/static/images/MasterCard.png" alt="MasterCard"/>
+            <img src="/static/images/AmericanExpress.png" alt="American Express"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-right: 10px;">First name</td>
+            <td><input type="text" name="first_name" id="first_name" style="width: 200px;" value="{{ info.first_name }}" /></td>
+        <tr>
+            <td style="padding-right: 10px;">Last name</td>
+            <td><input type="text" name="last_name" id="last_name" style="width: 200px;" value="{{ info.last_name }}" /></td>
+        </tr>
+        <tr>
+            <td style="padding-right: 10px;">Card number</td>
+            <td><input type="text" name="cc_number" id="cc_number" style="width: 200px;" /></td>
+        </tr>
+        {% if info.cc_number %}
+        <tr>
+            <td style="padding-right: 10px;"></td>
+            <td>(currently {{ info.cc_number }})</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td style="padding-right: 10px;">CVV</td>
+            <td><input type="text" name="cvv" id="cvv" style="width: 75px;" value="{{ info.cvv }}"/></td>
+        </tr>
+        <tr>
+            <td style="padding-right: 10px;">Expires</td>
+            <td>
+                <select name="expiration_month" id="expiration_month" style="margin-left: 0;">
+                    <option value="00" selected="selected">Month</option>
+                    {% for month in months %}
+                        {% ifequal info.expiration_month month %}
+                            <option value="{{ month }}" selected="selected">{{ month }}</option>
+                        {% else %}
+                            <option value="{{ month }}">{{ month }}</option>
+                        {% endifequal %}
+                    {% endfor %}
+                </select>
+                /
+                <select name="expiration_year" id="expiration_year" style="margin-left: 0;">
+                    <option value="0000" selected="selected">Year</option>
+                    {% for year in years %}
+                        {% ifequal info.expiration_year year %}
+                            <option value="{{ year }}" selected="selected">{{ year }}</option>
+                        {% else %}
+                            <option value="{{ year }}">{{ year }}</option>
+                        {% endifequal %}
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" class="submit" value="Save" /></td>
+        </tr>
+        </table>
+    </form>
+    </td>
+    <td width="50%">
+        {% if info.bill_date %}
+        <h5>Next bill date: {{ info.bill_date }}</h5>
+        {% endif %}
+        {% if usage %}
+        <h5>Current usage: {{ usage }}</h5>
+        <br />
+        <hr />
+        <br />
+        {% endif %}
+        <h3>FAQ</h3>
+        <br />
+        <ul>
+            <li><a href="/docs/FAQBillingPricing/#why" target="_blank">Why do you need my billing information?</a></li>
+            <li><a href="/docs/FAQBillingPricing/#prorating" target="_blank">How do you prorate charges?</a></li>
+            <li><a href="/docs/FAQBillingPricing/#delete-account" target="_blank">How do I delete my account?</a></li>
+        </ul>
+    </td>
+    </tr></table>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        //jQuery(function(){ jQuery("label").inFieldLabels(); });
+    </script>
+{% endblock %}

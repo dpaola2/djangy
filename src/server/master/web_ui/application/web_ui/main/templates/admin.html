@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+    <div class="page-title">
+        <h2>Admin</h2>
+    </div>
+{% endblock %}
+{% block content %}
+    Registered Users: {{ user_count }}<br />
+    Applications: {{ app_count }}<br />
+    <div class="col1">
+        <h2>Users</h2>
+        {% for email, application in emails_applications %}
+        <ul>
+            <li>
+                <p>{{ email }}</p>
+                {% for app in application %}
+                <p>
+                    <a href="/dashboard/application/{{ app.name }}">{{ app.name }}</a>
+                </p>
+                {% endfor %}
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+    <div class="col2">
+        <form action="/admin/invite" method="GET">
+            Email:<input type="text" name="email" />
+            <input type="submit" value="Invite" />
+        </form>
+        <h2>Email Signups</h2>
+        <p>
+            <a href="/admin/get_emails" target="_blank">(download as txt)</a>
+        </p>
+        <div>
+            <ul>
+                {% for email in emails %}
+                    {% if email.invited %}
+                        <li>{{ email.email }}&nbsp;(already invited)</li>
+                    {% else %}
+                        <li>{{ email.email }}&nbsp;<a href="/admin/invite?email={{ email.email|urlencode }}">invite</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

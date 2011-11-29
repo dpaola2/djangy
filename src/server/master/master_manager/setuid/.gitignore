@@ -1,0 +1,8 @@
+run_add_application
+run_add_domain_name
+run_allocate
+run_command
+run_delete_domain_name
+run_deploy
+run_retrieve_logs
+run_soft_remove_application

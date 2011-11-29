@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}
+Login to Djangy - Instant deployment and scaling for your Django applications
+{% endblock %}
+{% block pagetitle %}
+    <div class="page-title">
+        <h2>Login</h2>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="block">
+        <form id="clientLogin" method="post" action="/login">
+            <ul>
+                <li><label for="email">Email</label><input type="text" name="email" id="email" /></li>
+                <li><label for="password">Password</label><input type="password" name="password" id="password" /></li>
+                <li><input type="submit" class="submit" value="Login" /></li>
+            </ul>
+        </form>
+        <a href="/request_reset_password">Forgot your password?</a>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        jQuery(function(){ jQuery("label").inFieldLabels(); });
+    </script>
+{% endblock %}

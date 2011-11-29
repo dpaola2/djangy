@@ -1,0 +1,23 @@
+At first, a host setup should be required and then a deployment.  Minimize overlap.
+
+Host setup:
+
+-assume completely clean system (includes apt-get uninstall for packages?)
+-install system packages required for things to work.  Keep easy_install to an absolute minimum.
+-add necessary users (right now, just gitosis. possibly a management user?)
+-generate all necessary public/private keypairs
+-install gitosis and ensure users have correct permissions
+-create necessary database users
+-do an initial repository clone
+-trac and blog stuff is excluded (possibly on a different host)
+
+
+Deployment:
+
+-do not delete directories, just ensure they exist and have the right chmod settings
+-do not delete repository directory, just pull (unless it doesn't exist, then clone)
+-rebuild all virtual environments
+-redo symlinks (cleaning beforehand)
+-ensure databases and their users exist, but do not clean them beforehand
+-run synced
+-restart apache (gracefully, probably)

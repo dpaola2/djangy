@@ -1,0 +1,3 @@
+run_clear_cache
+run_configure
+run_remove_application

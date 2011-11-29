@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+    <div class="page-title">
+        <h2>Account</h2>
+        <ul class="nav">
+            <li><a href="/dashboard">Applications</a></li>
+            <li><a href="/dashboard/account" class="selected">Account</a></li>
+            <li><a href="/dashboard/invite">Invite</a></li>
+            <li><a href="/dashboard/billing">Billing</a></li>
+        </ul>
+    </div>
+{% endblock %}
+{% block content %}
+    <table style="width: 100%;"><tr><td width="50%">
+    <form method="POST" action="/dashboard/account/change_password">
+        <h2>Change password</h2>
+        <ul>
+            <li>
+                <label for="old_password">Current&nbsp;Password</label>
+                <input type="password" name="old_password" id="old_password" style="width: auto;"/>
+            </li>
+            <li>
+                <label for="new_password1">New&nbsp;Password</label>
+                <input type="password" name="new_password1" id="new_password1" style="width: auto;"/>
+             </li>
+            <li>
+                <label for="new_password2">Confirm&nbsp;Password</label>
+                <input type="password" name="new_password2" id="new_password2" style="width: auto;"/>
+            </li>
+            <li>
+                <input type="hidden" name="sessionid" id="sessionid" value="{{ sessionid }}"/>
+                <input type="submit" class="submit" value="Change Password" style="width: auto;"/>
+            </li>
+        </ul>
+    </form>
+    </td><td width="50%">
+    <form method="POST" action="/dashboard/account/change_email">
+        <h2>Change email address</h2>
+        <ul>
+            <li style="margin: 4px 0 13px 0;">Current:&nbsp;&nbsp; <b>{{ email }}</b></li>
+            <li>
+                <label for="new_email">New&nbsp;Email&nbsp;Address</label>
+                <input type="text" name="new_email" id="new_email" style="width: auto;"/>
+            </li>
+            <li>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" style="width: auto;"/>
+            </li>
+            <li>
+                <input type="hidden" name="sessionid" id="sessionid" value="{{ sessionid }}"/>
+                <input type="submit" class="submit" value="Change Email Address" style="width: auto;"/>
+            </li>
+        </ul>
+    </form>
+    </td></tr></table>
+    <br/><br/>
+
+    <h2>SSH key management</h2>
+    <b>Current SSH public keys</b>
+    <div style="width:100%; overflow:auto; white-space:nowrap;">
+    {% for key in ssh_public_keys  %}
+        <b><a href="/dashboard/account/remove_ssh_public_key?id={{ key.id }}&sessionid={{ sessionid }}">remove</a></b>&nbsp;&nbsp;
+        {{ key.ssh_public_key }} {{ key.comment }}
+        <br/>
+    {% endfor %}
+    </div><br/>
+    <b>New SSH public key</b>
+    <form method="POST" action="/dashboard/account/add_ssh_public_key">
+        <textarea name="ssh_public_key"></textarea>
+        <input type="hidden" name="sessionid" value="{{ sessionid }}"/>
+        <input type="submit" class="submit" value="Add SSH public key"/>
+    </form>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        jQuery(function(){ jQuery("label").inFieldLabels(); });
+    </script>
+{% endblock %}

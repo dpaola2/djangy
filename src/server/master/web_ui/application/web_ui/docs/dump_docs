@@ -1,0 +1,4 @@
+#!/bin/bash
+
+source /srv/djangy/run/python-virtual/bin/activate && \
+python ../manage.py dumpdata --format=yaml docs > wiki_docs.yaml

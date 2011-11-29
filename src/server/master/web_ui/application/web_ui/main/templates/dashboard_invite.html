@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+    <div class="page-title">
+        <h2>Invite</h2>
+        <ul class="nav">
+            <li><a href="/dashboard">Applications</a></li>
+            <li><a href="/dashboard/account">Account</a></li>
+            <li><a href="/dashboard/invite" class="selected">Invite</a></li>
+            <li><a href="/dashboard/billing">Billing</a></li>
+        </ul>
+    </div>
+{% endblock %}
+{% block content %}
+    <form action="/dashboard/invite" method="POST">
+        {% if num_remaining_invitations > 0 %}
+    	<p>You have {{ num_remaining_invitations }} remaining invitations. 
+    	Use them wisely.</p>
+    	{% else %}
+    	<p>You have no remaining invitations.  Contact <a
+    	href="mailto:support@djangy.com">support@djangy.com</a> if you think
+    	you need more.</p>
+    	{% endif %}
+        <ul>
+            <li>
+                <label for="email">Email address</label>
+                <input type="text" name="email"  id="email" style="width: auto;"/>
+            </li>
+            <li>
+                <input type="hidden" name="sessionid" id="sessionid" value="{{ sessionid }}"/>
+                <input type="submit" class="submit" value="Invite" style="width: auto;" />
+            </li>
+        </ul>
+    </form>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        jQuery(function(){ jQuery("label").inFieldLabels(); });
+    </script>
+{% endblock %}

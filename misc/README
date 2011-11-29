@@ -1,0 +1,54 @@
+see the SETUP file for a more up-to-date roadmap for this process.
+
+
+Requirements list for deploying Djangy
+
+NOTE: places where www-data is mentioned may be replaced by whatever user apache/wsgi is running under.
+
+Required symlinks:
+/etc/apache2/sites-available/api.djangy.com -> /srv/djangy/www/external_api/config/apache.conf
+/etc/apache2/sites-available/djangy.com -> /srv/djangy/www/d2/config/apache.conf
+/usr/share/git-core/templates/hooks/post-receive -> /srv/djangy/post_receive.py
+
+Gitosis must be set up according to:
+http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way
+
+Gitosis repositories must live in:
+/srv/git/repositories
+
+Gitosis-admin must be accessible to (meaning gitosis.conf needs these and the public keys):
+www-data
+
+Required public keys:
+/srv/git/.ssh/id_rsa.pub
+/var/www/.ssh/id_rsa.pub
+
+Required permissions:
+/srv/git/repositories must be 755, owned by git
+/srv/bundles must be 777
+/srv/logs must be 777, owned by www-data
+/srv/scratch must be 777, owned by www-data
+
+Required database users:(username:password:db_name)
+(root:gatorade94)
+(djangy:djangy:djangy)
+
+To get databases sync'd, assuming the users exist:
+
+# this will run the fixtures and populate initial data
+cd /srv/djangy/www/external_api/application/external_api/
+python manage.py syncdb --settings=production
+
+# this might not be necessary.  let's think about this some more
+cd /srv/djangy/www/d2/application/d2
+python manage.py syncdb --settings=production
+
+Finally, ensure that each running django instance has a virtual environment (this should be scripted):
+
+cd /srv/djangy/www/d2
+virtualenv python-virtual
+source python-virtual/bin/activate
+easy_install django mako (and anything else we need)
+deactivate
+
+Good to go! (Hopefully)

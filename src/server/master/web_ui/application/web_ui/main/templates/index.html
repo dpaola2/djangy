@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block showcase %}
+    <div class="showcase" style="background: none;">
+        <div class="laptop"></div>
+
+        <div style="position: absolute; margin-left: 30px;">
+        {% if user %}
+            <h2>Welcome to Djangy!</h2>
+            <p>Thank you for participating in the Djangy private beta.</p>
+            <p>Visit the <a href="/dashboard" style="color: #ffffff; text-decoration: underline;">Dashboard</a> to manage your account and applications.</p>
+            <p>Read the <a href="/docs" style="color: #ffffff; text-decoration: underline;">Documentation</a> to learn more about Djangy.</p>
+            <p>Email <a href="mailto:support@djangy.com" style="color: #ffffff; text-decoration: underline;">support@djangy.com</a> with questions, comments, feature requests, and bug reports.</p>
+        {% else %}
+            <h2>Sign up for free!</h2>
+            <p>Djangy is currently in private beta.  Please enter your email address and we'll
+            send you an invitation soon!<br/>&nbsp;</p>
+            <form id="clientLogin" method="post" action="/signup">
+                <ul style="margin-left: 10px;"><li style="display: inline-block; margin-right: 20px;"><label for="email">Email</label> <input type="text" name="email" id="email" style="width: 250px;"/></li>
+                <input type="submit" class="submit" value="Invite me" style="display: inline;"/></ul>
+            </form>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="col1">
+        <h2>Deploy and scale Django apps instantly.</h2>
+        <p>
+            Never configure apache.
+            Forget about the headaches of virtual hosting.
+            Only pay for what you use.<br/>
+            <b>Push your code to Djangy and we'll do the rest!</b>
+        </p>
+        <p style="margin-left: 75px;">
+            <a href="http://www.djangoproject.com/" id="django_logo">Django</a><img src="https://www.djangy.com/static/images/djangopowered126x54.gif" style="display: none;" />
+            <a href="http://www.djangopony.com/" id="pony_powered_logo">Pony Powered</a><img src="https://www.djangy.com/static/images/ponypowered.png" style="display: none;" />
+        </p>
+    </div>
+    <div class="col2">
+        <h2>Need more power?</h2>
+        <p>Only pay for what you use: $0.05 per hour
+        for each running instance past the first. Instantly scale your 
+        allocations up and down, and pay at the end of the month.  
+        <a href="/pricing">Find out more</a>.</p>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        jQuery(function(){ jQuery("label").inFieldLabels(); });
+    </script>
+{% endblock %}

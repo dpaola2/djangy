@@ -1,0 +1,34 @@
+upstream upstream_${ application_name } {
+    ${ upstream_servers }
+}
+
+% if cache_size_kb > 0:
+proxy_cache_path /srv/proxycache_manager/nginx/cache/${ application_name } levels=2:2 keys_zone=${ application_name }:${ str(cache_index_size_kb) }k inactive=1d max_size=${ str(cache_size_kb) }k;
+% endif
+
+server {
+    listen 80;
+    server_name ${ http_virtual_hosts };
+    location / {
+        proxy_pass http://upstream_${ application_name }/;
+        proxy_redirect default;
+        proxy_set_header Host $host;
+        % if cache_size_kb > 0:
+        proxy_cache ${ application_name };
+        % endif
+    }
+
+    #access_log  logs/host.access.log  main;
+
+    # Crazy naming scheme for error pages to avoid collisions with real application URLs:
+
+    #proxy_intercept_errors on;   
+    #error_page 500 /__500__asdfxyz1029;
+    #location = /__500__asdfxyz1029 {
+    #    alias /srv/proxycache_manager/500.html;
+    #}
+    error_page 502 /__502__asdfxyz1029;
+    location = /__502__asdfxyz1029 {
+        alias /srv/proxycache_manager/502.html;
+    }
+}

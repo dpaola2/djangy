@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+    <div class="page-title">
+        <h2>Applications</h2>
+        <ul class="nav">
+            <li><a href="/dashboard" class="selected">Applications</a></li>
+            <li><a href="/dashboard/account">Account</a></li>
+            <li><a href="/dashboard/invite">Invite</a></li>
+            <li><a href="/dashboard/billing">Billing</a></li>
+        </ul>
+    </div>
+{% endblock %}
+{% block content %}
+    <h3 class="topfeatures">
+        {% if applications|length_is:"0" %}
+            You have no applications.  Check out the <a href="/docs/Quickstart">Quickstart guide</a> to get started!
+        {% else %}
+            {% if applications|length_is:"1" %}
+                You have one application:
+            {% else %}
+                You have {{ applications|length }} applications:
+            {% endif %}
+        {% endif %}
+    </h3>
+    {% for app in applications %}
+        <div class="block">
+            <h3><a href="/dashboard/application/{{ app.name }}">{{ app.name }}</a></h3>
+            {% comment %}
+            <a href="/dashboard/application/{{ app.name }}">Resource settings</a>
+            {% endcomment %}
+        </div>
+    {% endfor %}
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        jQuery(function(){ jQuery("label").inFieldLabels(); });
+    </script>
+{% endblock %}

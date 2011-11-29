@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+    <div class="page-title">
+        <h2>Join</h2>
+    </div>
+{% endblock %}
+{% block content %}
+    <p>Your invite code is: <h1>{{ invite_code }}</h1></p>
+    {% with "/join" as setpassword_action %}
+        {% with "Sign&nbsp;Up" as setpassword_button %}
+            {% include "setpassword.html" %}
+        {% endwith %}
+    {% endwith %}
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        jQuery(function(){ jQuery("label").inFieldLabels(); });
+    </script>
+{% endblock %}

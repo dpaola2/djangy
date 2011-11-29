@@ -1,0 +1,8 @@
+bind = "${ host }:${ port }"
+workers = ${ num_processes }
+daemon = True
+user = "${ web_uid }"
+group = "${ app_gid }"
+umask = "0077"
+proc_name = "${ application_name }"
+logfile = "/srv/logs/${ bundle_name }/error.log"

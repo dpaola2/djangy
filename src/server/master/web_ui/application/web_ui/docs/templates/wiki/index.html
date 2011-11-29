@@ -1,0 +1,16 @@
+{% extends 'wiki/wiki_base.html' %}
+
+
+{% block wiki_content %}
+	<h1>Index</h1>
+
+	{% if pages %}
+		<ul>
+			{% for page in pages %}
+				<li><a href="{{ page.name }}/">{{ page.name }}</a></li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p><a href="NewPage/edit/">Create a new page</a>.</p>
+	{% endif %}
+{% endblock %}

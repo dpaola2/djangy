@@ -1,0 +1,7 @@
+Include the following files in this directory so that root can ssh to Djangy
+hosts.  (Note that we ssh as root to perform host-wide administrative
+functions anyway, so there wouldn't be much benefit to using separate,
+non-administrative users.)
+
+root_key
+root_key.pub

@@ -1,0 +1,7 @@
+To build the client and install it locally, simply run:
+
+$ make
+
+To build the client and upload it to pypi, run:
+
+$ make upload

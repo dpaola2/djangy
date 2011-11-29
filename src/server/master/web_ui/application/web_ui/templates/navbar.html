@@ -1,0 +1,16 @@
+<ul class="nav">
+    {% if user and user.admin %}
+    <li><a href="/admin"{% if navbar_section == 'admin' %} class="selected"{% endif %}>Admin</a></li>
+    {% endif %}
+    {% if user %}
+    <li><a href="/dashboard"{% if navbar_section == 'dashboard' %} class="selected"{% endif %}>Dashboard</a></li>
+    {% endif %}
+    <li><a href="/pricing"{% if navbar_section == 'pricing' %} class="selected"{% endif %}>Pricing</a></li>
+    <li><a href="/docs"{% if navbar_section == 'docs' %} class="selected"{% endif %}>Documentation</a></li>
+    <li><a href="http://blog.djangy.com">Blog</a></li>
+    {% if user %}
+    <li><a href="/logout">Logout</a></li>
+    {% else %}
+    <li><a href="/login"{% if navbar_section == 'login' %} class="selected"{% endif %}>Login</a></li>
+    {% endif %}
+</ul>

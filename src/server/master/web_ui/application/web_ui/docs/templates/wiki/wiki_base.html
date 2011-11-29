@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+Djangy Documentation - Djangy: Instant Deployment and scaling for your django applications
+{% endblock %}
+{% block pagetitle %}
+    <div class="page-title">
+         <a href="/docs"><h2>Documentation</h2></a>
+         <ul class="nav">
+             <li><a href="mailto:support@djangy.com">Need help? email support@djangy.com</a></li>
+         </ul>
+     </div>
+{% endblock %}
+{% block content %}
+<div class="col1">
+{% block footer %}{% endblock %}
+{% block wiki_content %}{% endblock %}
+</div>
+<div class="col2">
+{{ navbar.content|safe }}
+</div>
+{% endblock %}

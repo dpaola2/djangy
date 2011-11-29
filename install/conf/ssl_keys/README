@@ -1,0 +1,9 @@
+Put your SSL certificates and public keys in here.  Ideally you should use a
+wildcard SSL certificate, so that it works for subdomains too.  Note that
+you will need to modify the nginx-related configuration files and the
+installer itself in /install to use your domain instead of djangy.com
+
+djangy.com.crt
+djangy.com.key
+www.djangy.com.crt
+www.djangy.com.key

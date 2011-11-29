@@ -1,0 +1,8 @@
+Include the following files in this directory so that newly-installed Djangy
+hosts have a known ssh key.  This is necessary to prevent prompting whether
+the ssh key is valid when the master manager connects to a new host.
+
+ssh_host_dsa_key
+ssh_host_dsa_key.pub
+ssh_host_rsa_key
+ssh_host_rsa_key.pub

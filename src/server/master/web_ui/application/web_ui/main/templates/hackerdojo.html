@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block pagetitle %}
+    <div class="page-title">
+        <h2>Join</h2>
+    </div>
+{% endblock %}
+{% block content %}
+    <p>Welcome, hackers.  Enter your invite code below:</p>
+    {% with "/hackerdojo" as setpassword_action %}
+        {% with "Sign&nbsp;Up" as setpassword_button %}
+            <form id="clientLogin" method="post" action="{{ setpassword_action }}">
+                <ul>
+                    <li><label for="invite_code">Invite code</label><input type="text" name="invite_code" id="invite_code" style="width:200px;" /></li>
+                    <li><label for="email">Email</label><input type="text" name="email" id="email" style="width: 200px;" /></li>
+                    <li><label for="password1">new&nbsp;password</label><input type="password" name="password1" id="password1" style="width: 200px;"/></li>
+                    <li><label for="password2">confirm</label><input type="password" name="password2" id="password2" style="width: 200px;"/></li>
+                    <li><input type="submit" class="submit" value="{{ setpassword_button }}" /></li>
+                </ul>
+            </form>
+        {% endwith %}
+    {% endwith %}
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        jQuery(function(){ jQuery("label").inFieldLabels(); });
+    </script>
+{% endblock %}
