@@ -1,4 +1,9 @@
-Originally written by Sameer Sundresh and Dave Paola
+Djangy: an open source cloud hosting service for Python/Django web
+applications, inspired by Heroku.
+
+Authors:
+Sameer Sundresh <sameer@sundresh.org>
+Dave Paola <dpaola2@gmail.com>
 
 Licensed under the UIUC-NCSA open source license (see LICENSE for details).
 
