@@ -1,3 +1,13 @@
+#
+# Djangy installer -- apache web server.
+#
+# As a stopgap, apache needs to run on the master node, because the main
+# controller/website hasn't been transitioned over to run using Gunicorn.
+# Apache sits behind the nginx frontend, just like Gunicorn processes.
+#
+# Author: Sameer Sundresh <sameer@sundresh.org>
+#
+
 import os.path
 from core import *
 

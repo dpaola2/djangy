@@ -1,3 +1,10 @@
+#
+# Djangy installer -- MySQL database configuration.
+#
+# Authors: Sameer Sundresh <sameer@sundresh.org>
+#          Dave Paola <dpaola2@gmail.com>
+#
+
 import os.path
 import config
 from core import *

@@ -1,4 +1,10 @@
 #!/usr/bin/env python
+#
+# Djangy installer.  See core.py for the basic definitions of the
+# declarative installer DSL used here.
+#
+# Author: Sameer Sundresh <sameer@sundresh.org>
+#
 import os, sys
 import config
 from core import *

@@ -1,4 +1,9 @@
 #! /usr/bin/env python
+#
+# Upload a file to the backups Amazon S3 bucket.
+#
+# Author: Dave Paola <dpaola2@gmail.com>
+#
 
 import S3, sys, config, os
 from core import read_file

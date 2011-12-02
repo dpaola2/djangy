@@ -1,3 +1,13 @@
+#
+# Declarative decorators and predicates for Djangy's installer.
+#
+# The idea is you specify how things should be, and the code either
+# verifies that it is so, or performs actions to make it so, or
+# fails with an exception if the system is in a conflicting state.
+#
+# Author: Sameer Sundresh <sameer@sundresh.org>
+#
+
 import grp, os, os.path, pwd, shutil, subprocess, tempfile
 
 

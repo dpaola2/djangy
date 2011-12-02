@@ -1,3 +1,9 @@
+#
+# Djangy installer -- configure the git server.
+#
+# Author: Sameer Sundresh <sameer@sundresh.org>
+#
+
 import os, os.path, subprocess
 from core import *
 

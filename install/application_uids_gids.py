@@ -1,3 +1,15 @@
+#
+# Djangy installer -- application uids/gids.
+#
+# Each application on Djangy runs as a separate host uid/gid.  At first, we
+# tried running code as uid/gid without any entries in /etc/passwd or
+# /etc/group, but apache wouldn't allow that.  We then switched over to
+# running applicatinos using Gunicorn, but kept this code in place, since
+# we use different uid/gid pairs for setup, web servers, and (planned, not
+# fully implemented) cron jobs.
+#
+# Author: Sameer Sundresh <sameer@sundresh.org>
+#
 import re
 from core import *
 

@@ -8,6 +8,9 @@
 # Creates an archive file called djangy_dump_YYYY-MM-DD_hh-mm-ss.fff.tar.gz
 # in the current directory.
 #
+# Author: Sameer Sundresh <sameer@sundresh.org>
+#
+
 import os, os.path, re, shutil, subprocess, sys, tempfile, time
 
 # This is the MySQL root password on the old master node whose state you're

@@ -1,3 +1,13 @@
+#
+# Djangy installer -- nginx front-end web server.
+#
+# Configure the front-end nginx proxy/caching server, if this is a front-end
+# node.  A single nginx front-end node can proxy to applications running on
+# multiple middle-tier application nodes.
+#
+# Author: Sameer Sundresh <sameer@sundresh.org>
+#
+
 import os, os.path
 from core import *
 

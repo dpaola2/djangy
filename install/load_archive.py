@@ -1,4 +1,11 @@
 #!/usr/bin/env python
+#
+# Install a Djangy system dump created by dump_archive.py
+# Useful for deploying a new clone of a Djangy server.
+#
+# Author: Sameer Sundresh <sameer@sundresh.org>
+#
+
 import os, os.path, re, subprocess, sys, time
 from core import *
 import config

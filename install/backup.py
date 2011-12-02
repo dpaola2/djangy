@@ -1,4 +1,10 @@
 #! /usr/bin/env python
+#
+# Perform a backup of the Djangy system state.
+#
+# Author: Dave Paola <dpaola2@gmail.com>
+#
+
 import subprocess, dump_archive, os
 from s3put import *
 
